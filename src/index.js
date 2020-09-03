@@ -6,7 +6,6 @@ import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import * as serviceWorker from './serviceWorker'
 
 import App from './containers/App/App'
 import './index.css'
@@ -26,5 +25,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 )
-
-serviceWorker.unregister()
