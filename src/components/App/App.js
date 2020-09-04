@@ -15,34 +15,58 @@ import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 
 const App = () => {
   // Temporally hook checking what routes should be accessible (toggle logged in true or false)
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  // We might be able to use the Layout as a wrapper outside the switch and then have all the routes inside that without needing to repeat Layout? 
+  // const routes = isLoggedIn ? (
+  //   <Switch>
+  //     <Route path='/' exact>
+  //       <Layout>
+  //         <ExplorePage />
+  //       </Layout>
+  //     </Route>
+  //     <Route path='/map' exact>
+  //       <Layout>
+  //         <MapPage />
+  //       </Layout>
+  //     </Route>
+  //     <Route path='/create' exact>
+  //       <Layout>
+  //         <CreatePage />
+  //       </Layout>
+  //     </Route>
+  //     <Route path='/profile' exact>
+  //       <Layout>
+  //         <ProfilePage />
+  //       </Layout>
+  //     </Route>
+  //   </Switch>
+  // ) : (
+  //   <Route path='/' exact>
+  //     <LoginPage />
+  //   </Route>
+  // )
 
   const routes = isLoggedIn ? (
-    <Switch>
-      <Route path='/' exact>
-        <Layout>
+    <Layout>
+      <Switch>
+        <Route path='/explore' exact>
           <ExplorePage />
-        </Layout>
-      </Route>
-      <Route path='/map' exact>
-        <Layout>
+        </Route>
+        <Route path='/map' exact>
           <MapPage />
-        </Layout>
-      </Route>
-      <Route path='/create' exact>
-        <Layout>
+        </Route>
+        <Route path='/create' exact>
           <CreatePage />
-        </Layout>
-      </Route>
-      <Route path='/profile' exact>
-        <Layout>
+        </Route>
+        <Route path='/profile' exact>
           <ProfilePage />
-        </Layout>
-      </Route>
-    </Switch>
+        </Route>
+      </Switch>
+    </Layout>
   ) : (
     <Route path='/' exact>
-      <LoginPage />
+      <LoginPage setIsLoggedIn={setIsLoggedIn} />
     </Route>
   )
 

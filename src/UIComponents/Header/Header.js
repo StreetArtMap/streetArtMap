@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Header = () => {
-  return <header>TITLE</header>
+  return <header>Street | ART | Walk</header> 
 }
 
 export default Header
