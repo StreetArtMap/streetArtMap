@@ -9,13 +9,13 @@ const Nav = () => {
           <NavLink to='/'>explore</NavLink>
         </li>
         <li>
-          <NavLink to='/'>map</NavLink>
+          <NavLink to='/map'>map</NavLink>
         </li>
         <li>
-          <NavLink to='/'>add</NavLink>
+          <NavLink to='/create'>create</NavLink>
         </li>
         <li>
-          <NavLink to='/'>profile</NavLink>
+          <NavLink to='/profile'>profile</NavLink>
         </li>
       </ul>
     </nav>
