@@ -1,7 +1,6 @@
 .image-canvas {
-  margin-top: 20px;
   width: 100%;
-  height: 200px;
+  height: 100%;
   display: flex;
   justify-content: center;
 }

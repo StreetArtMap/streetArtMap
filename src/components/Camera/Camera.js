@@ -34,14 +34,14 @@ class Camera extends Component {
   }
 
   render() {
-    const imageDisplay = this.state.capturedImage ? (
+    const imageDisplay = this.state.capturedImage && (
       <img
         src={this.state.capturedImage}
         alt='captured'
         width='350'
         height='auto'
       />
-    ) : null
+    )
 
     const buttons = this.state.captured ? (
       <div>
@@ -52,12 +52,10 @@ class Camera extends Component {
       <Button onClick={this.captureImage}>Take Picture</Button>
     )
 
-    const uploading = this.state.uploading ? (
+    const uploading = this.state.uploading && (
       <div>
         <p>Uploading Image...</p>
       </div>
-    ) : (
-      <span />
     )
 
     return (
