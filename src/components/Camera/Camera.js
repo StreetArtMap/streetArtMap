@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Webcam } from './webcam'
 import './Camera.css'
 import axios from 'axios'
+import Button from '../../UIComponents/Button/Button'
 
 class Camera extends Component {
   constructor() {
@@ -44,11 +45,11 @@ class Camera extends Component {
 
     const buttons = this.state.captured ? (
       <div>
-        <button onClick={this.discardImage}>DELETE</button>
-        <button onClick={this.uploadImage}>Upload Photo</button>
+        <Button onClick={this.discardImage}>DELETE</Button>
+        <Button onClick={this.uploadImage}>Upload Photo</Button>
       </div>
     ) : (
-      <button onClick={this.captureImage}>Take Picture</button>
+      <Button onClick={this.captureImage}>Take Picture</Button>
     )
 
     const uploading = this.state.uploading ? (
