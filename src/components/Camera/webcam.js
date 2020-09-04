@@ -14,17 +14,13 @@ export class Webcam {
   }
   async setup() {
     return new Promise((resolve, reject) => {
-      // ADD CONDITION FOR IOS DEVICES
-      // Does not work without https, but netlify gives https?
       if (navigator.mediaDevices.getUserMedia !== undefined) {
         navigator.mediaDevices
           .getUserMedia({
             audio: false,
-            // CAMERA FACING ( CHANGE TO SELFIE ON LAPTOP? )
             video: {
               video: { facingMode: 'user' },
               // facingMode: { exact: 'environment' },
-              // SETTING IMAGE RATIO and min size:
               width: { min: 1280, max: 1920 },
               height: { min: 720, max: 1080 },
             },
@@ -33,7 +29,6 @@ export class Webcam {
             if ('srcObject' in this.webcamElement) {
               this.webcamElement.srcObject = mediaStream
             } else {
-              // For older browsers without the srcObject.
               this.webcamElement.src = window.URL.createObjectURL(mediaStream)
             }
             this.webcamElement.addEventListener(
