@@ -1,0 +1,22 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 90vw;
+  height: 80vh;
+  margin: 10vh 5vw;
+  border: 1px solid black;
+}
+
+.user-validation {
+  display: flex;
+  flex-direction: column;
+  height: 35vh;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+
+}
