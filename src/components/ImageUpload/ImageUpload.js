@@ -31,7 +31,6 @@ class ImageUpload extends React.Component {
   }
 
   openWidget = () => {
-    // create the widget
     window.cloudinary
       .createUploadWidget(
         {
@@ -45,44 +44,22 @@ class ImageUpload extends React.Component {
           })
         }
       )
-      .open() // open up the widget after creation
+      .open()
   }
 
   render() {
     const { imageUrl, imageAlt } = this.state
 
     return (
-      <main className='App'>
-        <section className='left-side'>
-          <form>
-            <div className='form-group'>
-              <input type='file' />
-            </div>
-
-            <button
-              type='button'
-              className='btn'
-              onClick={this.handleImageUpload}
-            >
-              Submit
-            </button>
-
-            <button
-              type='button'
-              className='btn widget-btn'
-              onClick={this.openWidget}
-            >
-              Upload Via Widget
-            </button>
-          </form>
-        </section>
-        <section className='right-side'>
-          <p>The resulting image will be displayed here</p>
-          {imageUrl && (
-            <img src={imageUrl} alt={imageAlt} className='displayed-image' />
-          )}
-        </section>
-      </main>
+      <form>
+        <input type='file' />
+        <button type='button' onClick={this.handleImageUpload}>
+          Submit
+        </button>
+        <button type='button' onClick={this.openWidget}>
+          Upload Via Widget
+        </button>
+      </form>
     )
   }
 }
