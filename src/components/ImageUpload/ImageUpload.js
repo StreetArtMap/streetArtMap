@@ -1,12 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-class ImageUpload extends React.Component {
-  state = {
-    imageUrl: null,
-    imageAlt: null,
-  }
+const ImageUpload = () => {
+  const [images, setImages] = useState('')
 
-  handleImageUpload = () => {
+  const handleImageUpload = () => {
     const { files } = document.querySelector('input[type="file"]')
     const formData = new FormData()
     formData.append('file', files[0])
@@ -22,15 +19,12 @@ class ImageUpload extends React.Component {
     )
       .then((res) => res.json())
       .then((res) => {
-        this.setState({
-          imageUrl: res.secure_url,
-          imageAlt: `An image of ${res.original_filename}`,
-        })
+        setImages(res.secure_url)
       })
       .catch((err) => console.log(err))
   }
 
-  openWidget = () => {
+  const openWidget = () => {
     window.cloudinary
       .createUploadWidget(
         {
@@ -38,30 +32,23 @@ class ImageUpload extends React.Component {
           uploadPreset: 'artmode',
         },
         (error, result) => {
-          this.setState({
-            imageUrl: result.info.secure_url,
-            imageAlt: `An image of ${result.info.original_filename}`,
-          })
+          setImages(result.info.secure_url)
         }
       )
       .open()
   }
 
-  render() {
-    const { imageUrl, imageAlt } = this.state
-
-    return (
-      <form>
-        <input type='file' />
-        <button type='button' onClick={this.handleImageUpload}>
-          Submit
-        </button>
-        <button type='button' onClick={this.openWidget}>
-          Upload Via Widget
-        </button>
-      </form>
-    )
-  }
+  return (
+    <form>
+      <input type='file' />
+      <button type='button' onClick={handleImageUpload}>
+        Submit
+      </button>
+      <button type='button' onClick={openWidget}>
+        Upload Via Widget
+      </button>
+    </form>
+  )
 }
 
 export default ImageUpload
