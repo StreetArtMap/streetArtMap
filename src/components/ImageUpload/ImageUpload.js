@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import Button from '../../UIComponents/Button/Button'
+import Input from '../../UIComponents/Input/Input'
 
 const ImageUpload = () => {
-  const [images, setImages] = useState('')
+  const [images, setImages] = useState([])
 
-  const handleImageUpload = () => {
+  const handleImageUpload = (e) => {
+    e.preventDefault()
     const { files } = document.querySelector('input[type="file"]')
     const formData = new FormData()
     formData.append('file', files[0])
@@ -19,7 +22,7 @@ const ImageUpload = () => {
     )
       .then((res) => res.json())
       .then((res) => {
-        setImages(res.secure_url)
+        setImages([...images, res.secure_url])
       })
       .catch((err) => console.log(err))
   }
@@ -32,21 +35,21 @@ const ImageUpload = () => {
           uploadPreset: 'artmode',
         },
         (error, result) => {
-          setImages(result.info.secure_url)
+          if (result.event === 'success') {
+            console.log(result.info.secure_url)
+            // if adding multiple images only able to push urls to array, setImage overwrites with last one
+            setImages([result.info.secure_url, ...images])
+          }
         }
       )
       .open()
   }
 
   return (
-    <form>
-      <input type='file' />
-      <button type='button' onClick={handleImageUpload}>
-        Submit
-      </button>
-      <button type='button' onClick={openWidget}>
-        Upload Via Widget
-      </button>
+    <form onSubmit={handleImageUpload}>
+      <Input type='file' />
+      <Button type='submit'>Submit</Button>
+      <Button onClick={openWidget}>Upload Via Widget</Button>
     </form>
   )
 }
