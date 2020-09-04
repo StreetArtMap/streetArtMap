@@ -2,12 +2,30 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Input = (props) => {
-  const { type, placeholder, onChange, ...other } = props
-  return (
-    <>
-      <input type={type} placeholder={placeholder} {...other} />
+  const {
+    id,
+    label,
+    type,
+    placeholder,
+    onChange,
+    element,
+    rows,
+    errorMessage,
+    isValid,
+    ...other
+  } = props
 
-      {/* this styling below is throwing a console boolean error? */}
+  const tag = !element ? (
+    <input type={type} placeholder={placeholder} {...other} />
+  ) : (
+    <textarea rows={rows || 3} placeholder={placeholder} />
+  )
+
+  return (
+    <section>
+      <label htmlFor={id}>{label}</label>
+      {tag}
+      {!isValid && <p>{errorMessage}</p>}
       <style jsx>{`
         input {
           outline: none;
@@ -28,8 +46,8 @@ const Input = (props) => {
         input:active {
           border-bottom: 1px solid grey;
         }
-      `}</style> 
-    </>
+      `}</style>
+    </section>
   )
 }
 
@@ -37,7 +55,7 @@ Input.propTypes = {
   type: PropTypes.string,
   width: PropTypes.string,
   placeholder: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 }
 
 export default Input

@@ -11,13 +11,25 @@ const LoginPage = (props) => {
   const [password, setPassword] = useState('')
 
   return (
-    <section className="login-container">
-      <section className="login-title">LOG IN</section>
-      <section className="user-validation">
-        <Input onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username..."></Input>
-        <Input onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password..."></Input>
-        <Link to="/explore" onClick={() => setIsLoggedIn(true)}>
-          <Button type="submit" >LOG IN</Button>
+    <section className='login-container'>
+      <section className='login-title'>LOG IN</section>
+      <section className='user-validation'>
+        <Input
+          onChange={(e) => setUsername(e.target.value)}
+          // id='1'
+          // label='testing label'
+          // errorMessage='testing error message'
+          // isValid={false}
+          type='text'
+          placeholder='Username...'
+        ></Input>
+        <Input
+          onChange={(e) => setPassword(e.target.value)}
+          type='password'
+          placeholder='Password...'
+        ></Input>
+        <Link to='/explore' onClick={() => setIsLoggedIn(true)}>
+          <Button type='submit'>LOG IN</Button>
         </Link>
       </section>
       <p>Don't have an account?</p>
@@ -27,7 +39,7 @@ const LoginPage = (props) => {
 }
 
 LoginPage.propTypes = {
-  setIsLoggedIn: PropTypes.func
+  setIsLoggedIn: PropTypes.func,
 }
 
 export default LoginPage
