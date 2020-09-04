@@ -26,7 +26,7 @@ const Button = ({
   }
   if (to) {
     return (
-      <Link to={to} className={className}>
+      <Link to={to} className={className} onClick={onClick}>
         {children}
       </Link>
     )
@@ -45,8 +45,7 @@ const Button = ({
 
 Button.propTypes = {
   type: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 }
 
 export default Button
-
