@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './MapWithMarkers.css'
+// npm install --save react-map-gl
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
 import MOCK_DATA from '../../MOCK_DATA'
 
@@ -25,7 +26,6 @@ const MapWithMarkers = () => {
 
   return (
     <section className='markers-map-wrapper'>
-      hello
       <ReactMapGL
         {...viewport}
         mapStyle='mapbox://styles/edignot/ckemah34j0amm19oe5hjne20p'
