@@ -1,8 +1,8 @@
 const MOCK_DATA = [
   {
     id: 1,
-    latitude: 39.744137,
-    longitude: -104.95005,
+    latitude: +'39.744137',
+    longitude: +'-104.95005',
     address: 'address1',
     city: 'city1',
     state: 'state1',
@@ -20,8 +20,8 @@ const MOCK_DATA = [
   },
   {
     id: 2,
-    latitude: 39.660355,
-    longitude: -105.598137,
+    latitude: +'39.660355',
+    longitude: +'-105.598137',
     address: 'address2',
     city: 'city2',
     state: 'state2',
@@ -39,8 +39,8 @@ const MOCK_DATA = [
   },
   {
     id: 3,
-    latitude: 39.72356,
-    longitude: -104.894882,
+    latitude: +'39.72356',
+    longitude: +'-104.894882',
     address: 'address3',
     city: 'city3',
     state: 'state3',

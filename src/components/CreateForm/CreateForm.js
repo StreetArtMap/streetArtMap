@@ -32,10 +32,11 @@ const CreateForm = ({ images, setPostImage }) => {
     await getLocation()
   }
 
-  const mappedImages = images.map(image => {
-     return <img src={image} alt="new-shoot" width="100" height="100" key={image} />
-   })
-  
+  const mappedImages = images.map((image) => {
+    return (
+      <img src={image} alt='new-shoot' width='100' height='100' key={image} />
+    )
+  })
 
   return (
     <>

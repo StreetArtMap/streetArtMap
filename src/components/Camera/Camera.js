@@ -106,8 +106,8 @@ const Camera = ({
         playsInline
         muted
         id='webcam'
-        width='500px'
-        height='500px'
+        width='100px'
+        height='100px'
       />
       <br />
       {buttons}

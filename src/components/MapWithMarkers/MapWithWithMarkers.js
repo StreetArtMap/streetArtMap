@@ -6,24 +6,73 @@ import MOCK_DATA from '../../MOCK_DATA'
 import Button from '../../UIComponents/Button/Button'
 
 const MapWithMarkers = ({ setRoute }) => {
+  const [selectedArt, setSelectedArt] = useState(null)
+  const [myLocation, setMyLocation] = useState({
+    latitude: 39.744137,
+    longitude: -104.95005,
+  })
+
   const [viewport, setViewport] = useState({
-    latitude: 45.4211,
-    longitude: -75.6903,
+    latitude: myLocation.latitude,
+    longitude: myLocation.longitude,
     zoom: 10,
     width: '100%',
     height: '100%',
   })
 
-  const [selectedArt, setSelectedArt] = useState(null)
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      return navigator.geolocation.getCurrentPosition(showPosition)
+    } else {
+      alert('Geo Location is not supported by your device')
+    }
+  }
+
+  const showPosition = (position) => {
+    const location = {
+      longitude: position.coords.longitude,
+      latitude: position.coords.latitude,
+    }
+    setMyLocation(location)
+    return location
+  }
+
+  useEffect(() => {
+    getLocation()
+  }, [myLocation])
 
   useEffect(() => {
     const listener = (e) => {
       if (e.key === 'Escape') {
         setSelectedArt(null)
       }
+      if (!e.target.className.includes('active')) {
+        setSelectedArt(null)
+      }
     }
     window.addEventListener('keydown', listener)
+    window.addEventListener('click', listener)
   }, [])
+
+  const markers = MOCK_DATA.map((tag) => (
+    <Marker key={tag.id} latitude={tag.latitude} longitude={tag.longitude}>
+      <button
+        onClick={(e) => {
+          e.preventDefault()
+          setSelectedArt(tag)
+          e.target.classList.add('active')
+        }}
+      >
+        TAG
+      </button>
+    </Marker>
+  ))
+
+  const myMarker = (
+    <Marker latitude={myLocation.latitude} longitude={myLocation.longitude}>
+      <button>MY LOCATION</button>
+    </Marker>
+  )
 
   return (
     <section className='markers-map-container'>
@@ -39,31 +88,25 @@ const MapWithMarkers = ({ setRoute }) => {
         }}
       >
         <NavigationControl />
-        {MOCK_DATA.map((tag) => (
-          <Marker
-            key={tag.id}
-            latitude={tag.latitude}
-            longitude={tag.longitude}
-          >
-            <button
-              onClick={(e) => {
-                e.preventDefault()
-                setSelectedArt(tag)
-              }}
-            >
-              TAG
-            </button>
-          </Marker>
-        ))}
+        {markers}
+        {myMarker}
         {selectedArt && (
           <Popup
             latitude={selectedArt.latitude}
             longitude={selectedArt.longitude}
             onClose={() => {
-              setSelectedArt(null)
+              setSelectedArt(false)
             }}
+            closeOnClick={true}
+            closeButton={false}
+            isOpen={true}
           >
-            <h2>{selectedArt.name}</h2>
+            <Button>SELECTED ART</Button>
+            <img
+              src={MOCK_DATA[0].image_urls[0]}
+              width='200px'
+              height='200px'
+            />
           </Popup>
         )}
       </ReactMapGL>

@@ -23,17 +23,17 @@ class MapWithNavigation extends React.Component {
 
     map.on('load', function () {
       directions.setOrigin([MOCK_DATA[0].longitude, MOCK_DATA[0].latitude])
-      directions.addWaypoint(0, [MOCK_DATA[2].longitude, MOCK_DATA[2].latitude])
-      directions.addWaypoint(1, [-94.676392, 39.106667])
-      directions.setDestination([MOCK_DATA[1].longitude, MOCK_DATA[1].latitude])
+      directions.addWaypoint(0, [MOCK_DATA[1].longitude, MOCK_DATA[2].latitude])
+      directions.addWaypoint(1, [MOCK_DATA[2].longitude, MOCK_DATA[2].latitude])
+      directions.addWaypoint(2, [-94.676392, 39.106667])
+      directions.addWaypoint(2, [-106.50573, 31.773088])
+      directions.setDestination([MOCK_DATA[0].longitude, MOCK_DATA[0].latitude])
     })
 
     const directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       unit: 'metric',
       profile: 'mapbox/driving',
-      placeholderDestination: 'end',
-      placeholderOrigin: 'start',
       controls: {
         profileSwitcher: true,
       },
@@ -49,7 +49,9 @@ class MapWithNavigation extends React.Component {
       <section
         ref={(el) => (this.mapWrapper = el)}
         className='navigation-map-container'
-      ></section>
+      >
+        {this.marker}
+      </section>
     )
   }
 }
