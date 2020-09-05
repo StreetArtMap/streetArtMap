@@ -1,0 +1,24 @@
+.btn {
+  padding: 0.7em 1.7em;
+  border: none;
+  border-radius: 1.4em;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  outline: none;
+  font-size: 1em;
+  color: pink;
+  box-shadow: 1px 1px grey;
+  background-color: green;
+}
+.btn:hover {
+  box-shadow: 5px 4px grey;
+}
+.btn:active {
+  box-shadow: 10px 10px grey;
+}
+.btn:disabled {
+  color: white;
+  box-shadow: 1px 2px brown;
+  background-color: grey;
+}
