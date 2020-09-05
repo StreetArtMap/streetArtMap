@@ -48,7 +48,7 @@ class MapWithNavigation extends React.Component {
     return (
       <section
         ref={(el) => (this.mapWrapper = el)}
-        className='navigation-map-wrapper'
+        className='navigation-map-container'
       ></section>
     )
   }

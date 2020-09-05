@@ -7,7 +7,7 @@ const MapPage = () => {
   const [route, setRoute] = useState(false)
 
   return (
-    <section>
+    <section className='map-container'>
       {route ? (
         <MapWithNavigation setRoute={setRoute} />
       ) : (

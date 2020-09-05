@@ -10,8 +10,8 @@ const MapWithMarkers = ({ setRoute }) => {
     latitude: 45.4211,
     longitude: -75.6903,
     zoom: 10,
-    width: '100vw',
-    height: '100vh',
+    width: '100%',
+    height: '100%',
   })
 
   const [selectedArt, setSelectedArt] = useState(null)
@@ -26,8 +26,10 @@ const MapWithMarkers = ({ setRoute }) => {
   }, [])
 
   return (
-    <section className='markers-map-wrapper'>
-      <Button onClick={() => setRoute(true)}>SEE ROUTES</Button>
+    <section className='markers-map-container'>
+      <Button onClick={() => setRoute(true)} className='toggle-maps-btn'>
+        SEE ROUTES
+      </Button>
       <ReactMapGL
         {...viewport}
         mapStyle='mapbox://styles/edignot/ckemah34j0amm19oe5hjne20p'
