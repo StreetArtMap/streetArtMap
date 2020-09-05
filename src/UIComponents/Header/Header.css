@@ -1,0 +1,10 @@
+header {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: .2vh;
+  border: 1px solid blue;
+  font-size: 3vh;
+}

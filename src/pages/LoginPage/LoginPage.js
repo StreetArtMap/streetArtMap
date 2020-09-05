@@ -12,7 +12,7 @@ const LoginPage = (props) => {
 
   return (
     <section className='login-container'>
-      <section className='login-title'>LOG IN</section>
+      <section className='login-title'>Street | ART | Walk</section>
       <section className='user-validation'>
         <Input
           onChange={(e) => setUsername(e.target.value)}

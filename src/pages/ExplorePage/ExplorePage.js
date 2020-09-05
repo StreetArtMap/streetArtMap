@@ -1,7 +1,8 @@
 import React from 'react'
+import './ExplorePage.css'
 
 const ExplorePage = () => {
-  return <section>EXPLORE PAGE</section>
+  return <section className="explore-container">EXPLORE PAGE</section>
 }
 
 export default ExplorePage

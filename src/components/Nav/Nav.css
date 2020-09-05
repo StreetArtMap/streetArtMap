@@ -1,0 +1,15 @@
+footer {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid pink;
+}
+
+.nav-box {
+  width: 25vw;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
