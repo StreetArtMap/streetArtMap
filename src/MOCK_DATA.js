@@ -56,3 +56,5 @@ const MOCK_DATA = [
     visited: false,
   },
 ]
+
+export default MOCK_DATA
