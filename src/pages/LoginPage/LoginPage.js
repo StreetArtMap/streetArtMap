@@ -16,10 +16,6 @@ const LoginPage = (props) => {
       <section className='user-validation'>
         <Input
           onChange={(e) => setUsername(e.target.value)}
-          // id='1'
-          // label='testing label'
-          // errorMessage='testing error message'
-          // isValid={false}
           type='text'
           placeholder='Username...'
         ></Input>

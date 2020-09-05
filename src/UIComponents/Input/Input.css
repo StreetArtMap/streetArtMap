@@ -1,0 +1,19 @@
+input {
+  outline: none;
+  padding-top: 0.8em;
+  padding-bottom: 0.4em;
+  font-size: 1em;
+  border-radius: 1vh;
+  background-color: transparent;
+  color: black;
+  border-bottom: 1px solid grey;
+  width: 'auto';
+  width: 50vw;
+  font-size: 2.5vh;
+}
+input:hover {
+  border-bottom: 1px solid grey;
+}
+input:active {
+  border-bottom: 1px solid grey;
+}

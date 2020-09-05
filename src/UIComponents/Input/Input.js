@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import './Input.css'
 
 const Input = (props) => {
   const {
@@ -18,7 +19,7 @@ const Input = (props) => {
   const tag = !element ? (
     <input type={type} placeholder={placeholder} {...other} />
   ) : (
-    <textarea rows={rows || 3} placeholder={placeholder} />
+    <textarea rows={rows || 3} placeholder={placeholder} {...other} />
   )
 
   return (
@@ -26,27 +27,6 @@ const Input = (props) => {
       <label htmlFor={id}>{label}</label>
       {tag}
       {!isValid && <p>{errorMessage}</p>}
-      <style jsx>{`
-        input {
-          outline: none;
-          padding-top: 0.8em;
-          padding-bottom: 0.4em;
-          font-size: 1em;
-          border-radius: 1vh;
-          background-color: transparent;
-          color: black;
-          border-bottom: 1px solid grey;
-          width: 'auto';
-          width: 50vw;
-          font-size: 2.5vh;
-        }
-        input:hover {
-          border-bottom: 1px solid grey;
-        }
-        input:active {
-          border-bottom: 1px solid grey;
-        }
-      `}</style>
     </section>
   )
 }
