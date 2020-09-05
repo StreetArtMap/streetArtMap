@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Camera from '../../components/Camera/Camera'
 import CreateForm from '../../components/CreateForm/CreateForm'
 import ImageUpload from '../../components/ImageUpload/ImageUpload'
 
-const CreatePage = () => {
+const CameraPage = () => {
+  const [images, setImages] = useState([])
+
   return (
     <section>
       CREATE PAGE
       <Camera />
-      <ImageUpload />
-      <CreateForm />
+      <ImageUpload setImages={setImages} images={images} />
+      <CreateForm images={images} />
     </section>
   )
 }
 
-export default CreatePage
+export default CameraPage

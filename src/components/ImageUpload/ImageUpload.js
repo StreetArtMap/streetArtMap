@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
 
-const ImageUpload = () => {
-  const [images, setImages] = useState([])
-
+const ImageUpload = ({ setImages, images }) => {
   const handleImageUpload = (e) => {
     e.preventDefault()
     const { files } = document.querySelector('input[type="file"]')

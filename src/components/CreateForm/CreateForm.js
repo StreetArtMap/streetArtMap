@@ -2,10 +2,15 @@ import React, { useState } from 'react'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 
-const CreateForm = () => {
+const CreateForm = ({ images }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
+  const [title, setTitle] = useState('')
+  const [artistName, setArtistName] = useState('')
+  const [artistInstagram, setArtistInstagram] = useState('')
+  const [description, setDescription] = useState('')
+  const [address, setAddress] = useState('')
 
-  const getLocation = async () => {
+  const getLocation = () => {
     if (navigator.geolocation) {
       return navigator.geolocation.getCurrentPosition(showPosition)
     } else {
@@ -27,26 +32,46 @@ const CreateForm = () => {
     await getLocation()
   }
 
+  const inputHandler = (e) => {}
+
   return (
     <form onSubmit={artCreateHandler}>
-      <Input type='text' placeholder='art title' value='' />
-      <Input type='text' placeholder='artist name' value='' />
-      <Input type='text' placeholder='artist instagram' value='' />
+      <Input
+        type='text'
+        placeholder='art title'
+        value={title}
+        onInput={(e) => setTitle(e.target.value)}
+      />
+      <Input
+        type='text'
+        placeholder='artist name'
+        value={artistName}
+        onInput={(e) => setArtistName(e.target.value)}
+      />
+      <Input
+        type='text'
+        placeholder='artist instagram'
+        value={artistInstagram}
+        onInput={(e) => setArtistInstagram(e.target.value)}
+      />
       <Input
         type='text'
         element='textarea'
         placeholder='description'
         rows='5'
-        value=''
+        value={description}
+        onInput={(e) => setDescription(e.target.value)}
       />
+      <p>
+        {currentLocation
+          ? `${currentLocation.latitude}, ${currentLocation.longitude}`
+          : 'no location'}
+      </p>
       <Input
         type='text'
         placeholder='address'
-        value={
-          currentLocation
-            ? (currentLocation.latitude, currentLocation.longitude)
-            : 'no location'
-        }
+        value={address}
+        onInput={(e) => setAddress(e.target.value)}
       />
       <Button type='submit'>CREATE</Button>
     </form>

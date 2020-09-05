@@ -33,48 +33,6 @@ class Camera extends Component {
     }
   }
 
-  render() {
-    const imageDisplay = this.state.capturedImage && (
-      <img
-        src={this.state.capturedImage}
-        alt='captured'
-        width='350'
-        height='auto'
-      />
-    )
-
-    const buttons = this.state.captured ? (
-      <div>
-        <Button onClick={this.discardImage}>DELETE</Button>
-        <Button onClick={this.uploadImage}>Upload Photo</Button>
-      </div>
-    ) : (
-      <Button onClick={this.captureImage}>Take Picture</Button>
-    )
-
-    const uploading = this.state.uploading && (
-      <div>
-        <p>Uploading Image...</p>
-      </div>
-    )
-
-    return (
-      <div>
-        {uploading}
-        <video
-          autoPlay
-          playsInline
-          muted
-          id='webcam'
-          width='500px'
-          height='500px'
-        />
-        <br />
-        <div className='image-canvas'>{imageDisplay}</div>
-        {buttons}
-      </div>
-    )
-  }
   captureImage = async () => {
     const capturedData = this.webcam.takeBase64Photo({
       type: 'jpeg',
@@ -167,6 +125,49 @@ class Camera extends Component {
         alert('All saved images have been uploaded!')
       }
     }
+  }
+
+  render() {
+    const imageDisplay = this.state.capturedImage && (
+      <img
+        src={this.state.capturedImage}
+        alt='captured'
+        width='350'
+        height='auto'
+      />
+    )
+
+    const buttons = this.state.captured ? (
+      <div>
+        <Button onClick={this.discardImage}>DELETE</Button>
+        <Button onClick={this.uploadImage}>Upload Photo</Button>
+      </div>
+    ) : (
+      <Button onClick={this.captureImage}>Take Picture</Button>
+    )
+
+    const uploading = this.state.uploading && (
+      <div>
+        <p>Uploading Image...</p>
+      </div>
+    )
+
+    return (
+      <div>
+        {uploading}
+        <video
+          autoPlay
+          playsInline
+          muted
+          id='webcam'
+          width='500px'
+          height='500px'
+        />
+        <br />
+        <div className='image-canvas'>{imageDisplay}</div>
+        {buttons}
+      </div>
+    )
   }
 }
 
