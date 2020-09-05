@@ -3,8 +3,9 @@ import './MapWithMarkers.css'
 // npm install --save react-map-gl
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
 import MOCK_DATA from '../../MOCK_DATA'
+import Button from '../../UIComponents/Button/Button'
 
-const MapWithMarkers = () => {
+const MapWithMarkers = ({ setRoute }) => {
   const [viewport, setViewport] = useState({
     latitude: 45.4211,
     longitude: -75.6903,
@@ -26,6 +27,7 @@ const MapWithMarkers = () => {
 
   return (
     <section className='markers-map-wrapper'>
+      <Button onClick={() => setRoute(true)}>SEE ROUTES</Button>
       <ReactMapGL
         {...viewport}
         mapStyle='mapbox://styles/edignot/ckemah34j0amm19oe5hjne20p'
