@@ -45,7 +45,7 @@ const App = () => {
   return (
     <section className='app-container'>
       {routes}
-      <Button style='red'>CLICK</Button>
+      {/* <Button style='red'>CLICK</Button> */}
       {/* <LoadingSpinner asOverlay /> */}
     </section>
   )
