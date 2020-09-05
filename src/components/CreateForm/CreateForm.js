@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 
-const CreateForm = ({ images }) => {
+const CreateForm = ({ images, setPostImage }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
   const [title, setTitle] = useState('')
   const [artistName, setArtistName] = useState('')
@@ -32,49 +32,56 @@ const CreateForm = ({ images }) => {
     await getLocation()
   }
 
-  const inputHandler = (e) => {}
+  const mappedImages = images.map(image => {
+     return <img src={image} alt="new-shoot" width="100" height="100" key={image} />
+   })
+  
 
   return (
-    <form onSubmit={artCreateHandler}>
-      <Input
-        type='text'
-        placeholder='art title'
-        value={title}
-        onInput={(e) => setTitle(e.target.value)}
-      />
-      <Input
-        type='text'
-        placeholder='artist name'
-        value={artistName}
-        onInput={(e) => setArtistName(e.target.value)}
-      />
-      <Input
-        type='text'
-        placeholder='artist instagram'
-        value={artistInstagram}
-        onInput={(e) => setArtistInstagram(e.target.value)}
-      />
-      <Input
-        type='text'
-        element='textarea'
-        placeholder='description'
-        rows='5'
-        value={description}
-        onInput={(e) => setDescription(e.target.value)}
-      />
-      <p>
-        {currentLocation
-          ? `${currentLocation.latitude}, ${currentLocation.longitude}`
-          : 'no location'}
-      </p>
-      <Input
-        type='text'
-        placeholder='address'
-        value={address}
-        onInput={(e) => setAddress(e.target.value)}
-      />
-      <Button type='submit'>CREATE</Button>
-    </form>
+    <>
+      <section>{mappedImages}</section>
+      <Button onClick={() => setPostImage(false)}>TAKE ANOTHER PICTURE</Button>
+      <form onSubmit={artCreateHandler}>
+        <Input
+          type='text'
+          placeholder='art title'
+          value={title}
+          onInput={(e) => setTitle(e.target.value)}
+        />
+        <Input
+          type='text'
+          placeholder='artist name'
+          value={artistName}
+          onInput={(e) => setArtistName(e.target.value)}
+        />
+        <Input
+          type='text'
+          placeholder='artist instagram'
+          value={artistInstagram}
+          onInput={(e) => setArtistInstagram(e.target.value)}
+        />
+        <Input
+          type='text'
+          element='textarea'
+          placeholder='description'
+          rows='5'
+          value={description}
+          onInput={(e) => setDescription(e.target.value)}
+        />
+        <p>
+          {currentLocation
+            ? `${currentLocation.latitude}, ${currentLocation.longitude}`
+            : 'no location'}
+        </p>
+        <Input
+          type='text'
+          placeholder='address'
+          value={address}
+          onInput={(e) => setAddress(e.target.value)}
+        />
+        <Button type='submit'>CREATE</Button>
+      </form>
+    </>
   )
 }
 

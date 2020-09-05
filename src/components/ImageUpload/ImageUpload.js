@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
 
-const ImageUpload = ({ setImages, images }) => {
+const ImageUpload = ({ setImages, images, setPostImage }) => {
   const handleImageUpload = (e) => {
     e.preventDefault()
     const { files } = document.querySelector('input[type="file"]')
@@ -21,6 +21,7 @@ const ImageUpload = ({ setImages, images }) => {
       .then((res) => res.json())
       .then((res) => {
         setImages([...images, res.secure_url])
+        setPostImage(true)
       })
       .catch((err) => console.log(err))
   }
@@ -34,8 +35,8 @@ const ImageUpload = ({ setImages, images }) => {
         },
         (error, result) => {
           if (result.event === 'success') {
-            console.log(result.info.secure_url)
-            // if adding multiple images only able to push urls to array, setImage overwrites with last one
+            // ig and fb do not return a url that works for setImages
+            setPostImage(true)
             setImages([result.info.secure_url, ...images])
           }
         }

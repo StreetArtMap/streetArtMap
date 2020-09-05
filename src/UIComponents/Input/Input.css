@@ -7,9 +7,8 @@ input {
   background-color: transparent;
   color: black;
   border-bottom: 1px solid grey;
-  width: 'auto';
-  width: 50vw;
-  font-size: 2.5vh;
+  width: 250px;
+  font-size: 20px;
 }
 input:hover {
   border-bottom: 1px solid grey;

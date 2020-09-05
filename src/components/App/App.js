@@ -12,8 +12,6 @@ import ExplorePage from '../../pages/ExplorePage/ExplorePage'
 import MapPage from '../../pages/MapPage/MapPage'
 import CameraPage from '../../pages/CameraPage/CameraPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
-import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
-import Button from '../../UIComponents/Button/Button'
 
 const App = () => {
   // Temporally hook checking what routes should be accessible (toggle logged in true or false)
@@ -45,8 +43,6 @@ const App = () => {
   return (
     <section className='app-container'>
       {routes}
-      <Button style='red'>CLICK</Button>
-      {/* <LoadingSpinner asOverlay /> */}
     </section>
   )
 }

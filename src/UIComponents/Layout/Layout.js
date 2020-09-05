@@ -4,7 +4,7 @@ import Header from '../Header/Header'
 
 const Layout = ({ children }) => {
   return (
-    <section>
+    <section className="layout-container">
       <Header />
       {children}
       <Nav />
