@@ -4,7 +4,13 @@ import './Camera.css'
 import axios from 'axios'
 import Button from '../../UIComponents/Button/Button'
 
-const Camera = ({ offline, images, setImages, setIsSupported, setPostImage }) => {
+const Camera = ({
+  offline,
+  images,
+  setImages,
+  setIsSupported,
+  setPostImage,
+}) => {
   let canvasElement = useRef(null)
   let webcam = useRef(null)
   const [capturedImage, setCapturedImage] = useState(null)
@@ -23,16 +29,6 @@ const Camera = ({ offline, images, setImages, setIsSupported, setPostImage }) =>
     })
   }, [])
 
-
-  // is this method being used at all? 
-  // componentDidUpdate(prevProps) {
-  //   console.log(prevProps, 'previos preops into compo did update')
-  //   console.log(this.props.offline, 'what is props offline')
-  //   if (!this.props.offline && prevProps.offline === true) {
-  //     this.batchUploads()
-  //   }
-  // }
-
   const captureImage = async () => {
     const capturedData = webcam.current.takeBase64Photo({
       type: 'jpeg',
@@ -46,7 +42,7 @@ const Camera = ({ offline, images, setImages, setIsSupported, setPostImage }) =>
     setIsCaptured(false)
     setCapturedImage(null)
   }
-  
+
   const uploadImage = () => {
     if (offline) {
       console.log("you're using in offline mode sha")
@@ -76,20 +72,6 @@ const Camera = ({ offline, images, setImages, setIsSupported, setPostImage }) =>
     }
   }
 
-  // const findLocalItems = (query) => {
-  //   let i
-  //   let results = []
-  //   for (i in localStorage) {
-  //     if (localStorage.hasOwnProperty(i)) {
-  //       if (i.match(query) || (!query && typeof i === 'string')) {
-  //         const value = localStorage.getItem(i)
-  //         results.push({ key: i, val: value })
-  //       }
-  //     }
-  //   }
-  //   return results
-  // }
-
   const checkUploadStatus = (data) => {
     setIsUploading(false)
     if (data.status === 200) {
@@ -102,58 +84,80 @@ const Camera = ({ offline, images, setImages, setIsSupported, setPostImage }) =>
     }
   }
 
-  // const batchUploads = () => {
-  //   const images = this.findLocalItems(/^cloudy_pwa_/)
-  //   let error = false
-  //   if (images.length > 0) {
-  //     setIsUploading(true)
-  //     for (let i = 0; i < images.length; i++) {
-  //       axios
-  //         .post(`https://api.cloudinary.com/v1_1/ds6dxgvxo/image/upload`, {
-  //           file: images[i].val,
-  //           upload_preset: 'artmode',
-  //         })
-  //         .then((data) => checkUploadStatus(data))
-  //         .catch((error) => {
-  //           error = true
-  //         })
-  //     }
-  //     setIsUploading(false)
-  //     if (!error) {
-  //       alert('All saved images have been uploaded!')
-  //     }
-  //   }
-  // }
+  const buttons = isCaptured ? (
+    <div>
+      <Button onClick={uploadImage}>Upload Photo</Button>
+    </div>
+  ) : (
+    <Button onClick={captureImage}>Take Picture</Button>
+  )
 
-    const buttons = isCaptured ? (
-      <div>
-        <Button onClick={uploadImage}>Upload Photo</Button>
-      </div>
-    ) : (
-      <Button onClick={captureImage}>Take Picture</Button>
-    )
+  const uploading = isUploading && (
+    <div>
+      <p>Uploading Image...</p>
+    </div>
+  )
 
-    const uploading = isUploading && (
-      <div>
-        <p>Uploading Image...</p>
-      </div>
-    )
-
-    return (
-      <div>
-        {uploading}
-        <video
-          autoPlay
-          playsInline
-          muted
-          id='webcam'
-          width='500px'
-          height='500px'
-        />
-        <br />
-        {buttons}
-      </div>
-    )
-  }
+  return (
+    <div>
+      {uploading}
+      <video
+        autoPlay
+        playsInline
+        muted
+        id='webcam'
+        width='100px'
+        height='100px'
+      />
+      <br />
+      {buttons}
+    </div>
+  )
+}
 
 export default Camera
+
+// componentDidUpdate(prevProps) {
+//   console.log(prevProps, 'previos preops into compo did update')
+//   console.log(this.props.offline, 'what is props offline')
+//   if (!this.props.offline && prevProps.offline === true) {
+//     this.batchUploads()
+//   }
+// }
+
+// const findLocalItems = (query) => {
+//   let i
+//   let results = []
+//   for (i in localStorage) {
+//     if (localStorage.hasOwnProperty(i)) {
+//       if (i.match(query) || (!query && typeof i === 'string')) {
+//         const value = localStorage.getItem(i)
+//         results.push({ key: i, val: value })
+//       }
+//     }
+//   }
+//   return results
+// }
+
+// const batchUploads = () => {
+//   const images = this.findLocalItems(/^cloudy_pwa_/)
+//   let error = false
+//   if (images.length > 0) {
+//     setIsUploading(true)
+//     for (let i = 0; i < images.length; i++) {
+//       axios
+//         .post(`https://api.cloudinary.com/v1_1/ds6dxgvxo/image/upload`, {
+//           file: images[i].val,
+//           upload_preset: 'artmode',
+//         })
+//         .then((data) => checkUploadStatus(data))
+//         .catch((error) => {
+//           error = true
+//         })
+//     }
+//     setIsUploading(false)
+//     if (!error) {
+//       alert('All saved images have been uploaded!')
+//     }
+//   }
+// }
