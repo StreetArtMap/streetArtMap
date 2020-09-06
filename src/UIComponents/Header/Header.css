@@ -16,6 +16,12 @@
   transform: translateY(0);
   transition: transform 0.3s ease;
   justify-content: space-between;
+  text-align: center;
+}
+
+.title {
+  margin: 0 auto;
+  font-size: 1.6rem;
 }
 
 .wrapper {

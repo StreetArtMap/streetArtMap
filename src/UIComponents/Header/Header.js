@@ -26,7 +26,7 @@ const Header = () => {
 
   return (
     <header className={`header ${shadowStyle} ${hiddenStyle}`}>
-      Street | ART | Walk
+      <h1 className='title'>Street | ART | Walk</h1>
     </header>
   )
 }
