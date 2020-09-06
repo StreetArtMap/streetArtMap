@@ -76,9 +76,9 @@ const MapWithMarkers = ({ setRoute }) => {
 
   return (
     <section className='markers-map-container'>
-      <Button onClick={() => setRoute(true)} className='toggle-maps-btn'>
+      <button onClick={() => setRoute(true)} className='toggle-maps-btn'>
         SEE ROUTES
-      </Button>
+      </button>
       <ReactMapGL
         {...viewport}
         mapStyle='mapbox://styles/edignot/ckemah34j0amm19oe5hjne20p'
@@ -86,8 +86,9 @@ const MapWithMarkers = ({ setRoute }) => {
         onViewportChange={(viewport) => {
           setViewport(viewport)
         }}
+        className='react-map-container'
       >
-        <NavigationControl />
+        <NavigationControl className='navigation-control'/>
         {markers}
         {myMarker}
         {selectedArt && (

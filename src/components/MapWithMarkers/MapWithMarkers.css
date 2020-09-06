@@ -4,6 +4,10 @@
   position: relative;
 }
 
+.react-map-container {
+  position: relative;
+}
+
 .toggle-maps-btn {
   position: absolute;
   z-index: 999;
@@ -11,4 +15,18 @@
 
 .popup {
   pointer-events: none;
+}
+
+.toggle-maps-btn {
+  position: absolute;
+  left: 5%;
+  top: 15%;
+}
+
+.navigation-control {
+  display: inline-block;
+  margin: auto;
+  position: absolute;
+  right: 3%;
+  bottom: 15%;
 }
