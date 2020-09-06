@@ -172,7 +172,7 @@ const initialArtsState = [
 export const arts = (state = initialArtsState, action) => {
   switch (action.type) {
     case 'CREATE_ART':
-      return [...initialArtsState]
+      return [...state]
     default:
       return state
   }
