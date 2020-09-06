@@ -3,5 +3,6 @@
   min-height: 80vh;
   height: auto;
   margin: 10vh auto;
-  border: 2px solid red;
+  background-color: #fff;
+  box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.01);
 }

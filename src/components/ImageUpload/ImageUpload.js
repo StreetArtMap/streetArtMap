@@ -2,8 +2,15 @@ import React from 'react'
 import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
 
-const ImageUpload = ({ setImages, images, setPostImage }) => {
+const ImageUpload = ({
+  setImages,
+  images,
+  setPostImage,
+  isUploading,
+  setIsUploading,
+}) => {
   const handleImageUpload = (e) => {
+    setIsUploading(true)
     e.preventDefault()
     const { files } = document.querySelector('input[type="file"]')
     const formData = new FormData()
@@ -22,8 +29,12 @@ const ImageUpload = ({ setImages, images, setPostImage }) => {
       .then((res) => {
         setImages([...images, res.secure_url])
         setPostImage(true)
+        setIsUploading(false)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setIsUploading(false)
+        console.log(err)
+      })
   }
 
   const openWidget = () => {
@@ -35,7 +46,6 @@ const ImageUpload = ({ setImages, images, setPostImage }) => {
         },
         (error, result) => {
           if (result.event === 'success') {
-            // ig and fb do not return a url that works for setImages
             setPostImage(true)
             setImages([result.info.secure_url, ...images])
           }
@@ -45,11 +55,14 @@ const ImageUpload = ({ setImages, images, setPostImage }) => {
   }
 
   return (
-    <form onSubmit={handleImageUpload}>
-      <Input type='file' />
-      <Button type='submit'>Submit</Button>
+    <section>
+      <form onSubmit={handleImageUpload}>
+        <Input type='file' />
+        <Button type='submit'>Submit</Button>
+      </form>
+
       <Button onClick={openWidget}>Upload Via Widget</Button>
-    </form>
+    </section>
   )
 }
 

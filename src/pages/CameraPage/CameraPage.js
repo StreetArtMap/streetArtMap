@@ -27,6 +27,8 @@ const CameraPage = () => {
             setImages={setImages}
             images={images}
             setPostImage={setPostImage}
+            isUploading={isUploading}
+            setIsUploading={setIsUploading}
           />
         </>
       )}
@@ -35,6 +37,8 @@ const CameraPage = () => {
           setImages={setImages}
           images={images}
           setPostImage={setPostImage}
+          isUploading={isUploading}
+          setIsUploading={setIsUploading}
         />
       )}
       {postImage && <CreateForm images={images} setPostImage={setPostImage} />}
