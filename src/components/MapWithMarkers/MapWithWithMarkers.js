@@ -73,7 +73,13 @@ const MapWithMarkers = ({ setRoute }) => {
   }, [])
 
   const markers = useSelector((state) => state.arts).map((art) => (
-    <Marker key={art.id} latitude={art.latitude} longitude={art.longitude}>
+    <Marker
+      key={art.id}
+      latitude={art.latitude}
+      longitude={art.longitude}
+      offsetLeft={-20}
+      offsetTop={-20}
+    >
       <FaMapPin
         id={art.id}
         className='art-location-icon'
