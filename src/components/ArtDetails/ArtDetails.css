@@ -1,0 +1,30 @@
+.art-details-container {
+  padding: 20px;
+}
+
+.art-icon {
+  color: var(--medium-dark);
+  font-size: 2.5rem;
+}
+
+.art-icons-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 20px;
+}
+
+.instagram-wrapper {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--medium-dark);
+}
+
+.artist-name,
+.address,
+.description {
+  text-align: left;
+  padding: 3px;
+  font-size: 1.2rem;
+}

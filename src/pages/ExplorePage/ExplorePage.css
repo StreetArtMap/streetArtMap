@@ -1,6 +1,7 @@
 .explore-container {
   width: 88vw;
-  height: 80vh;
+  min-height: 80vh;
+  height: auto;
   margin: 0 auto;
 }
 
