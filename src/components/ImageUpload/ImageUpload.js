@@ -1,14 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../../UIComponents/Button/Button'
-import Input from '../../UIComponents/Input/Input'
+import './ImageUpload.css'
 
-const ImageUpload = ({
-  setImages,
-  images,
-  setPostImage,
-  isUploading,
-  setIsUploading,
-}) => {
+const ImageUpload = ({ setImages, images, setPostImage, setIsUploading }) => {
+  const [isImageSelected, setIsImageSelected] = useState(false)
+
   const handleImageUpload = (e) => {
     setIsUploading(true)
     e.preventDefault()
@@ -56,12 +52,25 @@ const ImageUpload = ({
 
   return (
     <section>
-      <form onSubmit={handleImageUpload}>
-        <Input type='file' />
-        <Button type='submit'>Submit</Button>
+      <form onSubmit={handleImageUpload} className='input-file-form'>
+        <input type='file' className='file-input' id='file-input' />
+        {!isImageSelected && (
+          <Button
+            type='submit'
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById('file-input').click()
+              setIsImageSelected(true)
+            }}
+          >
+            Upload from device
+          </Button>
+        )}
+        {isImageSelected && <Button type='submit'>Confirm upload</Button>}
       </form>
-
-      <Button onClick={openWidget}>Upload Via Widget</Button>
+      <Button onClick={openWidget} className='widget-btn'>
+        Upload Via Widget
+      </Button>
     </section>
   )
 }
