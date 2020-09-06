@@ -3,7 +3,13 @@ footer {
   height: 10vh;
   display: flex;
   flex-direction: row;
-  border: 2px solid pink;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 998;
+  opacity: 0.9;
 }
 
 .nav-box {
