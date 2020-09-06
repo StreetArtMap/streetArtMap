@@ -1,0 +1,11 @@
+:root {
+  --extra-dark: #070707;
+  --dark: #313131;
+  --medium-dark: #5e5e5e;
+  --medium: #a0a0a0;
+  --light-medium: rgb(206, 206, 206);
+  --light: #e9e9e9;
+  --accent-dark: #641533;
+  --accent-medium: #832d4e;
+  --accent-light: #b37b90;
+}
