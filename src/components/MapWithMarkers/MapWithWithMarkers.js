@@ -4,7 +4,7 @@ import './MapWithMarkers.css'
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
 import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
-import { FaHeart, FaRegHeart, FaSearch, FaCheck } from 'react-icons/fa'
+import { FaHeart, FaRegHeart, FaSearch, FaCheck, FaRoute } from 'react-icons/fa'
 
 const MapWithMarkers = ({ setRoute }) => {
   const [selectedArt, setSelectedArt] = useState(null)
@@ -100,9 +100,10 @@ const MapWithMarkers = ({ setRoute }) => {
 
   return (
     <section className='markers-map-container'>
-      <button onClick={() => setRoute(true)} className='toggle-maps-btn'>
-        SEE ROUTES
-      </button>
+      <section className='toggle-maps-btn' onClick={() => setRoute(true)}>
+        <FaRoute />
+        <p className='route'>routes</p>
+      </section>
 
       <ReactMapGL
         {...viewport}

@@ -11,6 +11,13 @@
 .toggle-maps-btn {
   position: absolute;
   z-index: 999;
+  font-size: 4rem;
+  color: var(--medium-dark);
+  cursor: pointer;
+}
+
+.route {
+  font-size: 1.4rem;
 }
 
 .popup {
