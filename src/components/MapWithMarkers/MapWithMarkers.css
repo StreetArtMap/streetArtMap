@@ -30,3 +30,43 @@
   right: 3%;
   bottom: 15%;
 }
+
+.my-location-icon {
+  font-size: 2.5rem;
+  color: var(--urgent);
+}
+
+.art-location-icon {
+  font-size: 2.5rem;
+  color: var(--accent-dark);
+}
+
+.map-image-carousel-container {
+  width: 200px;
+  height: 200px;
+}
+
+.map-art-details-container {
+  padding: 20px;
+  padding-bottom: 0;
+}
+
+.map-artist-name {
+  text-align: left;
+  padding: 3px;
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+
+.map-art-icons-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.map-art-icon {
+  color: var(--medium-dark);
+  font-size: 1.6rem;
+}

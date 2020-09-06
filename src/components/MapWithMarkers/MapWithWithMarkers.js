@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import './MapWithMarkers.css'
-// npm install --save react-map-gl
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
-import MOCK_DATA from '../../MOCK_DATA'
-import Button from '../../UIComponents/Button/Button'
+import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
+import ImageCarousel from '../ImageCarousel/ImageCarousel'
+import { FaHeart, FaRegHeart, FaMapMarked, FaCheck } from 'react-icons/fa'
 
 const MapWithMarkers = ({ setRoute }) => {
   const [selectedArt, setSelectedArt] = useState(null)
@@ -46,31 +47,37 @@ const MapWithMarkers = ({ setRoute }) => {
       if (e.key === 'Escape') {
         setSelectedArt(null)
       }
-      // if (!e.target.className.includes('active')) {
-      //   setSelectedArt(null)
-      // }
+
+      if (
+        e.target.className &&
+        typeof e.target.className.includes !== 'undefined' &&
+        (!e.target.className.includes('active') ||
+          !e.target.className.includes('active'))
+      ) {
+        setSelectedArt(null)
+      }
     }
     window.addEventListener('keydown', listener)
     window.addEventListener('click', listener)
   }, [])
 
-  const markers = MOCK_DATA.map((tag) => (
-    <Marker key={tag.id} latitude={tag.latitude} longitude={tag.longitude}>
-      <button
+  const markers = useSelector((state) => state.arts).map((art) => (
+    <Marker key={art.id} latitude={art.latitude} longitude={art.longitude}>
+      <FaMapPin
+        id={art.id}
+        className='art-location-icon'
         onClick={(e) => {
           e.preventDefault()
-          setSelectedArt(tag)
+          setSelectedArt(art)
           e.target.classList.add('active')
         }}
-      >
-        TAG
-      </button>
+      />
     </Marker>
   ))
 
   const myMarker = (
     <Marker latitude={myLocation.latitude} longitude={myLocation.longitude}>
-      <button>MY LOCATION</button>
+      <FaMapMarkerAlt className='my-location-icon' />
     </Marker>
   )
 
@@ -79,6 +86,7 @@ const MapWithMarkers = ({ setRoute }) => {
       <button onClick={() => setRoute(true)} className='toggle-maps-btn'>
         SEE ROUTES
       </button>
+
       <ReactMapGL
         {...viewport}
         mapStyle='mapbox://styles/edignot/ckemah34j0amm19oe5hjne20p'
@@ -88,7 +96,7 @@ const MapWithMarkers = ({ setRoute }) => {
         }}
         className='react-map-container'
       >
-        <NavigationControl className='navigation-control'/>
+        <NavigationControl className='navigation-control' />
         {markers}
         {myMarker}
         {selectedArt && (
@@ -98,16 +106,25 @@ const MapWithMarkers = ({ setRoute }) => {
             onClose={() => {
               setSelectedArt(false)
             }}
-            closeOnClick={true}
+            closeOnClick={false}
             closeButton={false}
             isOpen={true}
           >
-            <Button>SELECTED ART</Button>
-            <img
-              src={MOCK_DATA[0].image_urls[0]}
-              width='200px'
-              height='200px'
-            />
+            <section className='map-image-carousel-container'>
+              <ImageCarousel images={selectedArt.image_urls} height={200} />
+            </section>
+            <section className='map-art-details-container'>
+              <section className='map-art-icons-wrapper'>
+                {selectedArt.favorite ? (
+                  <FaHeart className='map-art-icon' />
+                ) : (
+                  <FaRegHeart className='map-art-icon' />
+                )}
+                {selectedArt.visited && <FaCheck className='map-art-icon' />}
+              </section>
+
+              <p className='map-artist-name'>{selectedArt.artist_name}</p>
+            </section>
           </Popup>
         )}
       </ReactMapGL>

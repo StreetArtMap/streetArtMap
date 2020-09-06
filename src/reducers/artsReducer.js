@@ -21,7 +21,7 @@ const initialArtsState = [
   {
     id: 2,
     latitude: +'39.660355',
-    longitude: +'-105.598137',
+    longitude: +'-106.598137',
     address: 'address2',
     city: 'city2',
     state: 'state2',
@@ -40,7 +40,7 @@ const initialArtsState = [
   {
     id: 3,
     latitude: +'39.72356',
-    longitude: +'-104.894882',
+    longitude: +'-103.894882',
     address: 'address3',
     city: 'city3',
     state: 'state3',
@@ -77,7 +77,7 @@ const initialArtsState = [
   {
     id: 4,
     latitude: +'39.660355',
-    longitude: +'-105.598137',
+    longitude: +'-101.598137',
     address: 'address2',
     city: 'city2',
     state: 'state2',
@@ -114,7 +114,7 @@ const initialArtsState = [
   {
     id: 7,
     latitude: +'39.744137',
-    longitude: +'-104.95005',
+    longitude: +'-100.95005',
     address: 'address1',
     city: 'city1',
     state: 'state1',

@@ -6,7 +6,7 @@ import './ArtContainer.css'
 const ArtContainer = ({ art }) => {
   return (
     <section className='art-container'>
-      <ImageCarousel images={art.image_urls} />
+      <ImageCarousel images={art.image_urls} height={300} />
       <ArtDetails art={art} />
     </section>
   )

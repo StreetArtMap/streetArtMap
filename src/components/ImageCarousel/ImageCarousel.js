@@ -4,9 +4,9 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './ImageCarousel.css'
 
-const ImageCarousel = ({ images }) => {
+const ImageCarousel = ({ images, height }) => {
   const slides = images.map((image) => (
-    <img src={image} height='300' className='carousel-img' />
+    <img src={image} height={height} className='carousel-img' />
   ))
 
   return (
