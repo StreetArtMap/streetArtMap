@@ -75,7 +75,7 @@ const initialArtsState = [
     visited: false,
   },
   {
-    id: 4,
+    id: 5,
     latitude: +'39.660355',
     longitude: +'-101.598137',
     address: 'address2',

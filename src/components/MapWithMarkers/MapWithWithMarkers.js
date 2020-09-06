@@ -43,6 +43,17 @@ const MapWithMarkers = ({ setRoute }) => {
   }, [myLocation])
 
   useEffect(() => {
+    selectedArt &&
+      setViewport({
+        latitude: selectedArt.latitude,
+        longitude: selectedArt.longitude,
+        zoom: 10,
+        width: '100%',
+        height: '100%',
+      })
+  }, [selectedArt])
+
+  useEffect(() => {
     const listener = (e) => {
       if (e.key === 'Escape') {
         setSelectedArt(null)
