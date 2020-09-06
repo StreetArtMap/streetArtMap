@@ -1,3 +1,10 @@
+.login-page {
+  background-color: var(--medium);
+  height: 100vh;
+  display: flex;
+  background-image: url('https://images.unsplash.com/photo-1484136199491-6603c473c88b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2448&q=80');
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
@@ -8,6 +15,9 @@
   height: auto;
   margin: 10vh 5vw;
   border: 1px solid black;
+  border-radius: 7px;
+  background-color: var(--extra-light);
+  opacity: 0.95;
 }
 
 .user-validation {
