@@ -47,26 +47,25 @@
 }
 
 .map-art-details-container {
-  padding: 20px;
+  padding: 10px;
   padding-bottom: 0;
 }
 
 .map-artist-name {
   text-align: left;
-  padding: 3px;
   font-size: 1.2rem;
-  margin-top: 5px;
+  padding: 0 10px;
 }
 
 .map-art-icons-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  gap: 10px;
   margin-top: 10px;
 }
 
 .map-art-icon {
   color: var(--medium-dark);
   font-size: 1.6rem;
+  padding: 10px;
 }

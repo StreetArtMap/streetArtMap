@@ -4,7 +4,7 @@ import './MapWithMarkers.css'
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
 import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
-import { FaHeart, FaRegHeart, FaMapMarked, FaCheck } from 'react-icons/fa'
+import { FaHeart, FaRegHeart, FaSearch, FaCheck } from 'react-icons/fa'
 
 const MapWithMarkers = ({ setRoute }) => {
   const [selectedArt, setSelectedArt] = useState(null)
@@ -103,9 +103,6 @@ const MapWithMarkers = ({ setRoute }) => {
           <Popup
             latitude={selectedArt.latitude}
             longitude={selectedArt.longitude}
-            onClose={() => {
-              setSelectedArt(false)
-            }}
             closeOnClick={false}
             closeButton={false}
             isOpen={true}
@@ -121,6 +118,7 @@ const MapWithMarkers = ({ setRoute }) => {
                   <FaRegHeart className='map-art-icon' />
                 )}
                 {selectedArt.visited && <FaCheck className='map-art-icon' />}
+                <FaSearch className='map-art-icon' />
               </section>
 
               <p className='map-artist-name'>{selectedArt.artist_name}</p>
