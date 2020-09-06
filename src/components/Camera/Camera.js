@@ -10,12 +10,13 @@ const Camera = ({
   setImages,
   setIsSupported,
   setPostImage,
+  isUploading,
+  setIsUploading,
 }) => {
   let canvasElement = useRef(null)
   let webcam = useRef(null)
   const [capturedImage, setCapturedImage] = useState(null)
   const [isCaptured, setIsCaptured] = useState(false)
-  const [isUploading, setIsUploading] = useState(false)
 
   useEffect(() => {
     canvasElement.current = document.createElement('canvas')
@@ -92,26 +93,20 @@ const Camera = ({
     <Button onClick={captureImage}>Take Picture</Button>
   )
 
-  const uploading = isUploading && (
-    <div>
-      <p>Uploading Image...</p>
-    </div>
-  )
-
   return (
-    <div>
-      {uploading}
+    <>
       <video
         autoPlay
         playsInline
         muted
+        className='video-camera-wrapper'
         id='webcam'
         width='100px'
         height='100px'
       />
       <br />
       {buttons}
-    </div>
+    </>
   )
 }
 

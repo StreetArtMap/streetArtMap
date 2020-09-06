@@ -2,5 +2,6 @@
   width: 88vw;
   min-height: 80vh;
   height: auto;
-  margin: 0 auto;
+  margin: 10vh auto;
+  border: 2px solid red;
 }
