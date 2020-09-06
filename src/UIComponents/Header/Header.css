@@ -24,11 +24,6 @@
   font-size: 1.6rem;
 }
 
-.wrapper {
-  text-align: center;
-  height: 100%;
-}
-
 .header.shadow {
   box-shadow: 0 9px 9px -9px rgba(0, 0, 0, 0.13);
 }
