@@ -1,5 +1,6 @@
 .camera-container {
-  width: 100vw;
+  width: 88vw;
   min-height: 80vh;
   height: auto;
+  margin: 0 auto;
 }
