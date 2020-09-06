@@ -1,4 +1,56 @@
 .profile-container {
   width: 100vw;
   height: 80vh;
+  box-sizing: border-box;
+  border: 1px solid brown;
+}
+
+.user-details-container {
+  height: 20vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid blueviolet;
+}
+
+.user-profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.all-button,
+.saved-button {
+  width: 50vw;
+  height: 7vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  background: beige;
+}
+
+.photo-container {
+  height: 52vh;
+  overflow: scroll;
+  border: 1px dotted blue;
+  padding-top: 1vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  grid-auto-rows: 250px;
+  grid-gap: 15px;
+}
+
+.art-tile {
+  width: 270px;
+  height: 250px;
+  border: 2px solid black;
 }

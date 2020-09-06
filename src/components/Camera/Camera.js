@@ -85,10 +85,8 @@ const Camera = ({
   }
 
   const buttons = isCaptured ? (
-    <div>
-      <Button onClick={uploadImage}>Upload Photo</Button>
-    </div>
-  ) : (
+    <Button onClick={uploadImage}>Upload Photo</Button>
+    ) : (
     <Button onClick={captureImage}>Take Picture</Button>
   )
 
@@ -100,16 +98,16 @@ const Camera = ({
 
   return (
     <div>
-      {uploading}
       <video
         autoPlay
         playsInline
         muted
         id='webcam'
-        width='100px'
-        height='100px'
+        width='250px'
+        height='250px'
       />
       <br />
+      {uploading}
       {buttons}
     </div>
   )
