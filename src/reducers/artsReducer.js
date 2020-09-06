@@ -57,7 +57,7 @@ const initialArtsState = [
   },
 ]
 
-export const art = (state = initialArtsState, action) => {
+export const arts = (state = initialArtsState, action) => {
   switch (action.type) {
     case 'CREATE_ART':
       return [...initialArtsState]

@@ -1,13 +1,14 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import './ExplorePage.css'
-import ImageCarousel from '../../components/ImageCarousel/ImageCarousel'
+import ArtContainer from '../../components/ArtContainer/ArtContainer'
 
 const ExplorePage = () => {
-  return (
-    <section className='explore-container'>
-      <ImageCarousel />
-    </section>
-  )
+  const arts = useSelector((state) => state.arts).map((art) => (
+    <ArtContainer art={art} />
+  ))
+
+  return <section className='explore-container'>{arts}</section>
 }
 
 export default ExplorePage
