@@ -1,10 +1,4 @@
-footer {
-  width: 100vw;
-  height: 10vh;
-  display: flex;
-  flex-direction: row;
-  border: 2px solid pink;
-}
+@import '../../variables.css';
 
 .nav-box {
   width: 25vw;
@@ -12,4 +6,52 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.nav-icon {
+  font-size: 2rem;
+  color: var(--medium-dark);
+}
+
+.nav-text {
+  color: var(--medium-dark);
+}
+
+.nav-link {
+  text-decoration: none;
+}
+
+.footer {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.2vh;
+  font-size: 3vh;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 997;
+  background-color: var(--extra-light);
+  opacity: 0.9;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+  justify-content: space-between;
+  text-align: center;
+  z-index: 998;
+}
+
+.title {
+  margin: 0 auto;
+  font-size: 1.6rem;
+}
+
+.footer.shadow {
+  box-shadow: 0 9px 9px -9px rgba(0, 0, 0, 0.13);
+}
+
+.footer.hidden {
+  transform: translateY(110%);
 }

@@ -11,25 +11,27 @@ const LoginPage = (props) => {
   const [password, setPassword] = useState('')
 
   return (
-    <section className='login-container'>
-      <section className='login-title'>Street | ART | Walk</section>
-      <section className='user-validation'>
-        <Input
-          onChange={(e) => setUsername(e.target.value)}
-          type='text'
-          placeholder='Username...'
-        ></Input>
-        <Input
-          onChange={(e) => setPassword(e.target.value)}
-          type='password'
-          placeholder='Password...'
-        ></Input>
-        <Link to='/explore' onClick={() => setIsLoggedIn(true)}>
-          <Button type='submit'>LOG IN</Button>
-        </Link>
+    <section className='login-page'>
+      <section className='login-container'>
+        <section className='login-title'>Street | ART | Walk</section>
+        <section className='user-validation'>
+          <Input
+            onChange={(e) => setUsername(e.target.value)}
+            type='text'
+            placeholder='Username...'
+          ></Input>
+          <Input
+            onChange={(e) => setPassword(e.target.value)}
+            type='password'
+            placeholder='Password...'
+          ></Input>
+          <Link to='/explore' onClick={() => setIsLoggedIn(true)}>
+            <Button type='submit'>LOG IN</Button>
+          </Link>
+        </section>
+        <p>Don't have an account?</p>
+        <Button>SIGN UP</Button>
       </section>
-      <p>Don't have an account?</p>
-      <Button>SIGN UP</Button>
     </section>
   )
 }

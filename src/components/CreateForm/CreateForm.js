@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
+import './CreateForm.css'
 
 const CreateForm = ({ images, setPostImage }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
@@ -34,34 +35,45 @@ const CreateForm = ({ images, setPostImage }) => {
 
   const mappedImages = images.map((image) => {
     return (
-      <img src={image} alt='new-shoot' width='100' height='100' key={image} />
+      <img src={image} alt='new-shoot' className='form-image' key={image} />
     )
   })
 
   return (
     <>
-      <section>{mappedImages}</section>
-      <Button onClick={() => setPostImage(false)}>TAKE ANOTHER PICTURE</Button>
-      <form onSubmit={artCreateHandler}>
+      <section className='form-images-container'>{mappedImages}</section>
+      <Button onClick={() => setPostImage(false)}>ADD MORE PHOTOS</Button>
+      <form onSubmit={artCreateHandler} className='create-art-form'>
         <Input
+          className='create-art-input'
           type='text'
           placeholder='art title'
           value={title}
           onInput={(e) => setTitle(e.target.value)}
         />
         <Input
+          className='create-art-input'
           type='text'
           placeholder='artist name'
           value={artistName}
           onInput={(e) => setArtistName(e.target.value)}
         />
         <Input
+          className='create-art-input'
           type='text'
           placeholder='artist instagram'
           value={artistInstagram}
           onInput={(e) => setArtistInstagram(e.target.value)}
         />
         <Input
+          className='create-art-input'
+          type='text'
+          placeholder='address'
+          value={address}
+          onInput={(e) => setAddress(e.target.value)}
+        />
+        <Input
+          className='create-art-input'
           type='text'
           element='textarea'
           placeholder='description'
@@ -69,18 +81,12 @@ const CreateForm = ({ images, setPostImage }) => {
           value={description}
           onInput={(e) => setDescription(e.target.value)}
         />
-        <p>
+        <Button type='submit'>POST ART</Button>
+        {/* <p>
           {currentLocation
             ? `${currentLocation.latitude}, ${currentLocation.longitude}`
             : 'no location'}
-        </p>
-        <Input
-          type='text'
-          placeholder='address'
-          value={address}
-          onInput={(e) => setAddress(e.target.value)}
-        />
-        <Button type='submit'>CREATE</Button>
+        </p> */}
       </form>
     </>
   )

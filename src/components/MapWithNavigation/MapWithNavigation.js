@@ -1,15 +1,11 @@
 import React from 'react'
-// npm install --save mapbox-gl
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-// npm install --save @mapbox/mapbox-gl-directions
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 import './MapWithNavigation.css'
 import style from './mapWithNavigationStyle'
-// Using mock data for now
 import MOCK_DATA from '../../MOCK_DATA'
-// add MapBox key to .env and gitignore
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY
 
 class MapWithNavigation extends React.Component {
@@ -32,7 +28,7 @@ class MapWithNavigation extends React.Component {
 
     const directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
-      unit: 'metric',
+      unit: 'imperial',
       profile: 'mapbox/driving',
       controls: {
         profileSwitcher: true,

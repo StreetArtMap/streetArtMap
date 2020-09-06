@@ -1,4 +1,5 @@
-input {
+input,
+textarea {
   outline: none;
   padding-top: 0.8em;
   padding-bottom: 0.4em;
@@ -7,12 +8,18 @@ input {
   background-color: transparent;
   color: black;
   border-bottom: 1px solid grey;
-  width: 250px;
+  width: 300px;
   font-size: 20px;
 }
+textarea:hover,
 input:hover {
   border-bottom: 1px solid grey;
 }
+textarea:active,
 input:active {
   border-bottom: 1px solid grey;
+}
+
+textarea {
+  resize: none;
 }
