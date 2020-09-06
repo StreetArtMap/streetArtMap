@@ -1,3 +1,5 @@
+@import '../../variables.css';
+
 footer {
   width: 100vw;
   height: 10vh;
@@ -7,7 +9,7 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #fff;
+  background-color: var(--extra-light);
   z-index: 998;
   opacity: 0.9;
 }
@@ -18,4 +20,17 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.nav-icon {
+  font-size: 2rem;
+  color: var(--medium-dark);
+}
+
+.nav-text {
+  color: var(--medium-dark);
+}
+
+.nav-link {
+  text-decoration: none;
 }
