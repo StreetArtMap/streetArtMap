@@ -90,7 +90,7 @@ const Camera = ({
       <Button onClick={uploadImage}>Upload Photo</Button>
     </div>
   ) : (
-    <Button onClick={captureImage}>Take Picture</Button>
+    <Button onClick={captureImage}>Take Photo</Button>
   )
 
   return (

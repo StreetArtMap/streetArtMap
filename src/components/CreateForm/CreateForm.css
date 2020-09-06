@@ -1,0 +1,22 @@
+.form-images-container {
+  border: 2px solid red;
+  display: grid;
+  margin-bottom: 20px;
+}
+
+.form-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.create-art-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.create-art-input {
+  margin: 20px;
+}
