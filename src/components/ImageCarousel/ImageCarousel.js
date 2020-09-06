@@ -2,9 +2,12 @@ import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import './ImageCarousel.css'
 
 const ImageCarousel = ({ images }) => {
-  const slides = images.map((image) => <img src={image} height='300' />)
+  const slides = images.map((image) => (
+    <img src={image} height='300' className='carousel-img' />
+  ))
 
   return (
     <Slider
