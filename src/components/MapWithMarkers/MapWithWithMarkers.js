@@ -46,9 +46,9 @@ const MapWithMarkers = ({ setRoute }) => {
       if (e.key === 'Escape') {
         setSelectedArt(null)
       }
-      if (!e.target.className.includes('active')) {
-        setSelectedArt(null)
-      }
+      // if (!e.target.className.includes('active')) {
+      //   setSelectedArt(null)
+      // }
     }
     window.addEventListener('keydown', listener)
     window.addEventListener('click', listener)

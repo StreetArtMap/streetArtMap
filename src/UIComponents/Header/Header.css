@@ -1,10 +1,32 @@
-header {
+.header {
   width: 100vw;
   height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  letter-spacing: .2vh;
-  border: 1px solid blue;
+  letter-spacing: 0.2vh;
   font-size: 3vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 997;
+  background-color: var(--extra-light);
+  opacity: 0.9;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+  justify-content: space-between;
+}
+
+.wrapper {
+  text-align: center;
+  height: 100%;
+}
+
+.header.shadow {
+  box-shadow: 0 9px 9px -9px rgba(0, 0, 0, 0.13);
+}
+
+.header.hidden {
+  transform: translateY(-110%);
 }
