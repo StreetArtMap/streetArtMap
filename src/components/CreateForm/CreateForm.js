@@ -14,11 +14,12 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [artistInstagram, setArtistInstagram] = useState('')
   const [description, setDescription] = useState('')
   const [address, setAddress] = useState('')
-  const [addressInput, setAddressInput] = useState(false)
+  const [addressInput, setAddressInput] = useState(true)
+  const [addressButton, setAddressButton] = useState(false)
 
-  const getLocation = () => {
+  const getLocation = async () => {
     if (navigator.geolocation) {
-      return navigator.geolocation.getCurrentPosition(showPosition)
+      return await navigator.geolocation.getCurrentPosition(showPosition)
     } else {
       alert('Geo Location is not supported by your device')
     }
@@ -35,8 +36,9 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 
   const getCurrentLocation = async (e) => {
     e.preventDefault()
+    setAddressInput(false)
+    setAddressButton(true)
     await getLocation()
-    console.log(currentLocation)
   }
 
   const addDefaultImageSrc = (e) => {
@@ -49,7 +51,11 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     setImages([...newImages])
   }
 
-  const toggleAddressOrLocation = () => {}
+  const toggleAddressOrLocation = (e) => {
+    e.preventDefault()
+    setAddressInput(true)
+    setAddressButton(false)
+  }
 
   const mappedImages = images.map((image) => {
     return (
@@ -108,6 +114,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           value={artistInstagram}
           onInput={(e) => setArtistInstagram(e.target.value)}
         />
+
         {addressInput && (
           <Input
             className='create-art-input'
@@ -121,18 +128,28 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         )}
 
         {!addressInput && (
-          <p>
+          <p className='current-location-display'>
             {currentLocation &&
               `${currentLocation.latitude}° N, ${currentLocation.longitude}° W`}
           </p>
         )}
+        {!addressButton && (
+          <section className='form-btn-wrapper'>
+            <Button onClick={getCurrentLocation}>
+              my location
+              <FaMapMarkerAlt />
+            </Button>
+          </section>
+        )}
 
-        <section className='form-btn-wrapper'>
-          <Button onClick={getCurrentLocation}>
-            my location
-            <FaMapMarkerAlt />
-          </Button>
-        </section>
+        {addressButton && (
+          <section className='form-btn-wrapper'>
+            <Button onClick={toggleAddressOrLocation}>
+              enter address
+              <FaMapMarkerAlt />
+            </Button>
+          </section>
+        )}
 
         <Input
           className='create-art-input'
