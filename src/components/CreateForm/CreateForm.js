@@ -10,25 +10,25 @@ import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 
 const CreateForm = ({ images, setPostImage, setImages }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
+  const [addressInput, setAddressInput] = useState(true)
+  const [addressButton, setAddressButton] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [title, setTitle] = useState('')
   const [artistName, setArtistName] = useState('')
   const [artistInstagram, setArtistInstagram] = useState('')
   const [description, setDescription] = useState('')
-  const [address, setAddress] = useState(null)
-  const [city, setCity] = useState(null)
-  const [state, setState] = useState(null)
-  const [zipcode, setZipcode] = useState(null)
-  const [addressInput, setAddressInput] = useState(true)
-  const [addressButton, setAddressButton] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [address, setAddress] = useState('')
+  const [city, setCity] = useState('')
+  const [state, setState] = useState('')
+  const [zipcode, setZipcode] = useState('')
   const [isAddressValid, setIsAddressValid] = useState(true)
   const [isCityValid, setIsCityValid] = useState(true)
   const [isStateValid, setIsStateValid] = useState(true)
   const [isZipcodeValid, setIsZipcodeValid] = useState(true)
 
-  const getLocation = async () => {
+  const getLocation = () => {
     if (navigator.geolocation) {
-      return await navigator.geolocation.getCurrentPosition(showPosition)
+      return navigator.geolocation.getCurrentPosition(showPosition)
     } else {
       alert('Geo Location is not supported by your device')
     }
@@ -40,19 +40,19 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       latitude: position.coords.latitude,
     }
     setCurrentLocation(location)
-    return location
   }
 
-  const getCurrentLocationHandler = async (e) => {
+  const getCurrentLocationHandler = (e) => {
     setIsLoading(true)
     e.preventDefault()
     setAddressInput(false)
-    setAddress(null)
-    setCity(null)
-    setState(null)
-    setZipcode(null)
+    setAddress('')
+    setCity('')
+    setState('')
+    setZipcode('')
     setAddressButton(true)
-    await getLocation()
+    // await get location is not working
+    getLocation()
     setIsLoading(false)
   }
 
@@ -75,14 +75,21 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 
   const postArtHandler = (e) => {
     e.preventDefault()
-    // true or false
     const fullAddress = address && city && state && zipcode ? true : false
-    console.log(fullAddress)
-    if (!fullAddress) {
+
+    if (addressInput && !fullAddress) {
       !address && setIsAddressValid(false)
       !city && setIsCityValid(false)
       !state && setIsStateValid(false)
       !zipcode && setIsZipcodeValid(false)
+    } else if (!addressInput && !currentLocation) {
+      alert(
+        'Error getting your location. Please try again or enter address instead'
+      )
+      return
+    } else if (!images.length) {
+      alert('Please add at least one photo')
+      return
     } else {
       const newArt = {
         image_urls: images,
@@ -92,18 +99,15 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         city: city,
         state: state,
         zipcode: zipcode,
-        // optional
         description: description,
-        // optional
         artist_name: artistName,
-        // optional
         art_name: title,
-        // optional
         instagram_handle: artistInstagram,
         favorite: false,
         visited: false,
       }
       console.log(newArt)
+      alert('Art created!')
     }
   }
 
@@ -235,8 +239,6 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           rows='5'
           value={description}
           onInput={(e) => setDescription(e.target.value)}
-          isValid={false}
-          errorMessage='Description is required'
         />
         <section className='form-btn-wrapper post-art-btn'>
           <Button type='submit'>
