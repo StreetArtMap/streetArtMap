@@ -1,4 +1,12 @@
 .explore-container {
-  width: 100vw;
-  height: 80vh;
+  width: 88vw;
+  min-height: 80vh;
+  height: auto;
+  margin: 0 auto;
+}
+
+.slick-track {
+  margin: 0;
+  padding: 0;
+  width: auto;
 }

@@ -1,12 +1,23 @@
+.login-page {
+  background-color: var(--medium);
+  height: 100vh;
+  display: flex;
+  background-image: url('https://images.unsplash.com/photo-1561059488-916d69792237?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2978&q=80');
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   width: 90vw;
-  height: 80vh;
+  min-height: 80vh;
+  height: auto;
   margin: 10vh 5vw;
   border: 1px solid black;
+  border-radius: 7px;
+  background-color: var(--extra-light);
+  opacity: 0.9;
 }
 
 .user-validation {

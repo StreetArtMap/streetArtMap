@@ -1,5 +1,7 @@
 import React from 'react'
 import './ProfilePage.css'
+import '../../variables.css'
+import { FaHeart, FaBookOpen, FaBookmark, FaFolder, FaRegHeart, FaCheck } from 'react-icons/fa'
 
 
 const ProfilePage = () => {
@@ -10,14 +12,15 @@ const ProfilePage = () => {
           <img src={`https://images.unsplash.com/photo-1595790752141-3bad67318327?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80`} alt="human-user" className="user-profile-image"/>
         </section>
         <section className="user-stats">
-          <p>UserName Here</p>
-          <p>10 Images Saved</p>
-          <p>55 Art Posts</p>
+          <p className="username">UserName Here</p>
+          <p className="user-image-count">10 Images Saved</p>
+          <p className="user-image-count">55 Posts</p>
+          <section className="button-container">
+            <section className="all-button"><FaBookOpen className='art-icon' /></section>
+            <section className="saved-button"><FaBookmark className='art-icon' />
+            </section>
+          </section>
         </section>
-      </section>
-      <section className="button-container">
-        <section className="all-button">ALL</section>
-        <section className="saved-button">SAVED</section>
       </section>
       <section className="photo-container">
         <img src={`https://images.unsplash.com/photo-1532743869468-90b42b7455dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80`} alt="art1" className="art-tile" />
