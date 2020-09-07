@@ -4,6 +4,7 @@ import './ImageUpload.css'
 
 const ImageUpload = ({ setImages, images, setPostImage, setIsUploading }) => {
   const [isImageSelected, setIsImageSelected] = useState(false)
+  const [imageSelected, setImageSelected] = useState(null)
 
   const handleImageUpload = (e) => {
     setIsUploading(true)
@@ -53,7 +54,14 @@ const ImageUpload = ({ setImages, images, setPostImage, setIsUploading }) => {
   return (
     <section>
       <form onSubmit={handleImageUpload} className='input-file-form'>
-        <input type='file' className='file-input' id='file-input' />
+        <input
+          type='file'
+          className='file-input'
+          id='file-input'
+          onChange={(e) => {
+            setImageSelected(e.target.files[0].name)
+          }}
+        />
         {!isImageSelected && (
           <Button
             type='submit'
@@ -63,9 +71,10 @@ const ImageUpload = ({ setImages, images, setPostImage, setIsUploading }) => {
               setIsImageSelected(true)
             }}
           >
-            Upload from device
+            Select from device
           </Button>
         )}
+        <p>{imageSelected}</p>
         {isImageSelected && <Button type='submit'>Confirm upload</Button>}
       </form>
       <Button onClick={openWidget} className='widget-btn'>

@@ -41,7 +41,13 @@ const CameraPage = () => {
           setIsUploading={setIsUploading}
         />
       )}
-      {postImage && <CreateForm images={images} setPostImage={setPostImage} />}
+      {postImage && (
+        <CreateForm
+          images={images}
+          setPostImage={setPostImage}
+          setImages={setImages}
+        />
+      )}
       {isUploading && <LoadingSpinner asOverlay />}
     </section>
   )

@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 import './CreateForm.css'
+import { TiDelete } from 'react-icons/ti'
+
 import { DEFAULT_IMG_URL } from '../../constants'
 
-const CreateForm = ({ images, setPostImage }) => {
+const CreateForm = ({ images, setPostImage, setImages }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
   const [title, setTitle] = useState('')
   const [artistName, setArtistName] = useState('')
@@ -38,15 +40,28 @@ const CreateForm = ({ images, setPostImage }) => {
     e.target.src = DEFAULT_IMG_URL
   }
 
+  const removeImageHandler = (e) => {
+    e.preventDefault()
+    const newImages = images.filter((image) => image !== e.target.id)
+    setImages([...newImages])
+  }
+
   const mappedImages = images.map((image) => {
     return (
-      <img
-        src={image || DEFAULT_IMG_URL}
-        alt='new-shoot'
-        className='form-image'
-        key={image}
-        onError={addDefaultImageSrc}
-      />
+      <section className='form-image-wrapper'>
+        <TiDelete
+          id={image}
+          onClick={removeImageHandler}
+          className='image-delete-btn'
+        />
+        <img
+          src={image || DEFAULT_IMG_URL}
+          alt='new-shoot'
+          className='form-image'
+          key={image}
+          onError={addDefaultImageSrc}
+        />
+      </section>
     )
   })
 

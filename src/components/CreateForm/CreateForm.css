@@ -1,13 +1,29 @@
 .form-images-container {
-  border: 2px solid red;
   display: grid;
   margin-bottom: 20px;
+  grid-template: auto / repeat(2, 1fr);
+  width: 100%;
+}
+
+.form-image-wrapper {
+  position: relative;
+}
+
+.image-delete-btn {
+  color: var(--extra-light);
+  font-size: 4rem;
+  cursor: pointer;
+  position: absolute;
+  box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.03);
+  top: 10px;
+  right: 10px;
 }
 
 .form-image {
-  width: 200px;
-  height: 200px;
+  width: 100%;
   object-fit: cover;
+  padding: 5px;
+  box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.03);
 }
 
 .create-art-form {
