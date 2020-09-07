@@ -31,12 +31,12 @@ const Camera = ({
   }, [])
 
   const captureImage = async () => {
-    const capturedData = webcam.current.takeBase64Photo({
+    const capturedData = await webcam.current.takeBase64Photo({
       type: 'jpeg',
       quality: 1,
-    })
+    }).base64
+    setCapturedImage(capturedData)
     setIsCaptured(true)
-    setCapturedImage(capturedData.base64)
   }
 
   const discardImage = () => {
@@ -46,7 +46,6 @@ const Camera = ({
 
   const uploadImage = () => {
     if (offline) {
-      console.log("you're using in offline mode sha")
       const prefix = 'cloudy_pwa_'
       const rs = Math.random().toString(36).substr(2, 5)
       localStorage.setItem(`${prefix}${rs}`, this.state.capturedImage)
@@ -67,7 +66,7 @@ const Camera = ({
         })
         .catch((error) => {
           console.log(error, 'ERROR')
-          alert('Error uploading an image...')
+          alert('Error uploading an image!!!')
           setIsUploading(false)
         })
     }
@@ -85,13 +84,11 @@ const Camera = ({
     }
   }
 
-  const buttons = isCaptured ? (
-    <div>
-      <Button onClick={uploadImage}>Upload Photo</Button>
-    </div>
-  ) : (
-    <Button onClick={captureImage}>Take Photo</Button>
-  )
+  const imageUploadHandler = async (e) => {
+    e.preventDefault()
+    await captureImage()
+    uploadImage()
+  }
 
   return (
     <>
@@ -105,8 +102,7 @@ const Camera = ({
         height='250px'
       />
       <br />
-      {isUploading}
-      {buttons}
+      <Button onClick={imageUploadHandler}>Take Photo</Button>
     </>
   )
 }
