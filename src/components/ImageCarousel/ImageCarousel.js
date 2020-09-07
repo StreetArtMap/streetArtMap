@@ -3,10 +3,20 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './ImageCarousel.css'
+import { DEFAULT_IMG_URL } from '../../constants'
 
 const ImageCarousel = ({ images, height }) => {
+  const addDefaultImageSrc = (e) => {
+    e.target.src = DEFAULT_IMG_URL
+  }
+
   const slides = images.map((image) => (
-    <img src={image} height={height} className='carousel-img' />
+    <img
+      src={image}
+      height={height}
+      className='carousel-img'
+      onError={addDefaultImageSrc}
+    />
   ))
 
   return (

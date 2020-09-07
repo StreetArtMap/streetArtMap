@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 import './CreateForm.css'
+import { DEFAULT_IMG_URL } from '../../constants'
 
 const CreateForm = ({ images, setPostImage }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
@@ -33,9 +34,19 @@ const CreateForm = ({ images, setPostImage }) => {
     await getLocation()
   }
 
+  const addDefaultImageSrc = (e) => {
+    e.target.src = DEFAULT_IMG_URL
+  }
+
   const mappedImages = images.map((image) => {
     return (
-      <img src={image} alt='new-shoot' className='form-image' key={image} />
+      <img
+        src={image || DEFAULT_IMG_URL}
+        alt='new-shoot'
+        className='form-image'
+        key={image}
+        onError={addDefaultImageSrc}
+      />
     )
   })
 
