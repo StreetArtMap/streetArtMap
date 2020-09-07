@@ -25,8 +25,10 @@ const Input = (props) => {
   return (
     <section>
       <label htmlFor={id}>{label}</label>
-      {tag}
-      {!isValid && <p>{errorMessage}</p>}
+      <section className='input-error-wrapper'>
+        {tag}
+        {!isValid && <p className='input-error-message'>{errorMessage}</p>}
+      </section>
     </section>
   )
 }
