@@ -98,8 +98,8 @@ const Camera = ({
         muted
         className='video-camera-wrapper'
         id='webcam'
-        width='100px'
-        height='100px'
+        width='250px'
+        height='250px'
       />
       <br />
       <Button onClick={imageUploadHandler}>Take Photo</Button>

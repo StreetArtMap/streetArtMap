@@ -1,5 +1,86 @@
 .profile-container {
+  margin-top: 10vh;
   width: 100vw;
+  box-sizing: border-box;
   min-height: 80vh;
-  height: auto;
+  height: 100%;
+}
+
+.user-details-container {
+  height: 20vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 2px solid var(--light-medium);
+  background-color: var(--light);
+}
+
+.user-profile-image {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 6vh;
+}
+
+.user-stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 20vh;
+  width: 50vw;
+  font-size: 1.4rem;
+  letter-spacing: .1rem;
+  padding-left: 5vh;
+}
+
+.user-image-count {
+  font-size: 1rem;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 50vw;
+}
+
+.all-button:hover,
+.saved-button:hover,
+.all-button:active,
+.saved-button:active,
+.all-button:focus,
+.saved-button:focus {
+  box-shadow: 0 0 3px 3px var(--medium);
+  transform: scale(1.05);
+  transition: transform .3s;
+  opacity: .8;
+}
+
+
+
+.photo-container {
+  height: 60vh;
+  overflow-y: scroll;
+  padding: 1vh;
+  padding-top: 0vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  grid-auto-rows: 250px;
+  grid-gap: 15px;
+  background-color: var(--light);
+  border-bottom: 2px solid var(--light-medium);
+}
+
+.art-tile {
+  width: 270px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.art-icon {
+  font-size: 2.5rem;
 }
