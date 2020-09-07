@@ -18,7 +18,7 @@ describe('ProfilePage', () => {
   })
 
   it('should render the profile page', () => {
-    const { getByText, getByPlaceholderText, getAllByRole } = render(
+    const { getByText, getByTitle, getAllByRole } = render(
       <BrowserRouter>
         <ProfilePage />
       </BrowserRouter>)
@@ -27,13 +27,13 @@ describe('ProfilePage', () => {
     const savedImages = getByText('10 Images Saved')
     const postsInformation = getByText('55 Posts')
     const images = getAllByRole('img')
-    // const allBtn = screen.getByRole('button', { name: /ALL/})
-    // const savedBtn = screen.getByRole('button', { name: /SAVED/})
+    const collectionBtn = getByTitle('collection-icon')
+    const bookmarkBtn = getByTitle('bookmark-icon')
     expect(userName).toBeInTheDocument()
     expect(savedImages).toBeInTheDocument()
     expect(postsInformation).toBeInTheDocument()
     expect(images).toHaveLength(8)
-    // expect(allBtn).toBeInTheDocument()
-    // expect(savedBtn).toBeInTheDocument()
+    expect(collectionBtn).toBeInTheDocument()
+    expect(bookmarkBtn).toBeInTheDocument()
   })
 })

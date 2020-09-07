@@ -16,8 +16,8 @@ const ProfilePage = () => {
           <p className="user-image-count">10 Images Saved</p>
           <p className="user-image-count">55 Posts</p>
           <section className="button-container">
-            <section className="all-button"><FaBookOpen className='art-icon' /></section>
-            <section className="saved-button"><FaBookmark className='art-icon' />
+            <section className="all-button"><FaBookOpen className='art-icon' title="collection-icon" /></section>
+            <section className="saved-button"><FaBookmark className='art-icon' title="bookmark-icon" />
             </section>
           </section>
         </section>
