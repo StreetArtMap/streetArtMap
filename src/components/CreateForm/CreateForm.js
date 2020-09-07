@@ -34,9 +34,10 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     return location
   }
 
-  const getCurrentLocation = async (e) => {
+  const getCurrentLocationHandler = async (e) => {
     e.preventDefault()
     setAddressInput(false)
+    setAddress('')
     setAddressButton(true)
     await getLocation()
   }
@@ -51,9 +52,10 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     setImages([...newImages])
   }
 
-  const toggleAddressOrLocation = (e) => {
+  const toggleAddressOrLocationHandler = (e) => {
     e.preventDefault()
     setAddressInput(true)
+    setCurrentLocation(null)
     setAddressButton(false)
   }
 
@@ -135,7 +137,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         )}
         {!addressButton && (
           <section className='form-btn-wrapper'>
-            <Button onClick={getCurrentLocation}>
+            <Button onClick={getCurrentLocationHandler}>
               my location
               <FaMapMarkerAlt />
             </Button>
@@ -144,7 +146,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 
         {addressButton && (
           <section className='form-btn-wrapper'>
-            <Button onClick={toggleAddressOrLocation}>
+            <Button onClick={toggleAddressOrLocationHandler}>
               enter address
               <FaMapMarkerAlt />
             </Button>
