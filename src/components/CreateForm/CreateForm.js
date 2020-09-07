@@ -26,23 +26,25 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [isStateValid, setIsStateValid] = useState(true)
   const [isZipcodeValid, setIsZipcodeValid] = useState(true)
 
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      return navigator.geolocation.getCurrentPosition(showPosition)
-    } else {
-      alert('Geo Location is not supported by your device')
+  const getCurrentPosition = (options = {}) => {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, options)
+    })
+  }
+
+  const fetchCoordinates = async () => {
+    try {
+      const { coords } = await getCurrentPosition()
+      const { latitude, longitude } = coords
+      setCurrentLocation({ latitude, longitude })
+      setIsLoading(false)
+    } catch (error) {
+      console.error(error)
+      setIsLoading(false)
     }
   }
 
-  const showPosition = (position) => {
-    const location = {
-      longitude: position.coords.longitude,
-      latitude: position.coords.latitude,
-    }
-    setCurrentLocation(location)
-  }
-
-  const getCurrentLocationHandler = (e) => {
+  const getCurrentLocationHandler = async (e) => {
     setIsLoading(true)
     e.preventDefault()
     setAddressInput(false)
@@ -51,9 +53,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     setState('')
     setZipcode('')
     setAddressButton(true)
-    // await get location is not working
-    getLocation()
-    setIsLoading(false)
+    await fetchCoordinates()
   }
 
   const addDefaultImageSrc = (e) => {
