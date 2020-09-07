@@ -17,8 +17,9 @@
 }
 
 .loading-spinner__overlay {
-  height: 100%;
-  width: 100%;
+  z-index: 5;
+  height: 100vh;
+  width: 100vw;
   position: absolute;
   top: 0;
   left: 0;

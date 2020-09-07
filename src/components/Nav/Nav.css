@@ -33,14 +33,14 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 997;
+  z-index: 7;
   background-color: var(--extra-light);
   opacity: 0.9;
   transform: translateY(0);
   transition: transform 0.3s ease;
   justify-content: space-between;
   text-align: center;
-  z-index: 998;
+  z-index: 8;
 }
 
 .title {

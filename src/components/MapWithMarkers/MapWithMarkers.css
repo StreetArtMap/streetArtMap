@@ -10,7 +10,7 @@
 
 .toggle-maps-btn {
   position: absolute;
-  z-index: 999;
+  z-index: 9;
   font-size: 4rem;
   color: var(--medium-dark);
   cursor: pointer;

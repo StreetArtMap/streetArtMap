@@ -26,6 +26,9 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [isStateValid, setIsStateValid] = useState(true)
   const [isZipcodeValid, setIsZipcodeValid] = useState(true)
 
+  isLoading && (document.body.style.overflow = 'hidden')
+  !isLoading && (document.body.style.overflow = 'scroll')
+
   const getCurrentPosition = (options = {}) => {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resolve, reject, options)
@@ -135,7 +138,6 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay />}
       <section className='form-images-container'>{mappedImages}</section>
       {!images.length && (
         <p className='no-images-error'>Please add at least one photo</p>
@@ -214,12 +216,17 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           </p>
         )}
         {!addressButton && (
-          <section className='form-btn-wrapper'>
-            <Button onClick={getCurrentLocationHandler}>
-              my location
-              <FaMapMarkerAlt />
-            </Button>
-          </section>
+          <>
+            <p className='my-location-message'>
+              Enter address or click 'my location'
+            </p>
+            <section className='form-btn-wrapper my-location-btn'>
+              <Button onClick={getCurrentLocationHandler}>
+                my location
+                <FaMapMarkerAlt />
+              </Button>
+            </section>
+          </>
         )}
 
         {addressButton && (
@@ -232,7 +239,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         )}
 
         <Input
-          className='create-art-input'
+          className='create-art-input description-input'
           type='text'
           element='textarea'
           placeholder='description'
@@ -246,6 +253,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           </Button>
         </section>
       </form>
+      {isLoading && <LoadingSpinner asOverlay />}
     </>
   )
 }
