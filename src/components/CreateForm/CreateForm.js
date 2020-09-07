@@ -13,7 +13,10 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [artistName, setArtistName] = useState('')
   const [artistInstagram, setArtistInstagram] = useState('')
   const [description, setDescription] = useState('')
-  const [address, setAddress] = useState('')
+  const [address, setAddress] = useState(null)
+  const [city, setCity] = useState(null)
+  const [state, setState] = useState(null)
+  const [zipcode, setZipcode] = useState(null)
   const [addressInput, setAddressInput] = useState(true)
   const [addressButton, setAddressButton] = useState(false)
 
@@ -37,7 +40,10 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const getCurrentLocationHandler = async (e) => {
     e.preventDefault()
     setAddressInput(false)
-    setAddress('')
+    setAddress(null)
+    setCity(null)
+    setState(null)
+    setZipcode(null)
     setAddressButton(true)
     await getLocation()
   }
@@ -57,6 +63,25 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     setAddressInput(true)
     setCurrentLocation(null)
     setAddressButton(false)
+  }
+
+  const postArtHandler = () => {
+    const newArt = {
+      image_urls: '',
+      latitude: currentLocation.latitude,
+      longitude: currentLocation.longitude,
+      address: 'a',
+      city: 'a',
+      state: 'a',
+      zipcode: 'a',
+      description: description,
+      artist_name: artistName,
+      art_name: title,
+      instagram_handle: artistInstagram,
+      favorite: false,
+      visited: false,
+    }
+    console.log(newArt)
   }
 
   const mappedImages = images.map((image) => {
@@ -90,7 +115,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       <Button onClick={() => setPostImage(false)}>
         ADD MORE PHOTOS <ImCamera />
       </Button>
-      <form onSubmit={() => alert('submit!')} className='create-art-form'>
+      <form onSubmit={postArtHandler} className='create-art-form'>
         <Input
           className='create-art-input'
           type='text'
@@ -118,15 +143,44 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         />
 
         {addressInput && (
-          <Input
-            className='create-art-input'
-            type='text'
-            placeholder='address'
-            value={address}
-            onInput={(e) => setAddress(e.target.value)}
-            isValid={false}
-            errorMessage='Address or current location is required'
-          />
+          <>
+            <Input
+              className='create-art-input'
+              type='text'
+              placeholder='address'
+              value={address}
+              onInput={(e) => setAddress(e.target.value)}
+              isValid={false}
+              errorMessage='Address is required'
+            />
+            <Input
+              className='create-art-input'
+              type='text'
+              placeholder='city'
+              value={city}
+              onInput={(e) => setCity(e.target.value)}
+              isValid={false}
+              errorMessage='City is required'
+            />
+            <Input
+              className='create-art-input'
+              type='text'
+              placeholder='state'
+              value={state}
+              onInput={(e) => setState(e.target.value)}
+              isValid={false}
+              errorMessage='State is required'
+            />
+            <Input
+              className='create-art-input'
+              type='text'
+              placeholder='zipcode'
+              value={zipcode}
+              onInput={(e) => setZipcode(e.target.value)}
+              isValid={false}
+              errorMessage='Zipcode is required'
+            />
+          </>
         )}
 
         {!addressInput && (
