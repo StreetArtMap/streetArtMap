@@ -65,15 +65,16 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     setAddressButton(false)
   }
 
-  const postArtHandler = () => {
+  const postArtHandler = (e) => {
+    e.preventDefault()
     const newArt = {
-      image_urls: '',
-      latitude: currentLocation.latitude,
-      longitude: currentLocation.longitude,
-      address: 'a',
-      city: 'a',
-      state: 'a',
-      zipcode: 'a',
+      image_urls: images,
+      latitude: currentLocation ? currentLocation.latitude : null,
+      longitude: currentLocation ? currentLocation.longitude : null,
+      address: address,
+      city: city,
+      state: state,
+      zipcode: zipcode,
       description: description,
       artist_name: artistName,
       art_name: title,
