@@ -64,7 +64,7 @@
 
 .photo-container {
   height: 60vh;
-  overflow: scroll;
+  overflow-y: scroll;
   padding: 1vh;
   padding-top: 0vh;
   display: grid;

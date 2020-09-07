@@ -25,7 +25,7 @@ describe('ProfilePage', () => {
 
     const userName = getByText('UserName Here')
     const savedImages = getByText('10 Images Saved')
-    const postsInformation = getByText('55 Art Posts')
+    const postsInformation = getByText('55 Posts')
     const images = getAllByRole('img')
     // const allBtn = screen.getByRole('button', { name: /ALL/})
     // const savedBtn = screen.getByRole('button', { name: /SAVED/})

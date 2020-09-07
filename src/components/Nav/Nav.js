@@ -32,25 +32,25 @@ const Nav = () => {
     <footer className={`footer ${shadowStyle} ${hiddenStyle}`}>
       <section className='nav-box'>
         <NavLink to='/explore' className='nav-link'>
-          <FaSearch className='nav-icon' />
+          <FaSearch className='nav-icon' title="search-icon" />
           <p className='nav-text'>explore</p>
         </NavLink>
       </section>
       <section className='nav-box'>
         <NavLink to='/map' className='nav-link'>
-          <FaMapMarked className='nav-icon' />
+          <FaMapMarked className='nav-icon' title="map-icon" />
           <p className='nav-text'>map</p>
         </NavLink>
       </section>
       <section className='nav-box'>
         <NavLink to='/create' className='nav-link'>
-          <ImCamera className='nav-icon' />
+          <ImCamera className='nav-icon' title="camera-icon" />
           <p className='nav-text'>create</p>
         </NavLink>
       </section>
       <section className='nav-box'>
         <NavLink to='/profile' className='nav-link'>
-          <BsFillPersonFill className='nav-icon' />
+          <BsFillPersonFill className='nav-icon' title="profile-icon" />
           <p className='nav-text'>profile</p>
         </NavLink>
       </section>
