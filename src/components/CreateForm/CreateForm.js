@@ -6,6 +6,7 @@ import { TiDelete } from 'react-icons/ti'
 import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
 import { ImCamera } from 'react-icons/im'
 import { DEFAULT_IMG_URL } from '../../constants'
+import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 
 const CreateForm = ({ images, setPostImage, setImages }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
@@ -19,6 +20,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [zipcode, setZipcode] = useState(null)
   const [addressInput, setAddressInput] = useState(true)
   const [addressButton, setAddressButton] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const getLocation = async () => {
     if (navigator.geolocation) {
@@ -38,6 +40,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   }
 
   const getCurrentLocationHandler = async (e) => {
+    setIsLoading(true)
     e.preventDefault()
     setAddressInput(false)
     setAddress(null)
@@ -46,6 +49,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     setZipcode(null)
     setAddressButton(true)
     await getLocation()
+    setIsLoading(false)
   }
 
   const addDefaultImageSrc = (e) => {
@@ -109,6 +113,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 
   return (
     <>
+      {isLoading && <LoadingSpinner asOverlay />}
       <section className='form-images-container'>{mappedImages}</section>
       {!images.length && (
         <p className='no-images-error'>Please add at least one photo</p>
@@ -174,7 +179,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
             />
             <Input
               className='create-art-input'
-              type='text'
+              type='number'
               placeholder='zipcode'
               value={zipcode}
               onInput={(e) => setZipcode(e.target.value)}
