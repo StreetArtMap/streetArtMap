@@ -3,7 +3,8 @@ import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 import './CreateForm.css'
 import { TiDelete } from 'react-icons/ti'
-
+import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
+import { ImCamera } from 'react-icons/im'
 import { DEFAULT_IMG_URL } from '../../constants'
 
 const CreateForm = ({ images, setPostImage, setImages }) => {
@@ -49,11 +50,14 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const mappedImages = images.map((image) => {
     return (
       <section className='form-image-wrapper'>
-        <TiDelete
-          id={image}
-          onClick={removeImageHandler}
-          className='image-delete-btn'
-        />
+        <section onClick={removeImageHandler}>
+          <TiDelete
+            id={image}
+            onClick={removeImageHandler}
+            className='image-delete-btn'
+          />
+        </section>
+
         <img
           src={image || DEFAULT_IMG_URL}
           alt='new-shoot'
@@ -68,7 +72,12 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   return (
     <>
       <section className='form-images-container'>{mappedImages}</section>
-      <Button onClick={() => setPostImage(false)}>ADD MORE PHOTOS</Button>
+      {!images.length && (
+        <p className='no-images-error'>Please add at least one photo</p>
+      )}
+      <Button onClick={() => setPostImage(false)}>
+        ADD MORE PHOTOS <ImCamera />
+      </Button>
       <form onSubmit={artCreateHandler} className='create-art-form'>
         <Input
           className='create-art-input'
@@ -76,6 +85,8 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           placeholder='art title'
           value={title}
           onInput={(e) => setTitle(e.target.value)}
+          isValid={false}
+          errorMessage='Title is required'
         />
         <Input
           className='create-art-input'
@@ -83,6 +94,8 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           placeholder='artist name'
           value={artistName}
           onInput={(e) => setArtistName(e.target.value)}
+          isValid={false}
+          errorMessage='Artist name is required'
         />
         <Input
           className='create-art-input'
@@ -97,7 +110,16 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           placeholder='address'
           value={address}
           onInput={(e) => setAddress(e.target.value)}
+          isValid={false}
+          errorMessage='Address or current location is required'
         />
+        <section className='form-btn-wrapper'>
+          <Button>
+            my location
+            <FaMapMarkerAlt />
+          </Button>
+        </section>
+
         <Input
           className='create-art-input'
           type='text'
@@ -106,8 +128,15 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           rows='5'
           value={description}
           onInput={(e) => setDescription(e.target.value)}
+          isValid={false}
+          errorMessage='Description is required'
         />
-        <Button type='submit'>POST ART</Button>
+        <section className='form-btn-wrapper'>
+          <Button type='submit'>
+            POST ART <FaTelegramPlane />
+          </Button>
+        </section>
+
         {/* <p>
           {currentLocation
             ? `${currentLocation.latitude}, ${currentLocation.longitude}`

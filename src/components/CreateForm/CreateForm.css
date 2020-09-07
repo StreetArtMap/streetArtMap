@@ -7,11 +7,12 @@
 
 .form-image-wrapper {
   position: relative;
+  border-radius: 7px;
 }
 
 .image-delete-btn {
   color: var(--extra-light);
-  font-size: 4rem;
+  font-size: 3rem;
   cursor: pointer;
   position: absolute;
   box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.03);
@@ -34,5 +35,14 @@
 }
 
 .create-art-input {
-  margin: 20px;
+  margin-top: 30px;
+}
+
+.no-images-error {
+  color: var(--error);
+  margin-bottom: 10px;
+}
+
+.form-btn-wrapper {
+  margin-top: 30px;
 }
