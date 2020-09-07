@@ -21,6 +21,10 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [addressInput, setAddressInput] = useState(true)
   const [addressButton, setAddressButton] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isAddressValid, setIsAddressValid] = useState(true)
+  const [isCityValid, setIsCityValid] = useState(true)
+  const [isStateValid, setIsStateValid] = useState(true)
+  const [isZipcodeValid, setIsZipcodeValid] = useState(true)
 
   const getLocation = async () => {
     if (navigator.geolocation) {
@@ -71,22 +75,36 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 
   const postArtHandler = (e) => {
     e.preventDefault()
-    const newArt = {
-      image_urls: images,
-      latitude: currentLocation ? currentLocation.latitude : null,
-      longitude: currentLocation ? currentLocation.longitude : null,
-      address: address,
-      city: city,
-      state: state,
-      zipcode: zipcode,
-      description: description,
-      artist_name: artistName,
-      art_name: title,
-      instagram_handle: artistInstagram,
-      favorite: false,
-      visited: false,
+    // true or false
+    const fullAddress = address && city && state && zipcode ? true : false
+    console.log(fullAddress)
+    if (!fullAddress) {
+      !address && setIsAddressValid(false)
+      !city && setIsCityValid(false)
+      !state && setIsStateValid(false)
+      !zipcode && setIsZipcodeValid(false)
+    } else {
+      const newArt = {
+        image_urls: images,
+        latitude: currentLocation ? currentLocation.latitude.toString() : '',
+        longitude: currentLocation ? currentLocation.longitude.toString() : '',
+        address: address,
+        city: city,
+        state: state,
+        zipcode: zipcode,
+        // optional
+        description: description,
+        // optional
+        artist_name: artistName,
+        // optional
+        art_name: title,
+        // optional
+        instagram_handle: artistInstagram,
+        favorite: false,
+        visited: false,
+      }
+      console.log(newArt)
     }
-    console.log(newArt)
   }
 
   const mappedImages = images.map((image) => {
@@ -128,8 +146,6 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           placeholder='art title'
           value={title}
           onInput={(e) => setTitle(e.target.value)}
-          isValid={false}
-          errorMessage='Title is required'
         />
         <Input
           className='create-art-input'
@@ -137,8 +153,6 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           placeholder='artist name'
           value={artistName}
           onInput={(e) => setArtistName(e.target.value)}
-          isValid={false}
-          errorMessage='Artist name is required'
         />
         <Input
           className='create-art-input'
@@ -156,8 +170,8 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
               placeholder='address'
               value={address}
               onInput={(e) => setAddress(e.target.value)}
-              isValid={false}
-              errorMessage='Address is required'
+              isValid={isAddressValid}
+              errorMessage='Address is required or current location'
             />
             <Input
               className='create-art-input'
@@ -165,8 +179,8 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
               placeholder='city'
               value={city}
               onInput={(e) => setCity(e.target.value)}
-              isValid={false}
-              errorMessage='City is required'
+              isValid={isCityValid}
+              errorMessage='City is required or current location'
             />
             <Input
               className='create-art-input'
@@ -174,8 +188,8 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
               placeholder='state'
               value={state}
               onInput={(e) => setState(e.target.value)}
-              isValid={false}
-              errorMessage='State is required'
+              isValid={isStateValid}
+              errorMessage='State is required or current location'
             />
             <Input
               className='create-art-input'
@@ -183,8 +197,8 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
               placeholder='zipcode'
               value={zipcode}
               onInput={(e) => setZipcode(e.target.value)}
-              isValid={false}
-              errorMessage='Zipcode is required'
+              isValid={isZipcodeValid}
+              errorMessage='Zipcode is required or current location'
             />
           </>
         )}
