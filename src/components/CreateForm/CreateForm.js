@@ -14,6 +14,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [artistInstagram, setArtistInstagram] = useState('')
   const [description, setDescription] = useState('')
   const [address, setAddress] = useState('')
+  const [addressInput, setAddressInput] = useState(false)
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -32,9 +33,10 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     return location
   }
 
-  const artCreateHandler = async (e) => {
+  const getCurrentLocation = async (e) => {
     e.preventDefault()
     await getLocation()
+    console.log(currentLocation)
   }
 
   const addDefaultImageSrc = (e) => {
@@ -46,6 +48,8 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     const newImages = images.filter((image) => image !== e.target.id)
     setImages([...newImages])
   }
+
+  const toggleAddressOrLocation = () => {}
 
   const mappedImages = images.map((image) => {
     return (
@@ -78,7 +82,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       <Button onClick={() => setPostImage(false)}>
         ADD MORE PHOTOS <ImCamera />
       </Button>
-      <form onSubmit={artCreateHandler} className='create-art-form'>
+      <form onSubmit={() => alert('submit!')} className='create-art-form'>
         <Input
           className='create-art-input'
           type='text'
@@ -104,17 +108,27 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           value={artistInstagram}
           onInput={(e) => setArtistInstagram(e.target.value)}
         />
-        <Input
-          className='create-art-input'
-          type='text'
-          placeholder='address'
-          value={address}
-          onInput={(e) => setAddress(e.target.value)}
-          isValid={false}
-          errorMessage='Address or current location is required'
-        />
+        {addressInput && (
+          <Input
+            className='create-art-input'
+            type='text'
+            placeholder='address'
+            value={address}
+            onInput={(e) => setAddress(e.target.value)}
+            isValid={false}
+            errorMessage='Address or current location is required'
+          />
+        )}
+
+        {!addressInput && (
+          <p>
+            {currentLocation &&
+              `${currentLocation.latitude}° N, ${currentLocation.longitude}° W`}
+          </p>
+        )}
+
         <section className='form-btn-wrapper'>
-          <Button>
+          <Button onClick={getCurrentLocation}>
             my location
             <FaMapMarkerAlt />
           </Button>
@@ -131,17 +145,11 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           isValid={false}
           errorMessage='Description is required'
         />
-        <section className='form-btn-wrapper'>
+        <section className='form-btn-wrapper post-art-btn'>
           <Button type='submit'>
             POST ART <FaTelegramPlane />
           </Button>
         </section>
-
-        {/* <p>
-          {currentLocation
-            ? `${currentLocation.latitude}, ${currentLocation.longitude}`
-            : 'no location'}
-        </p> */}
       </form>
     </>
   )

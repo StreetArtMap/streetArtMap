@@ -15,7 +15,6 @@
   font-size: 3rem;
   cursor: pointer;
   position: absolute;
-  box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.03);
   top: 10px;
   right: 10px;
 }
@@ -45,4 +44,13 @@
 
 .form-btn-wrapper {
   margin-top: 30px;
+}
+
+.post-art-btn:before {
+  content: ' ';
+  display: block;
+  height: 1px;
+  background-color: var(--dark);
+  margin: 20px auto;
+  width: 100px;
 }
