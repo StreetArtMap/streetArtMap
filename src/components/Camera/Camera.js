@@ -87,8 +87,6 @@ const Camera = ({
   const imageUploadHandler = async (e) => {
     e.preventDefault()
     await captureImage()
-    alert(capturedImage)
-    // async await doesn't work
     uploadImage()
   }
 
