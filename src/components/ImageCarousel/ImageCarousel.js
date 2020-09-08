@@ -9,15 +9,16 @@ const ImageCarousel = ({ images, height }) => {
   const addDefaultImageSrc = (e) => {
     e.target.src = DEFAULT_IMG_URL
   }
-
-  const slides = images.map((image) => (
-    <img
-      src={image}
-      height={height}
-      className='carousel-img'
-      onError={addDefaultImageSrc}
-    />
-  ))
+  
+  // const slides = images.map((image) => (
+  //   <img
+  //     src={image}
+  //     alt={image}
+  //     height={height}
+  //     className='carousel-img'
+  //     onError={addDefaultImageSrc}
+  //   />
+  // ))
 
   return (
     <Slider
@@ -27,7 +28,15 @@ const ImageCarousel = ({ images, height }) => {
       slidesToShow={1}
       slidesToScroll={1}
     >
-      {slides}
+      {images && images.map((image) => (
+    <img
+      src={image}
+      alt={image}
+      height={height}
+      className='carousel-img'
+      onError={addDefaultImageSrc}
+    />
+  ))}
     </Slider>
   )
 }

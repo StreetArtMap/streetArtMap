@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { addData } from '../../actions/userAction';
 import { useQuery, gql } from '@apollo/client'
 import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
@@ -8,7 +9,7 @@ import './LoginPage.css'
 import PropTypes from 'prop-types'
 
 const LoginPage = (props) => {
-  const { setIsLoggedIn } = props
+  const { setIsLoggedIn, addData } = props
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [artData, setArtData] = useState([])
@@ -38,12 +39,25 @@ const LoginPage = (props) => {
   const { loading, error, data } = useQuery(ART_FETCH)
   // if(loading) alert('loading...')
   // if(error) alert('Error...')
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (data) {
+  //     addData(data.streetArts)
+  //     setArtData(data.streetArts)
+  //     console.log(artData)
+  //   }
+  // }, [artData])
+  const getArt = () => {
     if (data) {
+      addData(data.streetArts)
       setArtData(data.streetArts)
+      console.log(artData)
+    } else if (loading) {
+      return <p>Loading...</p>
+    } else if (error) {
+      console.log(error)
     }
-  }, [artData, data])
-
+  }
+  
   return (
     <section className='login-page'>
       <section className='login-container'>
@@ -60,7 +74,7 @@ const LoginPage = (props) => {
             placeholder='Password...'
           ></Input>
           <Link to='/explore' onClick={() => setIsLoggedIn(true)}>
-            <Button type='submit'>LOG IN</Button>
+            <Button onClick={() => getArt()} type='submit'>LOG IN</Button>
           </Link>
         </section>
         <p>Don't have an account?</p>
@@ -74,6 +88,13 @@ LoginPage.propTypes = {
   setIsLoggedIn: PropTypes.func,
 }
 
-export default LoginPage
+const mapDispatch = (dispatch) => ({
+  addData: data => dispatch(addData(data))
+})
 
-// export default connect(null, {  })(withRouter(LoginPage))
+const mapState = (state) => ({
+  arts: state.arts
+})
+
+export default connect(mapState, mapDispatch)(withRouter(LoginPage))
+// export default connect(mapState, mapDispatch)(withRouter(LoginPage))

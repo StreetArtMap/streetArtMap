@@ -1,10 +1,20 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { DEFAULT_IMG_URL } from '../../constants'
 import './ProfilePage.css'
 import '../../variables.css'
-import { FaHeart, FaBookOpen, FaBookmark, FaFolder, FaRegHeart, FaCheck } from 'react-icons/fa'
+import { FaBookOpen, FaBookmark } from 'react-icons/fa'
 
 
 const ProfilePage = () => {
+  const addDefaultImageSrc = (e) => {
+    e.target.src = DEFAULT_IMG_URL
+  }
+  const arts = useSelector((state) => state.arts).map((art) => (
+    <img src={addDefaultImageSrc} alt="sdfadfsa" onError={addDefaultImageSrc} />
+  ))
+
+
   return (
     <section className="profile-container">
       <section className="user-details-container">
@@ -23,13 +33,7 @@ const ProfilePage = () => {
         </section>
       </section>
       <section className="photo-container">
-        <img src={`https://images.unsplash.com/photo-1532743869468-90b42b7455dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80`} alt="art1" className="art-tile" />
-        <img src={`https://images.unsplash.com/photo-1517604479449-5f8b33656096?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=987&q=80`} alt="art2" className="art-tile" />
-        <img src={`https://images.unsplash.com/photo-1533429429847-25196ff379cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=666&q=80`} alt="art3" className="art-tile" />
-        <img src={`https://images.unsplash.com/photo-1542574566-220003c67621?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80`} alt="art4" className="art-tile" />
-        <img src={`https://images.unsplash.com/photo-1528886050511-50b2248e8dcc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1624&q=80`} alt="art5" className="art-tile" />
-        <img src={`https://images.unsplash.com/photo-1483481738355-5ea215020724?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1612&q=80`} alt="art6" className="art-tile" />
-        <img src={`https://images.unsplash.com/photo-1516943294273-ea1986b95f25?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80`} alt="art7" className="art-tile" />
+       {arts}
       </section>
     </section>
   ) 

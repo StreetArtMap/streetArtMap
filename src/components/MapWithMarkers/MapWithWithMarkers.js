@@ -45,8 +45,8 @@ const MapWithMarkers = ({ setRoute, formMap, zoom, lat, lng }) => {
   useEffect(() => {
     selectedArt &&
       setViewport({
-        latitude: selectedArt.latitude,
-        longitude: selectedArt.longitude,
+        latitude: +selectedArt.latitude,
+        longitude: +selectedArt.longitude,
         zoom: 10,
         width: '100%',
         height: '100%',
@@ -75,8 +75,8 @@ const MapWithMarkers = ({ setRoute, formMap, zoom, lat, lng }) => {
   const markers = useSelector((state) => state.arts).map((art) => (
     <Marker
       key={art.id}
-      latitude={art.latitude}
-      longitude={art.longitude}
+      latitude={+art.latitude}
+      longitude={+art.longitude}
       offsetLeft={-20}
       offsetTop={-20}
     >
@@ -120,8 +120,8 @@ const MapWithMarkers = ({ setRoute, formMap, zoom, lat, lng }) => {
         {myMarker}
         {selectedArt && (
           <Popup
-            latitude={selectedArt.latitude}
-            longitude={selectedArt.longitude}
+            latitude={+selectedArt.latitude}
+            longitude={+selectedArt.longitude}
             closeOnClick={false}
             closeButton={false}
             isOpen={true}
