@@ -169,7 +169,7 @@
 //   },
 // ]
 
-const initialArtsState = []
+export const initialArtsState = []
 
 export const arts = (state = initialArtsState, action) => {
   switch (action.type) {

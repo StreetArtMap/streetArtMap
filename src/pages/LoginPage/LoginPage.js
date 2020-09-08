@@ -37,15 +37,6 @@ const LoginPage = (props) => {
     }
   `;
   const { loading, error, data } = useQuery(ART_FETCH)
-  // if(loading) alert('loading...')
-  // if(error) alert('Error...')
-  // useEffect(() => {
-  //   if (data) {
-  //     addData(data.streetArts)
-  //     setArtData(data.streetArts)
-  //     console.log(artData)
-  //   }
-  // }, [artData])
   const getArt = () => {
     if (data) {
       addData(data.streetArts)
@@ -97,4 +88,3 @@ const mapState = (state) => ({
 })
 
 export default connect(mapState, mapDispatch)(withRouter(LoginPage))
-// export default connect(mapState, mapDispatch)(withRouter(LoginPage))
