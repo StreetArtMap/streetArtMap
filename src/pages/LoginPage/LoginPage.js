@@ -76,4 +76,4 @@ LoginPage.propTypes = {
 
 export default LoginPage
 
-export default connect(null, {  })(withRouter(LoginPage))
+// export default connect(null, {  })(withRouter(LoginPage))
