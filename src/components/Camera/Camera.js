@@ -35,7 +35,7 @@ const Camera = ({
       type: 'jpeg',
       quality: 1,
     }).base64
-    await setCapturedImage(capturedData)
+    setCapturedImage(capturedData)
     setIsCaptured(true)
   }
 
@@ -87,8 +87,10 @@ const Camera = ({
   const imageUploadHandler = async (e) => {
     e.preventDefault()
     await captureImage()
+    // ISSUE async await doesn't work
     console.log(capturedImage)
     uploadImage()
+    console.log(capturedImage)
   }
 
   return (

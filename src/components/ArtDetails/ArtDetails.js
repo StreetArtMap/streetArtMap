@@ -14,8 +14,10 @@ const ArtDetails = ({
     artist_name,
     instagram_handle,
     description,
+    imageUrls,
   },
 }) => {
+
   return (
     <section className='art-details-container'>
       <section className='art-icons-wrapper'>
@@ -46,6 +48,7 @@ const ArtDetails = ({
       )}
 
       {description && <p className='description'>{description}</p>}
+      <p></p>
     </section>
   )
 }

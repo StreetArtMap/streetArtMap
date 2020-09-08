@@ -3,6 +3,7 @@ import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 import './CreateForm.css'
 import { TiDelete } from 'react-icons/ti'
+import { useMutation, gql } from '@apollo/client'
 import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
 import { ImCamera } from 'react-icons/im'
 import { DEFAULT_IMG_URL } from '../../constants'
@@ -26,6 +27,35 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [isCityValid, setIsCityValid] = useState(true)
   const [isStateValid, setIsStateValid] = useState(true)
   const [isZipcodeValid, setIsZipcodeValid] = useState(true)
+
+  const ART_POST = gql`
+    mutation {
+      createStreetArt( input: {
+          userId: 1,
+          latitude: ${
+            currentLocation ? currentLocation.latitude.toString() : ''
+          },
+          longitude: ${
+            currentLocation ? currentLocation.longitude.toString() : ''
+          },
+          address: ${address},
+          city: ${city},
+          state: ${state},
+          zipcode: ${zipcode},
+          description: ${description},
+          artistName: ${artistName},
+          artName: ${title},
+          instagramHandle: ${artistInstagram},
+          imageUrls: ${JSON.stringify(images)},
+        }) {
+        id,
+        address,
+        imageUrls
+      }
+    }
+  `
+
+  const [createStreetArt, { data }] = useMutation(ART_POST)
 
   isLoading && (document.body.style.overflow = 'hidden')
   !isLoading && (document.body.style.overflow = 'scroll')
@@ -66,7 +96,12 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 
   const removeImageHandler = (e) => {
     e.preventDefault()
-    const newImages = images.filter((image) => image !== e.target.id)
+    const newImages = images.filter((image) => {
+      if (image !== e.target.id && image !== undefined) {
+        return image
+      }
+    })
+
     setImages([...newImages])
   }
 
@@ -80,6 +115,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const postArtHandler = (e) => {
     e.preventDefault()
     const fullAddress = address && city && state && zipcode ? true : false
+    const finalImages = images.filter((image) => image !== undefined)
 
     if (addressInput && !fullAddress) {
       !address && setIsAddressValid(false)
@@ -91,61 +127,15 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         'Error getting your location. Please try again or enter address instead'
       )
       return
-    } else if (!images.length) {
+    } else if (!finalImages.length) {
       alert('Please add at least one photo')
       return
     } else {
-      const newArt = {
-        image_urls: images,
-        latitude: currentLocation ? currentLocation.latitude.toString() : '',
-        longitude: currentLocation ? currentLocation.longitude.toString() : '',
-        address: address,
-        city: city,
-        state: state,
-        zipcode: zipcode,
-        description: description,
-        artist_name: artistName,
-        art_name: title,
-        instagram_handle: artistInstagram,
-        favorite: false,
-        visited: false,
-      }
-      console.log(newArt)
+      createStreetArt()
+      console.log('MUTATION DATA', data)
       alert('Art created!')
     }
   }
-  // mutation example
-  // mutation {
-  //   createStreetArt( input: {
-  //     userId: 1
-  //     latitude: "41.9484"
-  //     longitude: "87.6553"
-  //     address: "1060 W. Addison"
-  //     city: "Chicago"
-  //     state: "IL"
-  //     zipcode: "60613"
-  //     description: "Wrigley Field"
-  //     artistName: "Ernie Banks"
-  //     artName: "Let's Play Two!"
-  //     instagramHandle: "@EBanks14"
-  //     imageUrls: "['url', 'url', 'url']"
-  //   }) {
-  //       id
-  //     address
-  //     imageUrls
-  //       }
-  // }
-
-  // response example
-  // {
-  //   "data": {
-  //     "createStreetArt": {
-  //       "id": "19",
-  //       "address": "1060 W. Addison",
-  //       "imageUrls": "['url', 'url', 'url']"
-  //     }
-  //   }
-  // }
 
   const mappedImages = images.map((image) => {
     return (
@@ -178,6 +168,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       <Button onClick={() => setPostImage(false)}>
         ADD MORE PHOTOS <ImCamera />
       </Button>
+
       <form onSubmit={postArtHandler} className='create-art-form'>
         <Input
           className='create-art-input'
@@ -298,3 +289,19 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 }
 
 export default CreateForm
+
+// const newArt = {
+//   image_urls: images,
+//   latitude: currentLocation ? currentLocation.latitude.toString() : '',
+//   longitude: currentLocation ? currentLocation.longitude.toString() : '',
+//   address: address,
+//   city: city,
+//   state: state,
+//   zipcode: zipcode,
+//   description: description,
+//   artist_name: artistName,
+//   art_name: title,
+//   instagram_handle: artistInstagram,
+//   favorite: false,
+//   visited: false,
+// }
