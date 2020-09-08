@@ -38,7 +38,8 @@ export class Webcam {
                   this.webcamElement.videoWidth,
                   this.webcamElement.videoHeight
                 )
-                resolve()
+                // needs argument
+                resolve(mediaStream)
               },
               false
             )
