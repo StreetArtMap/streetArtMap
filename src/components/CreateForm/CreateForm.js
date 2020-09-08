@@ -110,6 +110,38 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       alert('Art created!')
     }
   }
+  // mutation example
+  // mutation {
+  //   createStreetArt( input: {
+  //     userId: 1
+  //     latitude: "41.9484"
+  //     longitude: "87.6553"
+  //     address: "1060 W. Addison"
+  //     city: "Chicago"
+  //     state: "IL"
+  //     zipcode: "60613"
+  //     description: "Wrigley Field"
+  //     artistName: "Ernie Banks"
+  //     artName: "Let's Play Two!"
+  //     instagramHandle: "@EBanks14"
+  //     imageUrls: "['url', 'url', 'url']"
+  //   }) {
+  //       id
+  //     address
+  //     imageUrls
+  //       }
+  // }
+
+  // response example
+  // {
+  //   "data": {
+  //     "createStreetArt": {
+  //       "id": "19",
+  //       "address": "1060 W. Addison",
+  //       "imageUrls": "['url', 'url', 'url']"
+  //     }
+  //   }
+  // }
 
   const mappedImages = images.map((image) => {
     return (

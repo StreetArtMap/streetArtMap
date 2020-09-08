@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { useQuery, gql } from '@apollo/client'
 import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
 import './LoginPage.css'
@@ -9,6 +11,38 @@ const LoginPage = (props) => {
   const { setIsLoggedIn } = props
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [artData, setArtData] = useState([])
+  const ART_FETCH = gql`
+    query {
+      streetArts { 
+        id,
+        latitude, 
+        longitude, 
+        address, 
+        city, 
+        state, 
+        zipcode, 
+        imageUrls, 
+        description, 
+        artistName, 
+        artName, 
+        instagramHandle, 
+        favorite, 
+        visited, 
+        createdAt, 
+        updatedAt, 
+        userId
+      }  
+    }
+  `;
+  const { loading, error, data } = useQuery(ART_FETCH)
+  // if(loading) alert('loading...')
+  // if(error) alert('Error...')
+  useEffect(() => {
+    if (data) {
+      setArtData(data.streetArts)
+    }
+  }, [artData, data])
 
   return (
     <section className='login-page'>
@@ -41,3 +75,5 @@ LoginPage.propTypes = {
 }
 
 export default LoginPage
+
+export default connect(null, {  })(withRouter(LoginPage))
