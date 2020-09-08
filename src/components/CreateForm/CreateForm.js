@@ -67,7 +67,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const removeImageHandler = (e) => {
     e.preventDefault()
     const newImages = images.filter((image) => {
-      if (image !== e.target.id || image !== undefined) {
+      if (image !== e.target.id && image !== undefined) {
         return image
       }
     })
