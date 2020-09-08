@@ -11,6 +11,9 @@ const CameraPage = () => {
   const [postImage, setPostImage] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
 
+  isUploading && (document.body.style.overflow = 'hidden')
+  !isUploading && (document.body.style.overflow = 'scroll')
+
   return (
     <section className='camera-container'>
       {isSupported && !postImage && (

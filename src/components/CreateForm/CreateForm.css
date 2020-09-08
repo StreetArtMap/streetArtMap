@@ -37,16 +37,18 @@
   margin-top: 30px;
 }
 
+.description-input {
+  margin-top: 0;
+}
+
 .no-images-error {
   color: var(--error);
   margin-bottom: 10px;
 }
 
-.form-btn-wrapper {
-  margin-top: 30px;
-}
-
-.post-art-btn:before {
+.post-art-btn:before,
+.my-location-btn:after,
+.address-btn:after {
   content: ' ';
   display: block;
   height: 1px;
@@ -55,6 +57,13 @@
   width: 100px;
 }
 
-.current-location-display {
-  margin-top: 30px;
+.my-location-message,
+.current-location-display,
+.current-location-map {
+  margin: 30px 0;
+}
+
+.current-location-map {
+  width: 300px;
+  height: 300px;
 }
