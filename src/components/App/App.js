@@ -5,6 +5,7 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom'
+// import { ApolloProvider } from '@apollo/client'
 import './App.css'
 import Layout from '../../UIComponents/Layout/Layout'
 import LoginPage from '../../pages/LoginPage/LoginPage'
