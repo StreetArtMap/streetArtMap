@@ -6,7 +6,7 @@ import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
 import { FaHeart, FaRegHeart, FaSearch, FaCheck, FaRoute } from 'react-icons/fa'
 
-const MapWithMarkers = ({ setRoute }) => {
+const MapWithMarkers = ({ setRoute, formMap, zoom, lat, lng }) => {
   const [selectedArt, setSelectedArt] = useState(null)
   const [myLocation, setMyLocation] = useState({
     latitude: 39.744137,
@@ -14,9 +14,9 @@ const MapWithMarkers = ({ setRoute }) => {
   })
 
   const [viewport, setViewport] = useState({
-    latitude: myLocation.latitude,
-    longitude: myLocation.longitude,
-    zoom: 10,
+    latitude: lat || myLocation.latitude,
+    longitude: lng || myLocation.longitude,
+    zoom: zoom || 10,
     width: '100%',
     height: '100%',
   })
@@ -100,11 +100,12 @@ const MapWithMarkers = ({ setRoute }) => {
 
   return (
     <section className='markers-map-container'>
-      <section className='toggle-maps-btn' onClick={() => setRoute(true)}>
-        <FaRoute />
-        <p className='route'>routes</p>
-      </section>
-
+      {!formMap && (
+        <section className='toggle-maps-btn' onClick={() => setRoute(true)}>
+          <FaRoute />
+          <p className='route'>routes</p>
+        </section>
+      )}
       <ReactMapGL
         {...viewport}
         mapStyle='mapbox://styles/edignot/ckemah34j0amm19oe5hjne20p'
@@ -115,7 +116,7 @@ const MapWithMarkers = ({ setRoute }) => {
         className='react-map-container'
       >
         <NavigationControl className='navigation-control' />
-        {markers}
+        {!formMap && markers}
         {myMarker}
         {selectedArt && (
           <Popup

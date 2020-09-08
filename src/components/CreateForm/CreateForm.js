@@ -7,6 +7,7 @@ import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
 import { ImCamera } from 'react-icons/im'
 import { DEFAULT_IMG_URL } from '../../constants'
 import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
+import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
 
 const CreateForm = ({ images, setPostImage, setImages }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
@@ -209,11 +210,17 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           </>
         )}
 
-        {!addressInput && (
-          <p className='current-location-display'>
-            {currentLocation &&
-              `${currentLocation.latitude}° N, ${currentLocation.longitude}° W`}
-          </p>
+        {!addressInput && currentLocation && (
+          <>
+            <section className='current-location-map'>
+              <MapWithMarkers
+                formMap={true}
+                zoom={14}
+                lat={currentLocation.latitude}
+                lng={currentLocation.longitude}
+              />
+            </section>
+          </>
         )}
         {!addressButton && (
           <>
@@ -230,7 +237,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         )}
 
         {addressButton && (
-          <section className='form-btn-wrapper'>
+          <section className='form-btn-wrapper address-btn'>
             <Button onClick={toggleAddressOrLocationHandler}>
               enter address
               <FaMapMarkerAlt />
