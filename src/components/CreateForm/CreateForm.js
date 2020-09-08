@@ -66,7 +66,12 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 
   const removeImageHandler = (e) => {
     e.preventDefault()
-    const newImages = images.filter((image) => image !== e.target.id)
+    const newImages = images.filter((image) => {
+      if (image !== e.target.id || image !== undefined) {
+        return image
+      }
+    })
+
     setImages([...newImages])
   }
 
@@ -80,6 +85,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const postArtHandler = (e) => {
     e.preventDefault()
     const fullAddress = address && city && state && zipcode ? true : false
+    const finalImages = images.filter((image) => image !== undefined)
 
     if (addressInput && !fullAddress) {
       !address && setIsAddressValid(false)
@@ -91,7 +97,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         'Error getting your location. Please try again or enter address instead'
       )
       return
-    } else if (!images.length) {
+    } else if (!finalImages.length) {
       alert('Please add at least one photo')
       return
     } else {
