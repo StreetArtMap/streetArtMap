@@ -2,6 +2,7 @@
   display: inline-block;
   width: 64px;
   height: 64px;
+  margin: auto;
 }
 
 .lds-dual-ring:after {
@@ -17,8 +18,9 @@
 }
 
 .loading-spinner__overlay {
-  height: 100%;
-  width: 100%;
+  z-index: 5;
+  height: 150vh;
+  width: 100vw;
   position: absolute;
   top: 0;
   left: 0;

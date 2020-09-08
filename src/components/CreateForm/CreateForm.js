@@ -7,6 +7,7 @@ import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
 import { ImCamera } from 'react-icons/im'
 import { DEFAULT_IMG_URL } from '../../constants'
 import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
+import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
 
 const CreateForm = ({ images, setPostImage, setImages }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
@@ -26,23 +27,28 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [isStateValid, setIsStateValid] = useState(true)
   const [isZipcodeValid, setIsZipcodeValid] = useState(true)
 
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      return navigator.geolocation.getCurrentPosition(showPosition)
-    } else {
-      alert('Geo Location is not supported by your device')
+  isLoading && (document.body.style.overflow = 'hidden')
+  !isLoading && (document.body.style.overflow = 'scroll')
+
+  const getCurrentPosition = (options = {}) => {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, options)
+    })
+  }
+
+  const fetchCoordinates = async () => {
+    try {
+      const { coords } = await getCurrentPosition()
+      const { latitude, longitude } = coords
+      setCurrentLocation({ latitude, longitude })
+      setIsLoading(false)
+    } catch (error) {
+      console.error(error)
+      setIsLoading(false)
     }
   }
 
-  const showPosition = (position) => {
-    const location = {
-      longitude: position.coords.longitude,
-      latitude: position.coords.latitude,
-    }
-    setCurrentLocation(location)
-  }
-
-  const getCurrentLocationHandler = (e) => {
+  const getCurrentLocationHandler = async (e) => {
     setIsLoading(true)
     e.preventDefault()
     setAddressInput(false)
@@ -51,9 +57,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     setState('')
     setZipcode('')
     setAddressButton(true)
-    // await get location is not working
-    getLocation()
-    setIsLoading(false)
+    await fetchCoordinates()
   }
 
   const addDefaultImageSrc = (e) => {
@@ -167,7 +171,6 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay />}
       <section className='form-images-container'>{mappedImages}</section>
       {!images.length && (
         <p className='no-images-error'>Please add at least one photo</p>
@@ -239,23 +242,34 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           </>
         )}
 
-        {!addressInput && (
-          <p className='current-location-display'>
-            {currentLocation &&
-              `${currentLocation.latitude}° N, ${currentLocation.longitude}° W`}
-          </p>
+        {!addressInput && currentLocation && (
+          <>
+            <section className='current-location-map'>
+              <MapWithMarkers
+                formMap={true}
+                zoom={14}
+                lat={currentLocation.latitude}
+                lng={currentLocation.longitude}
+              />
+            </section>
+          </>
         )}
         {!addressButton && (
-          <section className='form-btn-wrapper'>
-            <Button onClick={getCurrentLocationHandler}>
-              my location
-              <FaMapMarkerAlt />
-            </Button>
-          </section>
+          <>
+            <p className='my-location-message'>
+              Enter address or click 'my location'
+            </p>
+            <section className='form-btn-wrapper my-location-btn'>
+              <Button onClick={getCurrentLocationHandler}>
+                my location
+                <FaMapMarkerAlt />
+              </Button>
+            </section>
+          </>
         )}
 
         {addressButton && (
-          <section className='form-btn-wrapper'>
+          <section className='form-btn-wrapper address-btn'>
             <Button onClick={toggleAddressOrLocationHandler}>
               enter address
               <FaMapMarkerAlt />
@@ -264,7 +278,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         )}
 
         <Input
-          className='create-art-input'
+          className='create-art-input description-input'
           type='text'
           element='textarea'
           placeholder='description'
@@ -278,6 +292,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           </Button>
         </section>
       </form>
+      {isLoading && <LoadingSpinner asOverlay />}
     </>
   )
 }
