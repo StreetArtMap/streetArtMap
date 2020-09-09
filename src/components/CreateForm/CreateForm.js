@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 import './CreateForm.css'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { addData } from '../../actions/userAction'
 import { TiDelete } from 'react-icons/ti'
@@ -31,7 +31,6 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
   const [isCityValid, setIsCityValid] = useState(true)
   const [isStateValid, setIsStateValid] = useState(true)
   const [isZipcodeValid, setIsZipcodeValid] = useState(true)
-  const [isArtUploading, setIsArtUploading] = useState(false)
   const [isArtUploaded, setIsArtUploaded] = useState(false)
 
   const ART_POST = gql`
@@ -88,23 +87,18 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
   const [createStreetArt, { data, loading, error }] = useMutation(ART_POST)
 
   useEffect(() => {
-    setTimeout(function () {
-      setIsArtUploading(false)
-      if (data) {
-        const images = JSON.parse(data.createStreetArt.imageUrls)
-        const parsedData = [
-          {
-            ...data.createStreetArt,
-            images,
-          },
-        ]
-        console.log(parsedData)
-        addData(parsedData)
-        setIsArtUploaded(true)
-      }
-    }, 1000)
+    if (data) {
+      const images = JSON.parse(data.createStreetArt.imageUrls)
+      const parsedData = [
+        {
+          ...data.createStreetArt,
+          images,
+        },
+      ]
+      addData(parsedData)
+      setIsArtUploaded(true)
+    }
   }, [data])
-
   isLoading && (document.body.style.overflow = 'hidden')
   !isLoading && (document.body.style.overflow = 'scroll')
 
@@ -179,7 +173,6 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
       alert('Please add at least one photo')
       return
     } else {
-      setIsArtUploading(true)
       createStreetArt({
         variables: {
           userId: 1,
@@ -347,12 +340,16 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
         </section>
       </form>
       <Modal show={isArtUploaded}>
-        <p className='modal-message'>ART POSTED!</p>
-        <Button>see posted art</Button>
-        <Button>post another art</Button>
+        <p className='modal-message success-message'>ART POSTED!</p>
+        <Button styling='padding'>view post</Button>
+        <Button styling='padding'>post again</Button>
+      </Modal>
+      <Modal show={error && true}>
+        <p className='modal-message error-message'>ERROR WHILE POSTING!</p>
+        <Button styling='padding'>back</Button>
       </Modal>
       {isLoading && <LoadingSpinner asOverlay />}
-      {isArtUploading && <LoadingSpinner asOverlay />}
+      {loading && <LoadingSpinner asOverlay />}
     </>
   )
 }

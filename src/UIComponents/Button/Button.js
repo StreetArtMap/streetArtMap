@@ -8,12 +8,12 @@ const Button = ({
   href,
   to,
   inverse,
-  style,
+  styling,
   disabled,
   type,
   onClick,
 }) => {
-  const className = `btn glow-on-hover btn-${style || 'btn-default'} ${
+  const className = `btn glow-on-hover btn-${styling || 'btn-default'} ${
     inverse && 'btn-inverse'
   }`
 

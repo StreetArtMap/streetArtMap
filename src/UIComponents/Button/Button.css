@@ -88,3 +88,7 @@
     background-position: 0 0;
   }
 }
+
+.btn-padding {
+  margin: 15px 0;
+}
