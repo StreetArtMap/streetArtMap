@@ -59,21 +59,39 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           imageUrls: $imageUrls
         }
       ) {
-        userId
+        id
         latitude
         longitude
         address
         city
         state
         zipcode
+        imageUrls
         description
         artistName
+        artName
         instagramHandle
-        imageUrls
+        favorite
+        visited
+        createdAt
+        updatedAt
+        userId
       }
     }
   `
-  const [createStreetArt, { data }] = useMutation(ART_POST)
+  const [createStreetArt, { data, loading, error }] = useMutation(ART_POST)
+
+  // change later:
+  const getArt = (e) => {
+    e.preventDefault()
+    if (data) {
+      console.log(data)
+    } else if (loading) {
+      return alert('Loading')
+    } else if (error) {
+      return alert('Error')
+    }
+  }
 
   isLoading && (document.body.style.overflow = 'hidden')
   !isLoading && (document.body.style.overflow = 'scroll')
@@ -130,7 +148,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     setAddressButton(false)
   }
 
-  const postArtHandler = (e) => {
+  const postArtHandler = async (e) => {
     e.preventDefault()
     const fullAddress = address && city && state && zipcode ? true : false
     const finalImages = images.filter((image) => image !== undefined)
@@ -149,7 +167,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       alert('Please add at least one photo')
       return
     } else {
-      createStreetArt({
+      await createStreetArt({
         variables: {
           userId: 1,
           latitude: currentLocation ? currentLocation.latitude.toString() : '',
@@ -167,8 +185,6 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           imageUrls: JSON.stringify(images),
         },
       })
-      console.log('MUTATION DATA', data)
-      alert('Art created!')
     }
   }
 
@@ -203,6 +219,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       <Button onClick={() => setPostImage(false)}>
         ADD MORE PHOTOS <ImCamera />
       </Button>
+      <Button onClick={getArt}>CHECK DATA</Button>
 
       <form onSubmit={postArtHandler} className='create-art-form'>
         <Input
@@ -324,19 +341,3 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 }
 
 export default CreateForm
-
-// const newArt = {
-//   image_urls: images,
-//   latitude: currentLocation ? currentLocation.latitude.toString() : '',
-//   longitude: currentLocation ? currentLocation.longitude.toString() : '',
-//   address: address,
-//   city: city,
-//   state: state,
-//   zipcode: zipcode,
-//   description: description,
-//   artist_name: artistName,
-//   art_name: title,
-//   instagram_handle: artistInstagram,
-//   favorite: false,
-//   visited: false,
-// }

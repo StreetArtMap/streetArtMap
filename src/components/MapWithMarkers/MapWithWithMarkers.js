@@ -127,7 +127,7 @@ const MapWithMarkers = ({ setRoute, formMap, zoom, lat, lng }) => {
             isOpen={true}
           >
             <section className='map-image-carousel-container'>
-              <ImageCarousel images={selectedArt.image_urls} height={200} />
+              <ImageCarousel images={selectedArt.images} height={200} />
             </section>
             <section className='map-art-details-container'>
               <section className='map-art-icons-wrapper'>
