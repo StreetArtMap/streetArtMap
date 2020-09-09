@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 import './CreateForm.css'
@@ -31,6 +31,8 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
   const [isCityValid, setIsCityValid] = useState(true)
   const [isStateValid, setIsStateValid] = useState(true)
   const [isZipcodeValid, setIsZipcodeValid] = useState(true)
+  const [isArtUploading, setIsArtUploading] = useState(false)
+  const [isArtUploaded, setIsArtUploaded] = useState(false)
 
   const ART_POST = gql`
     mutation createStreetArt(
@@ -85,26 +87,23 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
   `
   const [createStreetArt, { data, loading, error }] = useMutation(ART_POST)
 
-  // DELETE LATER:
-  const getArt = (e) => {
-    e.preventDefault()
-    if (data) {
-      const parsedData = data.streetArts.map((item) => {
-        const images = JSON.parse(item.imageUrls)
-        return {
-          ...item,
-          images,
-        }
-      })
-      addData(parsedData)
-      // console.log(data)
-      // setEnablePost(false)
-    } else if (loading) {
-      return alert('Loading')
-    } else if (error) {
-      return alert('Error')
-    }
-  }
+  useEffect(() => {
+    setTimeout(function () {
+      setIsArtUploading(false)
+      if (data) {
+        const images = JSON.parse(data.createStreetArt.imageUrls)
+        const parsedData = [
+          {
+            ...data.createStreetArt,
+            images,
+          },
+        ]
+        console.log(parsedData)
+        addData(parsedData)
+        setIsArtUploaded(true)
+      }
+    }, 1000)
+  }, [data])
 
   isLoading && (document.body.style.overflow = 'hidden')
   !isLoading && (document.body.style.overflow = 'scroll')
@@ -180,6 +179,7 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
       alert('Please add at least one photo')
       return
     } else {
+      setIsArtUploading(true)
       createStreetArt({
         variables: {
           userId: 1,
@@ -198,7 +198,6 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
           imageUrls: JSON.stringify(images),
         },
       })
-      getArt(e)
     }
   }
 
@@ -342,22 +341,24 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
           onInput={(e) => setDescription(e.target.value)}
         />
         <section className='form-btn-wrapper post-art-btn'>
-          {/* add to={'/explore'} to line below to redirect to main page */}
           <Button type='submit'>
             POST ART <FaTelegramPlane />
           </Button>
         </section>
       </form>
-      <Modal show={false}>
+      <Modal show={isArtUploaded}>
         <p className='modal-message'>ART POSTED!</p>
         <Button>see posted art</Button>
         <Button>post another art</Button>
       </Modal>
       {isLoading && <LoadingSpinner asOverlay />}
+      {isArtUploading && <LoadingSpinner asOverlay />}
     </>
   )
 }
 
-export default CreateForm
+const mapDispatch = (dispatch) => ({
+  addData: (data) => dispatch(addData(data)),
+})
 
-connect()(withRouter(CreateForm))
+export default connect(null, mapDispatch)(withRouter(CreateForm))
