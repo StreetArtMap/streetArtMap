@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { addData } from '../../actions/userAction'
@@ -8,8 +8,8 @@ import Input from '../../UIComponents/Input/Input'
 import './LoginPage.css'
 import PropTypes from 'prop-types'
 
-const LoginPage = (props) => {
-  const { setIsLoggedIn, addData } = props
+const LoginPage = ({ setIsLoggedIn, addData }) => {
+  // const { setIsLoggedIn, addData } = props
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [artData, setArtData] = useState([])
@@ -47,8 +47,7 @@ const LoginPage = (props) => {
         }
       })
       addData(parsedData)
-
-      setArtData(data.streetArts)
+      setArtData(parsedData)
       console.log(artData)
     } else if (loading) {
       return <p>Loading...</p>
