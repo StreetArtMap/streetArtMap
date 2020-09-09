@@ -81,7 +81,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   `
   const [createStreetArt, { data, loading, error }] = useMutation(ART_POST)
 
-  // change later:
+  // DELETE LATER:
   const getArt = (e) => {
     e.preventDefault()
     if (data) {
@@ -148,7 +148,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
     setAddressButton(false)
   }
 
-  const postArtHandler = async (e) => {
+  const postArtHandler = (e) => {
     e.preventDefault()
     const fullAddress = address && city && state && zipcode ? true : false
     const finalImages = images.filter((image) => image !== undefined)
@@ -167,7 +167,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       alert('Please add at least one photo')
       return
     } else {
-      await createStreetArt({
+      createStreetArt({
         variables: {
           userId: 1,
           latitude: currentLocation ? currentLocation.latitude.toString() : '',
@@ -219,8 +219,6 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       <Button onClick={() => setPostImage(false)}>
         ADD MORE PHOTOS <ImCamera />
       </Button>
-      <Button onClick={getArt}>CHECK DATA</Button>
-
       <form onSubmit={postArtHandler} className='create-art-form'>
         <Input
           className='create-art-input'
@@ -336,6 +334,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         </section>
       </form>
       {isLoading && <LoadingSpinner asOverlay />}
+      <Button onClick={getArt}>CHECK DATA RETURNED</Button>
     </>
   )
 }

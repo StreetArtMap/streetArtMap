@@ -93,8 +93,4 @@ const mapDispatch = (dispatch) => ({
   addData: (data) => dispatch(addData(data)),
 })
 
-const mapState = (state) => ({
-  arts: state.arts,
-})
-
-export default connect(mapState, mapDispatch)(withRouter(LoginPage))
+export default connect(null, mapDispatch)(withRouter(LoginPage))
