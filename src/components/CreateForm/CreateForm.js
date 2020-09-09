@@ -29,32 +29,50 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [isZipcodeValid, setIsZipcodeValid] = useState(true)
 
   const ART_POST = gql`
-    mutation {
-      createStreetArt( input: {
-          userId: 1,
-          latitude: ${
-            currentLocation ? currentLocation.latitude.toString() : ''
-          },
-          longitude: ${
-            currentLocation ? currentLocation.longitude.toString() : ''
-          },
-          address: ${address},
-          city: ${city},
-          state: ${state},
-          zipcode: ${zipcode},
-          description: ${description},
-          artistName: ${artistName},
-          artName: ${title},
-          instagramHandle: ${artistInstagram},
-          imageUrls: ${JSON.stringify(images)},
-        }) {
-        id,
-        address,
+    mutation createStreetArt(
+      $userId: Int!
+      $latitude: String!
+      $longitude: String!
+      $address: String!
+      $city: String!
+      $state: String!
+      $zipcode: String!
+      $description: String!
+      $artistName: String!
+      $artName: String!
+      $instagramHandle: String!
+      $imageUrls: String!
+    ) {
+      createStreetArt(
+        input: {
+          userId: $userId
+          latitude: $latitude
+          longitude: $longitude
+          address: $address
+          city: $city
+          state: $state
+          zipcode: $zipcode
+          description: $description
+          artistName: $artistName
+          artName: $artName
+          instagramHandle: $instagramHandle
+          imageUrls: $imageUrls
+        }
+      ) {
+        userId
+        latitude
+        longitude
+        address
+        city
+        state
+        zipcode
+        description
+        artistName
+        instagramHandle
         imageUrls
       }
     }
   `
-
   const [createStreetArt, { data }] = useMutation(ART_POST)
 
   isLoading && (document.body.style.overflow = 'hidden')
@@ -131,7 +149,24 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       alert('Please add at least one photo')
       return
     } else {
-      createStreetArt()
+      createStreetArt({
+        variables: {
+          userId: 1,
+          latitude: currentLocation ? currentLocation.latitude.toString() : '',
+          longitude: currentLocation
+            ? currentLocation.longitude.toString()
+            : '',
+          address: address,
+          city: city,
+          state: state,
+          zipcode: zipcode,
+          description: description,
+          artistName: artistName,
+          artName: title,
+          instagramHandle: artistInstagram,
+          imageUrls: JSON.stringify(images),
+        },
+      })
       console.log('MUTATION DATA', data)
       alert('Art created!')
     }

@@ -30,6 +30,7 @@ const Camera = ({
     })
   }, [])
 
+  //1
   const captureImage = async () => {
     const capturedData = await webcam.current.takeBase64Photo({
       type: 'jpeg',
