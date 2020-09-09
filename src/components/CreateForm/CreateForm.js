@@ -29,33 +29,69 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [isZipcodeValid, setIsZipcodeValid] = useState(true)
 
   const ART_POST = gql`
-    mutation {
-      createStreetArt( input: {
-          userId: 1,
-          latitude: ${
-            currentLocation ? currentLocation.latitude.toString() : ''
-          },
-          longitude: ${
-            currentLocation ? currentLocation.longitude.toString() : ''
-          },
-          address: ${address},
-          city: ${city},
-          state: ${state},
-          zipcode: ${zipcode},
-          description: ${description},
-          artistName: ${artistName},
-          artName: ${title},
-          instagramHandle: ${artistInstagram},
-          imageUrls: ${JSON.stringify(images)},
-        }) {
-        id,
-        address,
+    mutation createStreetArt(
+      $userId: Int!
+      $latitude: String!
+      $longitude: String!
+      $address: String!
+      $city: String!
+      $state: String!
+      $zipcode: String!
+      $description: String!
+      $artistName: String!
+      $artName: String!
+      $instagramHandle: String!
+      $imageUrls: String!
+    ) {
+      createStreetArt(
+        input: {
+          userId: $userId
+          latitude: $latitude
+          longitude: $longitude
+          address: $address
+          city: $city
+          state: $state
+          zipcode: $zipcode
+          description: $description
+          artistName: $artistName
+          artName: $artName
+          instagramHandle: $instagramHandle
+          imageUrls: $imageUrls
+        }
+      ) {
+        id
+        latitude
+        longitude
+        address
+        city
+        state
+        zipcode
         imageUrls
+        description
+        artistName
+        artName
+        instagramHandle
+        favorite
+        visited
+        createdAt
+        updatedAt
+        userId
       }
     }
   `
+  const [createStreetArt, { data, loading, error }] = useMutation(ART_POST)
 
-  const [createStreetArt, { data }] = useMutation(ART_POST)
+  // DELETE LATER:
+  const getArt = (e) => {
+    e.preventDefault()
+    if (data) {
+      console.log(data)
+    } else if (loading) {
+      return alert('Loading')
+    } else if (error) {
+      return alert('Error')
+    }
+  }
 
   isLoading && (document.body.style.overflow = 'hidden')
   !isLoading && (document.body.style.overflow = 'scroll')
@@ -131,9 +167,24 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       alert('Please add at least one photo')
       return
     } else {
-      createStreetArt()
-      console.log('MUTATION DATA', data)
-      alert('Art created!')
+      createStreetArt({
+        variables: {
+          userId: 1,
+          latitude: currentLocation ? currentLocation.latitude.toString() : '',
+          longitude: currentLocation
+            ? currentLocation.longitude.toString()
+            : '',
+          address: address,
+          city: city,
+          state: state,
+          zipcode: zipcode,
+          description: description,
+          artistName: artistName,
+          artName: title,
+          instagramHandle: artistInstagram,
+          imageUrls: JSON.stringify(images),
+        },
+      })
     }
   }
 
@@ -168,7 +219,6 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       <Button onClick={() => setPostImage(false)}>
         ADD MORE PHOTOS <ImCamera />
       </Button>
-
       <form onSubmit={postArtHandler} className='create-art-form'>
         <Input
           className='create-art-input'
@@ -284,24 +334,9 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         </section>
       </form>
       {isLoading && <LoadingSpinner asOverlay />}
+      <Button onClick={getArt}>CHECK DATA RETURNED</Button>
     </>
   )
 }
 
 export default CreateForm
-
-// const newArt = {
-//   image_urls: images,
-//   latitude: currentLocation ? currentLocation.latitude.toString() : '',
-//   longitude: currentLocation ? currentLocation.longitude.toString() : '',
-//   address: address,
-//   city: city,
-//   state: state,
-//   zipcode: zipcode,
-//   description: description,
-//   artist_name: artistName,
-//   art_name: title,
-//   instagram_handle: artistInstagram,
-//   favorite: false,
-//   visited: false,
-// }

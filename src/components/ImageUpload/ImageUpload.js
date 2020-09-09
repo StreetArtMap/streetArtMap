@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Button from '../../UIComponents/Button/Button'
 import './ImageUpload.css'
+import { CLOUDINARY_ENDPOINT } from '../../constants'
 
 const ImageUpload = ({ setImages, images, setPostImage, setIsUploading }) => {
   const [isImageSelected, setIsImageSelected] = useState(false)
@@ -18,10 +19,7 @@ const ImageUpload = ({ setImages, images, setPostImage, setIsUploading }) => {
       body: formData,
     }
 
-    return fetch(
-      'https://api.cloudinary.com/v1_1/ds6dxgvxo/image/upload',
-      options
-    )
+    return fetch(CLOUDINARY_ENDPOINT, options)
       .then((res) => res.json())
       .then((res) => {
         setImages([...images, res.secure_url])

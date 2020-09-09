@@ -4,7 +4,8 @@ import './MapWithMarkers.css'
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
 import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
-import { FaHeart, FaRegHeart, FaSearch, FaCheck, FaRoute } from 'react-icons/fa'
+import { FaHeart, FaRegHeart, FaSearch, FaRoute } from 'react-icons/fa'
+import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 
 const MapWithMarkers = ({ setRoute, formMap, zoom, lat, lng }) => {
   const [selectedArt, setSelectedArt] = useState(null)
@@ -127,7 +128,7 @@ const MapWithMarkers = ({ setRoute, formMap, zoom, lat, lng }) => {
             isOpen={true}
           >
             <section className='map-image-carousel-container'>
-              <ImageCarousel images={selectedArt.image_urls} height={200} />
+              <ImageCarousel images={selectedArt.images} height={200} />
             </section>
             <section className='map-art-details-container'>
               <section className='map-art-icons-wrapper'>
@@ -136,7 +137,11 @@ const MapWithMarkers = ({ setRoute, formMap, zoom, lat, lng }) => {
                 ) : (
                   <FaRegHeart className='map-art-icon' />
                 )}
-                {selectedArt.visited && <FaCheck className='map-art-icon' />}
+                {selectedArt.visited ? (
+                  <RiCheckboxCircleLine className='map-art-icon' />
+                ) : (
+                  <RiCheckboxBlankCircleLine className='map-art-icon' />
+                )}
                 <FaSearch className='map-art-icon' />
               </section>
 
