@@ -2,6 +2,7 @@ import React from 'react'
 import './ArtDetails.css'
 import { FaHeart, FaRegHeart, FaMapMarked, FaCheck } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
+import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 
 const ArtDetails = ({
   art: {
@@ -14,10 +15,8 @@ const ArtDetails = ({
     artist_name,
     instagram_handle,
     description,
-    imageUrls,
   },
 }) => {
-
   return (
     <section className='art-details-container'>
       <section className='art-icons-wrapper'>
@@ -26,7 +25,11 @@ const ArtDetails = ({
         ) : (
           <FaRegHeart className='art-icon' />
         )}
-        {visited && <FaCheck className='art-icon' />}
+        {visited ? (
+          <RiCheckboxCircleLine className='art-icon' />
+        ) : (
+          <RiCheckboxBlankCircleLine className='art-icon' />
+        )}
         <FaMapMarked className='art-icon' />
       </section>
 
