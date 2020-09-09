@@ -30,7 +30,7 @@ describe('ProfilePage', () => {
           zipcode: 'zip1',
           image_urls: ['url2', 'url1'],
           description: 'something about this art',
-          artist_name: 'artist name',
+          artistName: 'artist name',
           instagram_handle: null,
           favorite: true,
           visited: false,
@@ -54,17 +54,6 @@ describe('ProfilePage', () => {
   it('<ExplorePage/> component successfully renders', () => {
     const { getByTestId, getByText } = ExplorePageContainer
     expect(getByText('artist name')).toBeInTheDocument()
-  })
-
-  it.skip('should render without crashing', () => {
-    const div = document.createElement('div')
-    ReactDOM.render(
-      <BrowserRouter>
-        <ExplorePage />
-      </BrowserRouter>,
-      div
-    )
-    ReactDOM.unmountComponentAtNode(div)
   })
 
   it('should render the nav', () => {
