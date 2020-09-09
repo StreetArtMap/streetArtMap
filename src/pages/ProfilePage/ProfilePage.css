@@ -1,9 +1,9 @@
 .profile-container {
-  margin-top: 10vh;
   width: 100vw;
-  box-sizing: border-box;
   min-height: 80vh;
-  height: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 10vh;
 }
 
 .user-details-container {
@@ -21,7 +21,7 @@
   height: 135px;
   border-radius: 50%;
   object-fit: cover;
-  margin-left: 6vh;
+  margin-left: 2vh;
 }
 
 .user-stats {
@@ -60,25 +60,10 @@
   opacity: .8;
 }
 
-
-
-.photo-container {
-  height: 60vh;
-  overflow-y: scroll;
-  padding: 1vh;
-  padding-top: 0vh;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
-  grid-auto-rows: 250px;
-  grid-gap: 15px;
-  background-color: var(--light);
-  border-bottom: 2px solid var(--light-medium);
-}
-
 .art-tile {
-  width: 270px;
-  height: 250px;
+  width: auto;
   object-fit: cover;
+  border: 1px solid var(--dark);
   box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.03);
 }
 
