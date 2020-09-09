@@ -334,13 +334,12 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           </Button>
         </section>
       </form>
-      {isLoading && <LoadingSpinner asOverlay />}
-      <Button onClick={getArt}>CHECK DATA RETURNED</Button>
-      <Modal show={true}>
+      <Modal show={false}>
         <p className='modal-message'>ART POSTED!</p>
         <Button>see posted art</Button>
         <Button>post another art</Button>
       </Modal>
+      {isLoading && <LoadingSpinner asOverlay />}
     </>
   )
 }
