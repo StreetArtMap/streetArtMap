@@ -10,6 +10,13 @@
   color: var(--extra-light);
   box-shadow: 10px 10px 10px rgba(88, 88, 88, 0.05);
   border-radius: 7px;
+  text-decoration: none;
+  vertical-align: center;
+}
+
+a {
+  padding: 0;
+  margin: 0;
 }
 
 .glow-on-hover {
@@ -87,4 +94,8 @@
   100% {
     background-position: 0 0;
   }
+}
+
+.btn-padding {
+  margin: 15px 0;
 }

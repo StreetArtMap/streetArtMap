@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 import './CreateForm.css'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { addData } from '../../actions/userAction'
 import { TiDelete } from 'react-icons/ti'
 import { useMutation, gql } from '@apollo/client'
 import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
@@ -9,8 +12,9 @@ import { ImCamera } from 'react-icons/im'
 import { DEFAULT_IMG_URL } from '../../constants'
 import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
+import Modal from '../../UIComponents/Modal/Modal'
 
-const CreateForm = ({ images, setPostImage, setImages }) => {
+const CreateForm = ({ images, setPostImage, setImages, addData }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
   const [addressInput, setAddressInput] = useState(true)
   const [addressButton, setAddressButton] = useState(false)
@@ -27,6 +31,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const [isCityValid, setIsCityValid] = useState(true)
   const [isStateValid, setIsStateValid] = useState(true)
   const [isZipcodeValid, setIsZipcodeValid] = useState(true)
+  const [isArtUploaded, setIsArtUploaded] = useState(false)
 
   const ART_POST = gql`
     mutation createStreetArt(
@@ -81,18 +86,19 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   `
   const [createStreetArt, { data, loading, error }] = useMutation(ART_POST)
 
-  // DELETE LATER:
-  const getArt = (e) => {
-    e.preventDefault()
+  useEffect(() => {
     if (data) {
-      console.log(data)
-    } else if (loading) {
-      return alert('Loading')
-    } else if (error) {
-      return alert('Error')
+      const images = JSON.parse(data.createStreetArt.imageUrls)
+      const parsedData = [
+        {
+          ...data.createStreetArt,
+          images,
+        },
+      ]
+      addData(parsedData)
+      setIsArtUploaded(true)
     }
-  }
-
+  }, [data])
   isLoading && (document.body.style.overflow = 'hidden')
   !isLoading && (document.body.style.overflow = 'scroll')
 
@@ -137,7 +143,6 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         return image
       }
     })
-
     setImages([...newImages])
   }
 
@@ -310,12 +315,17 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
         )}
 
         {addressButton && (
-          <section className='form-btn-wrapper address-btn'>
-            <Button onClick={toggleAddressOrLocationHandler}>
-              enter address
-              <FaMapMarkerAlt />
-            </Button>
-          </section>
+          <>
+            <p className='my-location-message'>
+              Location not accurate? click 'enter address'
+            </p>
+            <section className='form-btn-wrapper address-btn'>
+              <Button onClick={toggleAddressOrLocationHandler}>
+                enter address
+                <FaMapMarkerAlt />
+              </Button>
+            </section>
+          </>
         )}
 
         <Input
@@ -333,10 +343,28 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           </Button>
         </section>
       </form>
-      {isLoading && <LoadingSpinner asOverlay />}
-      <Button onClick={getArt}>CHECK DATA RETURNED</Button>
+      <Modal show={isArtUploaded}>
+        <p className='modal-message success-message'>ART POSTED!</p>
+        <Button styling='padding' to='/explore'>
+          view post
+        </Button>
+        <Button styling='padding' onClick={() => setPostImage(false)}>
+          post again
+        </Button>
+      </Modal>
+      <Modal show={error && true}>
+        <p className='modal-message error-message'>ERROR WHILE POSTING!</p>
+        <Button styling='padding' onClick={() => setPostImage(false)}>
+          back
+        </Button>
+      </Modal>
+      {(isLoading || loading) && <LoadingSpinner asOverlay />}
     </>
   )
 }
 
-export default CreateForm
+const mapDispatch = (dispatch) => ({
+  addData: (data) => dispatch(addData(data)),
+})
+
+export default connect(null, mapDispatch)(withRouter(CreateForm))

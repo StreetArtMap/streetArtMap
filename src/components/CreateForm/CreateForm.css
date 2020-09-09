@@ -67,3 +67,16 @@
   width: 300px;
   height: 300px;
 }
+
+.modal-message {
+  margin-bottom: 30px;
+  font-size: 1.4rem;
+}
+
+.success-message {
+  color: var(--success);
+}
+
+.error-message {
+  color: var(--error);
+}
