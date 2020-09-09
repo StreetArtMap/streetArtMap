@@ -6,15 +6,19 @@ import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 
 const ArtDetails = ({
   art: {
-    visited,
-    favorite,
+    id,
+    latitude,
+    longitude,
     address,
     city,
     state,
     zipcode,
-    artist_name,
-    instagram_handle,
+    artName,
+    artistName,
+    instagramHandle,
     description,
+    visited,
+    favorite,
   },
 }) => {
   return (
@@ -33,16 +37,18 @@ const ArtDetails = ({
         <FaMapMarked className='art-icon' />
       </section>
 
-      {artist_name && <p className='artist-name'>{artist_name}</p>}
+      {artName && <p className='artist-name'>{artName}</p>}
 
-      {instagram_handle && (
+      {artistName && <p className='artist-name'>{artistName}</p>}
+
+      {instagramHandle && (
         <a
-          href={`https://www.instagram.com/${instagram_handle}`}
+          href={`https://www.instagram.com/${instagramHandle}`}
           className='instagram-wrapper'
         >
           <AiFillInstagram className='art-icon' />
 
-          {instagram_handle}
+          {instagramHandle}
         </a>
       )}
 
