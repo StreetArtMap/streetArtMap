@@ -4,6 +4,7 @@ import './Camera.css'
 import axios from 'axios'
 import Button from '../../UIComponents/Button/Button'
 import { CLOUDINARY_ENDPOINT } from '../../constants'
+import Modal from '../../UIComponents/Modal/Modal'
 
 const Camera = ({
   offline,
@@ -12,6 +13,7 @@ const Camera = ({
   setIsSupported,
   setPostImage,
   isUploading,
+  setIsSupportedError,
   setIsUploading,
 }) => {
   let canvasElement = useRef(null)
@@ -27,7 +29,7 @@ const Camera = ({
     )
     webcam.current.setup().catch(() => {
       setIsSupported(false)
-      alert('Cannot access device camera...')
+      setIsSupportedError(true)
     })
   }, [])
 

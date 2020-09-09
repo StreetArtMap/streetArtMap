@@ -4,10 +4,13 @@ import Camera from '../../components/Camera/Camera'
 import CreateForm from '../../components/CreateForm/CreateForm'
 import ImageUpload from '../../components/ImageUpload/ImageUpload'
 import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
+import Modal from '../../UIComponents/Modal/Modal'
+import Button from '../../UIComponents/Button/Button'
 
 const CameraPage = () => {
   const [images, setImages] = useState([])
   const [isSupported, setIsSupported] = useState(true)
+  const [isSupportedError, setIsSupportedError] = useState(false)
   const [postImage, setPostImage] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
 
@@ -25,6 +28,7 @@ const CameraPage = () => {
             setPostImage={setPostImage}
             isUploading={isUploading}
             setIsUploading={setIsUploading}
+            setIsSupportedError={setIsSupportedError}
           />
           <ImageUpload
             setImages={setImages}
@@ -52,6 +56,14 @@ const CameraPage = () => {
         />
       )}
       {isUploading && <LoadingSpinner asOverlay />}
+      <Modal show={isSupportedError}>
+        <p className='modal-message error-message'>
+          Cannot access device camera...
+        </p>
+        <Button styling='padding' onClick={() => setIsSupportedError(false)}>
+          see other options
+        </Button>
+      </Modal>
     </section>
   )
 }
