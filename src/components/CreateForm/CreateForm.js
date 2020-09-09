@@ -9,6 +9,7 @@ import { ImCamera } from 'react-icons/im'
 import { DEFAULT_IMG_URL } from '../../constants'
 import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
+import Modal from '../../UIComponents/Modal/Modal'
 
 const CreateForm = ({ images, setPostImage, setImages }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
@@ -335,6 +336,11 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
       </form>
       {isLoading && <LoadingSpinner asOverlay />}
       <Button onClick={getArt}>CHECK DATA RETURNED</Button>
+      <Modal show={true}>
+        <p className='modal-message'>ART POSTED!</p>
+        <Button>see posted art</Button>
+        <Button>post another art</Button>
+      </Modal>
     </>
   )
 }
