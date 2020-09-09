@@ -143,7 +143,6 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
         return image
       }
     })
-
     setImages([...newImages])
   }
 
@@ -316,12 +315,17 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
         )}
 
         {addressButton && (
-          <section className='form-btn-wrapper address-btn'>
-            <Button onClick={toggleAddressOrLocationHandler}>
-              enter address
-              <FaMapMarkerAlt />
-            </Button>
-          </section>
+          <>
+            <p className='my-location-message'>
+              Location not accurate? click 'enter address'
+            </p>
+            <section className='form-btn-wrapper address-btn'>
+              <Button onClick={toggleAddressOrLocationHandler}>
+                enter address
+                <FaMapMarkerAlt />
+              </Button>
+            </section>
+          </>
         )}
 
         <Input
@@ -341,15 +345,20 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
       </form>
       <Modal show={isArtUploaded}>
         <p className='modal-message success-message'>ART POSTED!</p>
-        <Button styling='padding'>view post</Button>
-        <Button styling='padding'>post again</Button>
+        <Button styling='padding' to='/explore'>
+          view post
+        </Button>
+        <Button styling='padding' onClick={() => setPostImage(false)}>
+          post again
+        </Button>
       </Modal>
       <Modal show={error && true}>
         <p className='modal-message error-message'>ERROR WHILE POSTING!</p>
-        <Button styling='padding'>back</Button>
+        <Button styling='padding' onClick={() => setPostImage(false)}>
+          back
+        </Button>
       </Modal>
-      {isLoading && <LoadingSpinner asOverlay />}
-      {loading && <LoadingSpinner asOverlay />}
+      {(isLoading || loading) && <LoadingSpinner asOverlay />}
     </>
   )
 }
