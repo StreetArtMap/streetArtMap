@@ -3,6 +3,7 @@ import { Webcam } from './webcam'
 import './Camera.css'
 import axios from 'axios'
 import Button from '../../UIComponents/Button/Button'
+import { CLOUDINARY_ENDPOINT } from '../../constants'
 
 const Camera = ({
   offline,
@@ -30,7 +31,6 @@ const Camera = ({
     })
   }, [])
 
-  //1
   const captureImage = async () => {
     const capturedData = await webcam.current.takeBase64Photo({
       type: 'jpeg',
@@ -57,7 +57,7 @@ const Camera = ({
     } else {
       setIsUploading(true)
       axios
-        .post(`https://api.cloudinary.com/v1_1/ds6dxgvxo/image/upload`, {
+        .post(CLOUDINARY_ENDPOINT, {
           file: capturedImage,
           upload_preset: 'artmode',
         })
@@ -88,10 +88,7 @@ const Camera = ({
   const imageUploadHandler = async (e) => {
     e.preventDefault()
     await captureImage()
-    // ISSUE async await doesn't work
-    console.log(capturedImage)
     uploadImage()
-    console.log(capturedImage)
   }
 
   return (
@@ -112,48 +109,3 @@ const Camera = ({
 }
 
 export default Camera
-
-// componentDidUpdate(prevProps) {
-//   console.log(prevProps, 'previos preops into compo did update')
-//   console.log(this.props.offline, 'what is props offline')
-//   if (!this.props.offline && prevProps.offline === true) {
-//     this.batchUploads()
-//   }
-// }
-
-// const findLocalItems = (query) => {
-//   let i
-//   let results = []
-//   for (i in localStorage) {
-//     if (localStorage.hasOwnProperty(i)) {
-//       if (i.match(query) || (!query && typeof i === 'string')) {
-//         const value = localStorage.getItem(i)
-//         results.push({ key: i, val: value })
-//       }
-//     }
-//   }
-//   return results
-// }
-
-// const batchUploads = () => {
-//   const images = this.findLocalItems(/^cloudy_pwa_/)
-//   let error = false
-//   if (images.length > 0) {
-//     setIsUploading(true)
-//     for (let i = 0; i < images.length; i++) {
-//       axios
-//         .post(`https://api.cloudinary.com/v1_1/ds6dxgvxo/image/upload`, {
-//           file: images[i].val,
-//           upload_preset: 'artmode',
-//         })
-//         .then((data) => checkUploadStatus(data))
-//         .catch((error) => {
-//           error = true
-//         })
-//     }
-//     setIsUploading(false)
-//     if (!error) {
-//       alert('All saved images have been uploaded!')
-//     }
-//   }
-// }

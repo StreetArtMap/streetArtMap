@@ -5,7 +5,6 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom'
-// import { ApolloProvider } from '@apollo/client'
 import './App.css'
 import Layout from '../../UIComponents/Layout/Layout'
 import LoginPage from '../../pages/LoginPage/LoginPage'
@@ -15,7 +14,6 @@ import CameraPage from '../../pages/CameraPage/CameraPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 
 const App = () => {
-  // Temporally hook checking what routes should be accessible (toggle logged in true or false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const routes = isLoggedIn ? (
@@ -41,11 +39,7 @@ const App = () => {
     </Route>
   )
 
-  return (
-    <section className='app-container'>
-      {routes}
-    </section>
-  )
+  return <section className='app-container'>{routes}</section>
 }
 
 export default App

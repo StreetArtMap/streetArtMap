@@ -5,7 +5,5 @@ export const login = (user) => ({
 
 export const addData = (data) => ({
   type: 'ADD_DATA',
-  data
+  data,
 })
-
-
