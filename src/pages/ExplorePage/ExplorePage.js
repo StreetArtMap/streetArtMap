@@ -5,7 +5,7 @@ import ArtContainer from '../../components/ArtContainer/ArtContainer'
 
 const ExplorePage = () => {
   const arts = useSelector((state) => state.arts).map((art) => (
-    <ArtContainer art={art} />
+    <ArtContainer art={art}/>
   ))
 
   return <section className='explore-container'>{arts}</section>
