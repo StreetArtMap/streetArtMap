@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './ImageCarousel.css'
 import { DEFAULT_IMG_URL } from '../../constants'
+import { v4 as uuidv4 } from 'uuid';
 
 const ImageCarousel = ({ images, height }) => {
   const addDefaultImageSrc = (e) => {
@@ -25,6 +26,7 @@ const ImageCarousel = ({ images, height }) => {
             height={height}
             className='carousel-img'
             onError={addDefaultImageSrc}
+            key={uuidv4()}
           />
         ))}
     </Slider>

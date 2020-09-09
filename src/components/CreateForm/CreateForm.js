@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 import './CreateForm.css'
+import { Redirect, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { addData } from '../../actions/userAction'
 import { TiDelete } from 'react-icons/ti'
 import { useMutation, gql } from '@apollo/client'
 import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
@@ -11,7 +14,7 @@ import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
 import Modal from '../../UIComponents/Modal/Modal'
 
-const CreateForm = ({ images, setPostImage, setImages }) => {
+const CreateForm = ({ images, setPostImage, setImages, addData }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
   const [addressInput, setAddressInput] = useState(true)
   const [addressButton, setAddressButton] = useState(false)
@@ -86,7 +89,16 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
   const getArt = (e) => {
     e.preventDefault()
     if (data) {
-      console.log(data)
+      const parsedData = data.streetArts.map((item) => {
+        const images = JSON.parse(item.imageUrls)
+        return {
+          ...item,
+          images,
+        }
+      })
+      addData(parsedData)
+      // console.log(data)
+      // setEnablePost(false)
     } else if (loading) {
       return alert('Loading')
     } else if (error) {
@@ -186,6 +198,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           imageUrls: JSON.stringify(images),
         },
       })
+      getArt(e)
     }
   }
 
@@ -329,6 +342,7 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
           onInput={(e) => setDescription(e.target.value)}
         />
         <section className='form-btn-wrapper post-art-btn'>
+          {/* add to={'/explore'} to line below to redirect to main page */}
           <Button type='submit'>
             POST ART <FaTelegramPlane />
           </Button>
@@ -345,3 +359,5 @@ const CreateForm = ({ images, setPostImage, setImages }) => {
 }
 
 export default CreateForm
+
+connect()(withRouter(CreateForm))
