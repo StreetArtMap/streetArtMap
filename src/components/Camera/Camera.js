@@ -43,10 +43,6 @@ const Camera = ({
     setCapturedImage(capturedData)
   }
 
-  const discardImage = () => {
-    setCapturedImage(null)
-  }
-
   const uploadImage = () => {
     if (offline) {
       const prefix = 'cloudy_pwa_'
@@ -55,7 +51,7 @@ const Camera = ({
       setError(
         'Image saved locally, it will be uploaded once internet connection is detected'
       )
-      this.discardImage()
+      setCapturedImage(null)
     } else {
       setIsUploading(true)
       axios

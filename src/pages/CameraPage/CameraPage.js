@@ -13,7 +13,7 @@ const CameraPage = () => {
   const [isSupportedError, setIsSupportedError] = useState(false)
   const [postImage, setPostImage] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState('')
 
   isUploading && (document.body.style.overflow = 'hidden')
   !isUploading && (document.body.style.overflow = 'scroll')
@@ -21,28 +21,18 @@ const CameraPage = () => {
   return (
     <section className='camera-container'>
       {isSupported && !postImage && (
-        <>
-          <Camera
-            setImages={setImages}
-            images={images}
-            setIsSupported={setIsSupported}
-            setPostImage={setPostImage}
-            isUploading={isUploading}
-            setIsUploading={setIsUploading}
-            setIsSupportedError={setIsSupportedError}
-            setError={setError}
-          />
-          <ImageUpload
-            setImages={setImages}
-            images={images}
-            setPostImage={setPostImage}
-            isUploading={isUploading}
-            setIsUploading={setIsUploading}
-            setError={setError}
-          />
-        </>
+        <Camera
+          setImages={setImages}
+          images={images}
+          setIsSupported={setIsSupported}
+          setPostImage={setPostImage}
+          isUploading={isUploading}
+          setIsUploading={setIsUploading}
+          setIsSupportedError={setIsSupportedError}
+          setError={setError}
+        />
       )}
-      {!isSupported && !postImage && (
+      {!postImage && (
         <ImageUpload
           setImages={setImages}
           images={images}
@@ -60,20 +50,23 @@ const CameraPage = () => {
         />
       )}
       {isUploading && <LoadingSpinner asOverlay />}
-      <Modal show={isSupportedError}>
-        <p className='modal-message error-message'>
-          Cannot access device camera...
-        </p>
-        <Button styling='padding' onClick={() => setIsSupportedError(false)}>
-          see other options
-        </Button>
-      </Modal>
-      <Modal show={error}>
-        <p className='modal-message error-message'>{error}</p>
-        <Button styling='padding' onClick={() => setError(false)}>
-          see other options
-        </Button>
-      </Modal>
+      {(isSupportedError || error) && (
+        <Modal show={true}>
+          <p className='modal-message error-message'>
+            {error}
+            {isSupportedError && 'see other options'}
+          </p>
+          <Button
+            styling='padding'
+            onClick={() => {
+              setError('')
+              setIsSupportedError(false)
+            }}
+          >
+            close
+          </Button>
+        </Modal>
+      )}
     </section>
   )
 }
