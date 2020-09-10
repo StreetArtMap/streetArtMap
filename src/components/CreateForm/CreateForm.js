@@ -200,10 +200,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
     return (
       <section className='form-image-wrapper'>
         <section onClick={removeImageHandler}>
-          <TiDelete
-            id={image}
-            className='image-delete-btn'
-          />
+          <TiDelete id={image} className='image-delete-btn' />
         </section>
 
         <img
@@ -296,7 +293,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           </>
         )}
 
-        {!addressInput && currentLocation && (
+        {!addressInput && currentLocation && !isArtUploaded && (
           <>
             <section className='current-location-map'>
               <MapWithMarkers
