@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import './Nav.css'
 import { NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { FaMapMarked, FaSearch } from 'react-icons/fa'
 import { ImCamera } from 'react-icons/im'
 import ScrollHide from '../../UIComponents/ScrollHide/ScrollHide'
 import { selectArt } from '../../actions/userAction'
 
-const Nav = ({ selectArt }) => {
+const Nav = () => {
   const [shouldHideHeader, setShouldHideHeader] = useState(false)
   const [shouldShowShadow, setShouldShowShadow] = useState(false)
 
@@ -30,13 +30,18 @@ const Nav = ({ selectArt }) => {
   const shadowStyle = shouldShowShadow ? 'shadow' : ''
   const hiddenStyle = shouldHideHeader ? 'hidden' : ''
 
+  const dispatch = useDispatch()
+
   return (
     <footer className={`footer ${shadowStyle} ${hiddenStyle}`}>
-      <section className='nav-box' onClick={() => selectArt(null)}>
+      <section className='nav-box'>
         <NavLink
           to='/explore'
           className='nav-link'
-          onClick={() => window.scrollTo(0, 0)}
+          onClick={() => {
+            dispatch(selectArt(null))
+            window.scrollTo(0, 0)
+          }}
         >
           <FaSearch className='nav-icon' title='search-icon' />
           <p className='nav-text'>explore</p>
@@ -46,7 +51,10 @@ const Nav = ({ selectArt }) => {
         <NavLink
           to='/map'
           className='nav-link'
-          onClick={() => window.scrollTo(0, 0)}
+          onClick={() => {
+            dispatch(selectArt(null))
+            window.scrollTo(0, 0)
+          }}
         >
           <FaMapMarked className='nav-icon' title='map-icon' />
           <p className='nav-text'>map</p>
@@ -56,7 +64,10 @@ const Nav = ({ selectArt }) => {
         <NavLink
           to='/create'
           className='nav-link'
-          onClick={() => window.scrollTo(0, 0)}
+          onClick={() => {
+            dispatch(selectArt(null))
+            window.scrollTo(0, 0)
+          }}
         >
           <ImCamera className='nav-icon' title='camera-icon' />
           <p className='nav-text'>create</p>
@@ -66,7 +77,10 @@ const Nav = ({ selectArt }) => {
         <NavLink
           to='/profile'
           className='nav-link'
-          onClick={() => window.scrollTo(0, 0)}
+          onClick={() => {
+            dispatch(selectArt(null))
+            window.scrollTo(0, 0)
+          }}
         >
           <BsFillPersonFill className='nav-icon' title='profile-icon' />
           <p className='nav-text'>profile</p>
@@ -76,8 +90,4 @@ const Nav = ({ selectArt }) => {
   )
 }
 
-const mapDispatch = (dispatch) => ({
-  selectArt: (id) => dispatch(selectArt(id)),
-})
-
-export default connect(null, mapDispatch)(Nav)
+export default Nav
