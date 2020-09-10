@@ -5,7 +5,6 @@ import { FaHeart, FaRegHeart, FaMapMarked } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 import { selectArt } from '../../actions/userAction'
-import Button from '../../UIComponents/Button/Button'
 
 const ArtDetails = ({
   art: {

@@ -14,7 +14,7 @@ import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
 import Modal from '../../UIComponents/Modal/Modal'
 
-const CreateForm = ({ images, setPostImage, setImages, addData }) => {
+const CreateForm = ({ images, setPostImage, setImages, addData, setError }) => {
   const [currentLocation, setCurrentLocation] = useState(null)
   const [addressInput, setAddressInput] = useState(true)
   const [addressButton, setAddressButton] = useState(false)
@@ -164,12 +164,12 @@ const CreateForm = ({ images, setPostImage, setImages, addData }) => {
       !state && setIsStateValid(false)
       !zipcode && setIsZipcodeValid(false)
     } else if (!addressInput && !currentLocation) {
-      alert(
+      setError(
         'Error getting your location. Please try again or enter address instead'
       )
       return
     } else if (!finalImages.length) {
-      alert('Please add at least one photo')
+      setError('Please add at least one photo')
       return
     } else {
       createStreetArt({

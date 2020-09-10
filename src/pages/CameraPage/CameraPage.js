@@ -47,6 +47,7 @@ const CameraPage = () => {
           images={images}
           setPostImage={setPostImage}
           setImages={setImages}
+          setError={setError}
         />
       )}
       {isUploading && <LoadingSpinner asOverlay />}

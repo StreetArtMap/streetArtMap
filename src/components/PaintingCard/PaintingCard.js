@@ -6,11 +6,10 @@ import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
 import './PaintingCard.css'
 
 const PaintingCard = () => {
-  const selectedId = '15'
+  const selectedId = useSelector((state) => state.session.selectedArt)
   const art = useSelector((state) =>
     state.arts.find((art) => art.id === selectedId)
   )
-  console.log(art, selectedId)
   return (
     <section className='painting-card-container'>
       <ImageCarousel images={art.images} height={500} />
