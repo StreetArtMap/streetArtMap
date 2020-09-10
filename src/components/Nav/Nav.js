@@ -33,25 +33,41 @@ const Nav = ({ selectArt }) => {
   return (
     <footer className={`footer ${shadowStyle} ${hiddenStyle}`}>
       <section className='nav-box' onClick={() => selectArt(null)}>
-        <NavLink to='/explore' className='nav-link'>
+        <NavLink
+          to='/explore'
+          className='nav-link'
+          onClick={() => window.scrollTo(0, 0)}
+        >
           <FaSearch className='nav-icon' title='search-icon' />
           <p className='nav-text'>explore</p>
         </NavLink>
       </section>
       <section className='nav-box'>
-        <NavLink to='/map' className='nav-link'>
+        <NavLink
+          to='/map'
+          className='nav-link'
+          onClick={() => window.scrollTo(0, 0)}
+        >
           <FaMapMarked className='nav-icon' title='map-icon' />
           <p className='nav-text'>map</p>
         </NavLink>
       </section>
       <section className='nav-box'>
-        <NavLink to='/create' className='nav-link'>
+        <NavLink
+          to='/create'
+          className='nav-link'
+          onClick={() => window.scrollTo(0, 0)}
+        >
           <ImCamera className='nav-icon' title='camera-icon' />
           <p className='nav-text'>create</p>
         </NavLink>
       </section>
       <section className='nav-box'>
-        <NavLink to='/profile' className='nav-link'>
+        <NavLink
+          to='/profile'
+          className='nav-link'
+          onClick={() => window.scrollTo(0, 0)}
+        >
           <BsFillPersonFill className='nav-icon' title='profile-icon' />
           <p className='nav-text'>profile</p>
         </NavLink>

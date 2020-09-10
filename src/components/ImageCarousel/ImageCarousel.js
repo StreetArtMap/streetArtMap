@@ -35,6 +35,7 @@ const ImageCarousel = ({ images, height, id, selectArt, imageLink }) => {
               key={uuidv4()}
               onClick={() => {
                 selectArt(id)
+                window.scrollTo(0, 0)
               }}
             />
           </Link>
