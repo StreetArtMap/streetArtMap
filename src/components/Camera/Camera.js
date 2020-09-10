@@ -4,7 +4,6 @@ import './Camera.css'
 import axios from 'axios'
 import Button from '../../UIComponents/Button/Button'
 import { CLOUDINARY_ENDPOINT } from '../../constants'
-import Modal from '../../UIComponents/Modal/Modal'
 
 const Camera = ({
   offline,
@@ -12,14 +11,13 @@ const Camera = ({
   setImages,
   setIsSupported,
   setPostImage,
-  isUploading,
   setIsSupportedError,
   setIsUploading,
+  setError,
 }) => {
   let canvasElement = useRef(null)
   let webcam = useRef(null)
   const [capturedImage, setCapturedImage] = useState(null)
-  const [isCaptured, setIsCaptured] = useState(false)
 
   useEffect(() => {
     canvasElement.current = document.createElement('canvas')
@@ -33,17 +31,19 @@ const Camera = ({
     })
   }, [])
 
+  useEffect(() => {
+    capturedImage && uploadImage()
+  }, [capturedImage])
+
   const captureImage = async () => {
     const capturedData = await webcam.current.takeBase64Photo({
       type: 'jpeg',
       quality: 1,
     }).base64
     setCapturedImage(capturedData)
-    setIsCaptured(true)
   }
 
   const discardImage = () => {
-    setIsCaptured(false)
     setCapturedImage(null)
   }
 
@@ -52,7 +52,7 @@ const Camera = ({
       const prefix = 'cloudy_pwa_'
       const rs = Math.random().toString(36).substr(2, 5)
       localStorage.setItem(`${prefix}${rs}`, this.state.capturedImage)
-      alert(
+      setError(
         'Image saved locally, it will be uploaded once internet connection is detected'
       )
       this.discardImage()
@@ -66,11 +66,12 @@ const Camera = ({
         .then((data) => {
           checkUploadStatus(data)
           setPostImage(true)
+          setCapturedImage(null)
         })
         .catch((error) => {
-          console.log(error, 'ERROR')
-          alert('Error uploading an image!!!')
+          setError('Error uploading an image...')
           setIsUploading(false)
+          setCapturedImage(null)
         })
     }
   }
@@ -78,19 +79,16 @@ const Camera = ({
   const checkUploadStatus = (data) => {
     setIsUploading(false)
     if (data.status === 200) {
-      alert('Image uploaded!')
       setImages([...images, data.data.secure_url])
-      console.log(images)
       discardImage()
     } else {
-      alert('Error uploading an image...')
+      setError('Error uploading an image...')
     }
   }
 
-  const imageUploadHandler = async (e) => {
+  const imageUploadHandler = (e) => {
     e.preventDefault()
-    await captureImage()
-    uploadImage()
+    captureImage()
   }
 
   return (

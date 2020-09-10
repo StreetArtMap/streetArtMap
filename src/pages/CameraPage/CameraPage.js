@@ -13,6 +13,7 @@ const CameraPage = () => {
   const [isSupportedError, setIsSupportedError] = useState(false)
   const [postImage, setPostImage] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
+  const [error, setError] = useState(false)
 
   isUploading && (document.body.style.overflow = 'hidden')
   !isUploading && (document.body.style.overflow = 'scroll')
@@ -29,6 +30,7 @@ const CameraPage = () => {
             isUploading={isUploading}
             setIsUploading={setIsUploading}
             setIsSupportedError={setIsSupportedError}
+            setError={setError}
           />
           <ImageUpload
             setImages={setImages}
@@ -36,6 +38,7 @@ const CameraPage = () => {
             setPostImage={setPostImage}
             isUploading={isUploading}
             setIsUploading={setIsUploading}
+            setError={setError}
           />
         </>
       )}
@@ -46,6 +49,7 @@ const CameraPage = () => {
           setPostImage={setPostImage}
           isUploading={isUploading}
           setIsUploading={setIsUploading}
+          setError={setError}
         />
       )}
       {postImage && (
@@ -61,6 +65,12 @@ const CameraPage = () => {
           Cannot access device camera...
         </p>
         <Button styling='padding' onClick={() => setIsSupportedError(false)}>
+          see other options
+        </Button>
+      </Modal>
+      <Modal show={error}>
+        <p className='modal-message error-message'>{error}</p>
+        <Button styling='padding' onClick={() => setError(false)}>
           see other options
         </Button>
       </Modal>
