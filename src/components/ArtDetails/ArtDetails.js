@@ -1,10 +1,10 @@
 import React from 'react'
-import './ArtDetails.css'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { selectArt } from '../../actions/userAction'
 import { FaHeart, FaRegHeart, FaMapMarked } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
-import { selectArt } from '../../actions/userAction'
+import './ArtDetails.css'
 
 const ArtDetails = ({
   art: {
@@ -20,8 +20,8 @@ const ArtDetails = ({
     visited,
     favorite,
   },
-  selectArt,
 }) => {
+  const dispatch = useDispatch()
   return (
     <section className='art-details-container'>
       <section className='art-icons-wrapper'>
@@ -35,7 +35,10 @@ const ArtDetails = ({
         ) : (
           <RiCheckboxBlankCircleLine className='art-icon' />
         )}
-        <FaMapMarked className='art-icon' onClick={() => selectArt(id)} />
+        <FaMapMarked
+          className='art-icon'
+          onClick={() => dispatch(selectArt(id))}
+        />
       </section>
       {artName && <p className='artist-name'>{artName}</p>}
       {artistName && <p className='artist-name'>{artistName}</p>}
@@ -56,8 +59,4 @@ const ArtDetails = ({
   )
 }
 
-const mapDispatch = (dispatch) => ({
-  selectArt: (id) => dispatch(selectArt(id)),
-})
-
-export default connect(null, mapDispatch)(ArtDetails)
+export default ArtDetails

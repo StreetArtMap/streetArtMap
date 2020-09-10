@@ -99,3 +99,9 @@ a {
 .btn-padding {
   margin: 15px 0;
 }
+
+.btn-disabled,
+.bnt-disabled:after,
+.btn-disabled:active {
+  opacity: 0.3;
+}

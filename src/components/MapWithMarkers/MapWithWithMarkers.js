@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import './MapWithMarkers.css'
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
-import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
+import Modal from '../../UIComponents/Modal/Modal'
+import Button from '../../UIComponents/Button/Button'
 import { FaHeart, FaRegHeart, FaSearch, FaRoute } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
+import './MapWithMarkers.css'
 
 const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
   const [selectedArt, setSelectedArt] = useState(null)
+  const [geolocationSupported, setGeolocationSupported] = useState(true)
   const [myLocation, setMyLocation] = useState({
     latitude: 39.744137,
     longitude: -104.95005,
@@ -26,7 +29,7 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
     if (navigator.geolocation) {
       return navigator.geolocation.getCurrentPosition(showPosition)
     } else {
-      alert('Geo Location is not supported by your device')
+      setGeolocationSupported(false)
     }
   }
 
@@ -151,6 +154,14 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
           </Popup>
         )}
       </ReactMapGL>
+      <Modal show={!geolocationSupported}>
+        <p className='modal-message error-message'>
+          Geolocation is not supported on your device...
+        </p>
+        <Button styling='padding' onClick={() => setGeolocationSupported(true)}>
+          back
+        </Button>
+      </Modal>
     </section>
   )
 }

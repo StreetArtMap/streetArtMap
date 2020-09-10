@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import Input from '../../UIComponents/Input/Input'
-import Button from '../../UIComponents/Button/Button'
-import './CreateForm.css'
 import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addData } from '../../actions/userAction'
-import { TiDelete } from 'react-icons/ti'
-import { useMutation, gql } from '@apollo/client'
-import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
-import { ImCamera } from 'react-icons/im'
 import { DEFAULT_IMG_URL } from '../../constants'
 import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
 import Modal from '../../UIComponents/Modal/Modal'
+import Input from '../../UIComponents/Input/Input'
+import Button from '../../UIComponents/Button/Button'
+import { TiDelete } from 'react-icons/ti'
+import { useMutation, gql } from '@apollo/client'
+import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
+import { ImCamera } from 'react-icons/im'
+import './CreateForm.css'
 
-const CreateForm = ({ images, setPostImage, setImages, addData, setError }) => {
+const CreateForm = ({ images, setPostImage, setImages, setError }) => {
+  const dispatch = useDispatch()
   const [currentLocation, setCurrentLocation] = useState(null)
   const [addressInput, setAddressInput] = useState(true)
   const [addressButton, setAddressButton] = useState(false)
@@ -95,10 +96,10 @@ const CreateForm = ({ images, setPostImage, setImages, addData, setError }) => {
           images,
         },
       ]
-      addData(parsedData)
+      dispatch(addData(parsedData))
       setIsArtUploaded(true)
     }
-  //eslint-disable-next-line
+    //eslint-disable-next-line
   }, [data])
   isLoading && (document.body.style.overflow = 'hidden')
   !isLoading && (document.body.style.overflow = 'scroll')
@@ -216,6 +217,12 @@ const CreateForm = ({ images, setPostImage, setImages, addData, setError }) => {
       </section>
     )
   })
+
+  const postDisabled =
+    (currentLocation || (address && city && state && zipcode)) &&
+    images.filter((image) => image !== undefined)
+      ? false
+      : true
 
   return (
     <>
@@ -340,14 +347,18 @@ const CreateForm = ({ images, setPostImage, setImages, addData, setError }) => {
           onInput={(e) => setDescription(e.target.value)}
         />
         <section className='form-btn-wrapper post-art-btn'>
-          <Button type='submit'>
+          <Button type='submit' styling={postDisabled && 'disabled'}>
             POST ART <FaTelegramPlane />
           </Button>
         </section>
       </form>
       <Modal show={isArtUploaded}>
         <p className='modal-message success-message'>ART POSTED!</p>
-        <Button styling='padding' to='/explore'>
+        <Button
+          styling='padding'
+          to='/explore'
+          onClick={() => window.scrollTo(0, 0)}
+        >
           view post
         </Button>
         <Button styling='padding' onClick={() => setPostImage(false)}>
@@ -365,8 +376,4 @@ const CreateForm = ({ images, setPostImage, setImages, addData, setError }) => {
   )
 }
 
-const mapDispatch = (dispatch) => ({
-  addData: (data) => dispatch(addData(data)),
-})
-
-export default connect(null, mapDispatch)(withRouter(CreateForm))
+export default withRouter(CreateForm)

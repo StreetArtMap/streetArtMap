@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import './CameraPage.css'
 import Camera from '../../components/Camera/Camera'
 import CreateForm from '../../components/CreateForm/CreateForm'
 import ImageUpload from '../../components/ImageUpload/ImageUpload'
 import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 import Modal from '../../UIComponents/Modal/Modal'
 import Button from '../../UIComponents/Button/Button'
+import './CameraPage.css'
 
 const CameraPage = () => {
   const [images, setImages] = useState([])

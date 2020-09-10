@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import './ExplorePage.css'
 import ArtContainer from '../../components/ArtContainer/ArtContainer'
-import { v4 as uuidv4 } from 'uuid'
 import MapWithMarkers from '../../components/MapWithMarkers/MapWithWithMarkers'
+import { v4 as uuidv4 } from 'uuid'
+import './ExplorePage.css'
 
 const ExplorePage = () => {
   const [targetArt, setTargetArt] = useState(null)

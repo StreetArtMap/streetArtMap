@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button from '../../UIComponents/Button/Button'
-import './ImageUpload.css'
 import { CLOUDINARY_ENDPOINT } from '../../constants'
+import './ImageUpload.css'
 
 const ImageUpload = ({
   setImages,
