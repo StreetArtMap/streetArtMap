@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { selectArt } from '../../actions/userAction'
 import { Link } from 'react-router-dom'
 
-const ImageCarousel = ({ images, height, id, selectArt }) => {
+const ImageCarousel = ({ images, height, id, selectArt, imageLink }) => {
   const addDefaultImageSrc = (e) => {
     e.target.src = DEFAULT_IMG_URL
   }
@@ -22,6 +22,7 @@ const ImageCarousel = ({ images, height, id, selectArt }) => {
       slidesToScroll={1}
     >
       {images &&
+        imageLink &&
         images.map((image) => (
           <Link to={`/arts/${id}`}>
             <img
@@ -37,6 +38,19 @@ const ImageCarousel = ({ images, height, id, selectArt }) => {
               }}
             />
           </Link>
+        ))}
+      {images &&
+        !imageLink &&
+        images.map((image) => (
+          <img
+            id={id}
+            src={image}
+            alt={image}
+            height={height}
+            className='carousel-img'
+            onError={addDefaultImageSrc}
+            key={uuidv4()}
+          />
         ))}
     </Slider>
   )
