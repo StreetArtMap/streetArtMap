@@ -1,10 +1,10 @@
 .camera-container {
   width: 88vw;
-  min-height: 70vh;
+  min-height: 80vh;
   height: auto;
-  margin: 15vh auto;
-  background-color: #fff;
-  box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.03);
-  border-radius: 7px;
-  padding-bottom: 30px;
+  padding: 10vh 0;
+  margin: 10vh auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

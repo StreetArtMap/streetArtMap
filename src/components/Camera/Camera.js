@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { Webcam } from './webcam'
-import Button from '../../UIComponents/Button/Button'
 import { CLOUDINARY_ENDPOINT } from '../../constants'
+import { RiCameraLensFill } from 'react-icons/ri'
 import './Camera.css'
 
 const Camera = ({
@@ -89,7 +89,7 @@ const Camera = ({
   }
 
   return (
-    <>
+    <section className='video-camera-container'>
       <video
         autoPlay
         playsInline
@@ -100,8 +100,13 @@ const Camera = ({
         height='250px'
       />
       <br />
-      <Button onClick={imageUploadHandler}>Take Photo</Button>
-    </>
+      <section onClick={imageUploadHandler}>
+        <RiCameraLensFill
+          className='capture-btn'
+          onClick={imageUploadHandler}
+        />
+      </section>
+    </section>
   )
 }
 

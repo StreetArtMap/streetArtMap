@@ -35,7 +35,7 @@
   right: 0;
   z-index: 7;
   background-color: var(--extra-light);
-  opacity: 0.9;
+  opacity: 0.96;
   transform: translateY(0);
   transition: transform 0.3s ease;
   justify-content: space-between;
