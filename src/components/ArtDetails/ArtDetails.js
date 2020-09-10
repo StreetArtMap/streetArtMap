@@ -1,5 +1,6 @@
 import React from 'react'
 import './ArtDetails.css'
+//eslint-disable-next-line
 import { FaHeart, FaRegHeart, FaMapMarked, FaCheck } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
