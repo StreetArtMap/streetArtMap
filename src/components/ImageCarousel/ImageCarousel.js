@@ -1,15 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { selectArt } from '../../actions/userAction'
+import { v4 as uuidv4 } from 'uuid'
+import { DEFAULT_IMG_URL } from '../../constants'
 import Slider from 'react-slick'
-import { connect } from 'react-redux'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './ImageCarousel.css'
-import { DEFAULT_IMG_URL } from '../../constants'
-import { v4 as uuidv4 } from 'uuid'
-import { selectArt } from '../../actions/userAction'
-import { Link } from 'react-router-dom'
 
-const ImageCarousel = ({ images, height, id, selectArt, imageLink }) => {
+const ImageCarousel = ({ images, height, id, imageLink }) => {
+  const dispatch = useDispatch()
   const addDefaultImageSrc = (e) => {
     e.target.src = DEFAULT_IMG_URL
   }
@@ -34,7 +35,7 @@ const ImageCarousel = ({ images, height, id, selectArt, imageLink }) => {
               onError={addDefaultImageSrc}
               key={uuidv4()}
               onClick={() => {
-                selectArt(id)
+                dispatch(selectArt(id))
                 window.scrollTo(0, 0)
               }}
             />
@@ -57,8 +58,4 @@ const ImageCarousel = ({ images, height, id, selectArt, imageLink }) => {
   )
 }
 
-const mapDispatch = (dispatch) => ({
-  selectArt: (id) => dispatch(selectArt(id)),
-})
-
-export default connect(null, mapDispatch)(ImageCarousel)
+export default ImageCarousel

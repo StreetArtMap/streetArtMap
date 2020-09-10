@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { addData } from '../../actions/userAction'
 import { useQuery, gql } from '@apollo/client'
+import { useDispatch } from 'react-redux'
+import { addData } from '../../actions/userAction'
 import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
 import './LoginPage.css'
-import PropTypes from 'prop-types'
 
-const LoginPage = ({ setIsLoggedIn, addData }) => {
+const LoginPage = ({ setIsLoggedIn }) => {
+  const dispatch = useDispatch()
   const [, setUsername] = useState('')
   const [, setPassword] = useState('')
   const [artData, setArtData] = useState([])
@@ -45,7 +46,7 @@ const LoginPage = ({ setIsLoggedIn, addData }) => {
           images,
         }
       })
-      addData(parsedData)
+      dispatch(addData(parsedData))
       setArtData(parsedData)
     } else if (loading) {
       return <p>Loading...</p>
@@ -86,8 +87,4 @@ LoginPage.propTypes = {
   setIsLoggedIn: PropTypes.func,
 }
 
-const mapDispatch = (dispatch) => ({
-  addData: (data) => dispatch(addData(data)),
-})
-
-export default connect(null, mapDispatch)(withRouter(LoginPage))
+export default withRouter(LoginPage)

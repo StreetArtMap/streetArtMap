@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import './Nav.css'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { selectArt } from '../../actions/userAction'
+import ScrollHide from '../../UIComponents/ScrollHide/ScrollHide'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { FaMapMarked, FaSearch } from 'react-icons/fa'
 import { ImCamera } from 'react-icons/im'
-import ScrollHide from '../../UIComponents/ScrollHide/ScrollHide'
-import { selectArt } from '../../actions/userAction'
+import './Nav.css'
 
 const Nav = () => {
   const [shouldHideHeader, setShouldHideHeader] = useState(false)
