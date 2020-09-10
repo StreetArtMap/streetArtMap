@@ -9,7 +9,6 @@ import './LoginPage.css'
 import PropTypes from 'prop-types'
 
 const LoginPage = ({ setIsLoggedIn, addData }) => {
-  // const { setIsLoggedIn, addData } = props
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [artData, setArtData] = useState([])
