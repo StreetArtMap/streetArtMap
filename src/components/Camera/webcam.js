@@ -19,7 +19,7 @@ export class Webcam {
           .getUserMedia({
             audio: false,
             video: {
-              video: { facingMode: 'user' },
+              video: { facingMode: 'environment' },
               // facingMode: { exact: 'environment' },
               width: { min: 1280, max: 1920 },
               height: { min: 720, max: 1080 },
