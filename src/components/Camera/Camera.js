@@ -17,6 +17,7 @@ const Camera = ({
   let canvasElement = useRef(null)
   let webcam = useRef(null)
   const [capturedImage, setCapturedImage] = useState(null)
+  //eslint-disable-next-line
   const [isCaptured, setIsCaptured] = useState(false)
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const Camera = ({
       setIsSupported(false)
       alert('Cannot access device camera...')
     })
+    //eslint-disable-next-line
   }, [])
 
   const captureImage = async () => {
