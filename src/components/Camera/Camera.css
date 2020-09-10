@@ -1,5 +1,7 @@
 .video-camera-container {
   position: relative;
+  background-color: var(--dark);
+  height: 58vh;
 }
 
 .video-camera-wrapper {
@@ -10,10 +12,9 @@
 
 .capture-btn {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   color: var(--extra-light);
-  font-size: 4rem;
+  font-size: 5rem;
   left: 50%;
-
   transform: translate(-50%, -50%);
 }
