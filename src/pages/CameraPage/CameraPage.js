@@ -20,18 +20,22 @@ const CameraPage = () => {
 
   return (
     <section className='camera-container'>
-      {isSupported && !postImage && (
-        <Camera
-          setImages={setImages}
-          images={images}
-          setIsSupported={setIsSupported}
-          setPostImage={setPostImage}
-          isUploading={isUploading}
-          setIsUploading={setIsUploading}
-          setIsSupportedError={setIsSupportedError}
-          setError={setError}
-        />
-      )}
+      {isSupported &&
+        !postImage &&
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        ) && (
+          <Camera
+            setImages={setImages}
+            images={images}
+            setIsSupported={setIsSupported}
+            setPostImage={setPostImage}
+            isUploading={isUploading}
+            setIsUploading={setIsUploading}
+            setIsSupportedError={setIsSupportedError}
+            setError={setError}
+          />
+        )}
       {!postImage && (
         <ImageUpload
           setImages={setImages}
