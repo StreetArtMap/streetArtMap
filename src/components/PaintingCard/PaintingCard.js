@@ -3,6 +3,7 @@ import ImageCarousel from '../ImageCarousel/ImageCarousel'
 import ArtDetails from '../ArtDetails/ArtDetails'
 import { useSelector } from 'react-redux'
 import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
+import './PaintingCard.css'
 
 const PaintingCard = () => {
   const selectedId = '15'

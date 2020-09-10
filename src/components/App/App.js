@@ -12,6 +12,7 @@ import ExplorePage from '../../pages/ExplorePage/ExplorePage'
 import MapPage from '../../pages/MapPage/MapPage'
 import CameraPage from '../../pages/CameraPage/CameraPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
+import PaintingCard from '../PaintingCard/PaintingCard'
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -30,6 +31,9 @@ const App = () => {
         </Route>
         <Route path='/profile' exact>
           <ProfilePage />
+        </Route>
+        <Route path='/arts/:id' exact>
+          <PaintingCard />
         </Route>
       </Switch>
     </Layout>

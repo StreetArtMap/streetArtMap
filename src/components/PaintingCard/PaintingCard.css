@@ -1,7 +1,15 @@
 .painting-card-container {
-  width: 100vw;
+  width: 88vw;
+  min-height: 80vh;
+  height: auto;
+  padding: 10vh 0;
+  margin: auto;
 }
 
 .painting-card-map {
   width: 100;
+}
+
+.map-container {
+  height: 50vh;
 }
