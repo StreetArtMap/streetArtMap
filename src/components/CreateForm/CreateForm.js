@@ -218,6 +218,12 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
     )
   })
 
+  const postDisabled =
+    (currentLocation || (address && city && state && zipcode)) &&
+    images.filter((image) => image !== undefined)
+      ? false
+      : true
+
   return (
     <>
       <section className='form-images-container'>{mappedImages}</section>
@@ -341,14 +347,18 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           onInput={(e) => setDescription(e.target.value)}
         />
         <section className='form-btn-wrapper post-art-btn'>
-          <Button type='submit'>
+          <Button type='submit' styling={postDisabled && 'disabled'}>
             POST ART <FaTelegramPlane />
           </Button>
         </section>
       </form>
       <Modal show={isArtUploaded}>
         <p className='modal-message success-message'>ART POSTED!</p>
-        <Button styling='padding' to='/explore'>
+        <Button
+          styling='padding'
+          to='/explore'
+          onClick={() => window.scrollTo(0, 0)}
+        >
           view post
         </Button>
         <Button styling='padding' onClick={() => setPostImage(false)}>
