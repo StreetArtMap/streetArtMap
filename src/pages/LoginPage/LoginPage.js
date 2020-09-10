@@ -48,7 +48,6 @@ const LoginPage = ({ setIsLoggedIn, addData }) => {
       })
       addData(parsedData)
       setArtData(parsedData)
-      console.log(artData)
     } else if (loading) {
       return <p>Loading...</p>
     } else if (error) {
