@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import './ExplorePage.css'
 import ArtContainer from '../../components/ArtContainer/ArtContainer'
 import { v4 as uuidv4 } from 'uuid'
-import { FaStreetView } from 'react-icons/fa'
 
 const ExplorePage = () => {
   const sortedArts = useSelector((state) => state.arts).sort(

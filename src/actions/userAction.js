@@ -7,3 +7,8 @@ export const addData = (data) => ({
   type: 'ADD_DATA',
   data,
 })
+
+export const selectArt = (id) => ({
+  type: 'SELECT_ART',
+  id,
+})
