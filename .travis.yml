@@ -1,5 +1,9 @@
 language: node_js
 node_js:
-  - "node"
+- node
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: UFA8YzOuwegcuckDdGT2O3qa5JVi9B//iIoHQsUODy91uYC+ECrOuwZUA6stzbfdIB24qZGkhMvfGaUkrL8FQb/+Qc+Z3xzw8bONMT5LEfvZqZQPokslUGKNtPG0PIi2FxiKdyAuia0pjY+vXgg57sBfdy6L+84iqv/Ey2Lg1cEL45SYcWk0tS0MF798Qy7zW1lLMj/zOP87oyk+Xu0y8fWOoDbS4wAkb/bOi4au99rNzhEYA0AypQiGYu400tVpve677Y85RKCLBRDqC32DGh7BSL9Q+Iv6Xnw3yUZilAJlzHPPIcDp6Oc4sik6mGO2Bjne/stvwFC4lxLkj9ZdXUY/dQj+CVrykgm866zcmJPx+O6CNlb0yxET28dp8DfL/3FgtmT43+4/jjxPCDqRxS+jvUp6azS6gpBPHnsjH7YsfqBVqVDfBAcky2YEzRBV8jkEYQ3sTap1s6QgrQbBubed4UDb9MXHemQ6Sn5zhEw2gfnH92FT5+yKI29zF580e8k1Tjk9y4kfeVyOSCHzxB6ROuUdmWrGrCDqeIw1rGwadmRUCrNSkPsgxYgsTq3R99GX1y4pAlcpMJA1uNTGEhhXQoZOPPSBAMxUrXvAIeKSDibBs4X7J6kVO+/hg9SDhszOzXJO2ersO9FcKH79sZP4T7V0QW94V4j6tHnbjfo=
