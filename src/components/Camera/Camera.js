@@ -76,7 +76,7 @@ const Camera = ({
     setIsUploading(false)
     if (data.status === 200) {
       setImages([...images, data.data.secure_url])
-      discardImage()
+      setCapturedImage(null)
     } else {
       setError('Error uploading an image...')
     }

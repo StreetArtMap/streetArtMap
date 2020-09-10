@@ -1,6 +1,6 @@
 import React from 'react'
 import './ArtDetails.css'
-import { FaHeart, FaRegHeart, FaMapMarked, FaCheck } from 'react-icons/fa'
+import { FaHeart, FaRegHeart, FaMapMarked } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 

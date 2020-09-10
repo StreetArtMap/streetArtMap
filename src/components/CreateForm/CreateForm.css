@@ -2,12 +2,16 @@
   display: grid;
   margin-bottom: 20px;
   grid-template: auto / repeat(2, 1fr);
+  grid-gap: 5px;
   width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
+  grid-auto-rows: 1fr;
 }
 
 .form-image-wrapper {
   position: relative;
   border-radius: 7px;
+  height: 180px;
 }
 
 .image-delete-btn {
@@ -21,6 +25,7 @@
 
 .form-image {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   padding: 5px;
   box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.03);
