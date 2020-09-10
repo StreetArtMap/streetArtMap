@@ -19,41 +19,46 @@ const CameraPage = () => {
   !isUploading && (document.body.style.overflow = 'scroll')
 
   return (
-    <section className='camera-container'>
-      {isSupported &&
-        !postImage &&
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        ) && (
-          <Camera
+    <>
+      {!postImage && (
+        <section className='camera-container'>
+          {isSupported &&
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+              navigator.userAgent
+            ) && (
+              <Camera
+                setImages={setImages}
+                images={images}
+                setIsSupported={setIsSupported}
+                setPostImage={setPostImage}
+                isUploading={isUploading}
+                setIsUploading={setIsUploading}
+                setIsSupportedError={setIsSupportedError}
+                setError={setError}
+              />
+            )}
+
+          <ImageUpload
             setImages={setImages}
             images={images}
-            setIsSupported={setIsSupported}
             setPostImage={setPostImage}
             isUploading={isUploading}
             setIsUploading={setIsUploading}
-            setIsSupportedError={setIsSupportedError}
             setError={setError}
           />
-        )}
-      {!postImage && (
-        <ImageUpload
-          setImages={setImages}
-          images={images}
-          setPostImage={setPostImage}
-          isUploading={isUploading}
-          setIsUploading={setIsUploading}
-          setError={setError}
-        />
+        </section>
       )}
       {postImage && (
-        <CreateForm
-          images={images}
-          setPostImage={setPostImage}
-          setImages={setImages}
-          setError={setError}
-        />
+        <section className='form-container'>
+          <CreateForm
+            images={images}
+            setPostImage={setPostImage}
+            setImages={setImages}
+            setError={setError}
+          />
+        </section>
       )}
+
       {isUploading && <LoadingSpinner asOverlay />}
       {(isSupportedError || error) && (
         <Modal show={true}>
@@ -72,7 +77,7 @@ const CameraPage = () => {
           </Button>
         </Modal>
       )}
-    </section>
+    </>
   )
 }
 

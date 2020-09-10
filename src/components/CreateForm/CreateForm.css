@@ -84,3 +84,7 @@
 .error-message {
   color: var(--error);
 }
+
+.btn-icon {
+  padding-left: 3px;
+}

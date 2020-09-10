@@ -202,7 +202,6 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
         <section onClick={removeImageHandler}>
           <TiDelete
             id={image}
-            onClick={removeImageHandler}
             className='image-delete-btn'
           />
         </section>
@@ -231,7 +230,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
         <p className='no-images-error'>Please add at least one photo</p>
       )}
       <Button onClick={() => setPostImage(false)}>
-        ADD MORE PHOTOS <ImCamera />
+        ADD MORE PHOTOS <ImCamera className='btn-icon' />
       </Button>
       <form onSubmit={postArtHandler} className='create-art-form'>
         <Input
@@ -317,7 +316,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
             <section className='form-btn-wrapper my-location-btn'>
               <Button onClick={getCurrentLocationHandler}>
                 my location
-                <FaMapMarkerAlt />
+                <FaMapMarkerAlt className='btn-icon' />
               </Button>
             </section>
           </>
@@ -331,7 +330,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
             <section className='form-btn-wrapper address-btn'>
               <Button onClick={toggleAddressOrLocationHandler}>
                 enter address
-                <FaMapMarkerAlt />
+                <FaMapMarkerAlt className='btn-icon' />
               </Button>
             </section>
           </>
