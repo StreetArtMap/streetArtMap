@@ -1,29 +1,36 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 import './MapWithNavigation.css'
 import style from './mapWithNavigationStyle'
-import MOCK_DATA from '../../MOCK_DATA'
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY
 
 class MapWithNavigation extends React.Component {
+  constructor(props) {
+    super(props)
+  }
   componentDidMount() {
+    const arts = this.props.arts.slice(0, 10)
+
     const map = new mapboxgl.Map({
       container: this.mapWrapper,
       style: 'mapbox://styles/mapbox/streets-v10',
-      center: [MOCK_DATA[0].longitude, MOCK_DATA[0].latitude],
+      center: [+arts[2].longitude, +arts[2].latitude],
       zoom: 10,
     })
 
     map.on('load', function () {
-      directions.setOrigin([MOCK_DATA[0].longitude, MOCK_DATA[0].latitude])
-      directions.addWaypoint(0, [MOCK_DATA[1].longitude, MOCK_DATA[2].latitude])
-      directions.addWaypoint(1, [MOCK_DATA[2].longitude, MOCK_DATA[2].latitude])
-      directions.addWaypoint(2, [-94.676392, 39.106667])
-      directions.addWaypoint(2, [-106.50573, 31.773088])
-      directions.setDestination([MOCK_DATA[0].longitude, MOCK_DATA[0].latitude])
+      directions.setOrigin([+arts[2].longitude, +arts[2].latitude])
+      arts.forEach((art) => {
+        directions.addWaypoint(arts.indexOf(art), [
+          +art.longitude,
+          +art.latitude,
+        ])
+      })
+      directions.setDestination([+arts[9].longitude, +arts[9].latitude])
     })
 
     const directions = new MapboxDirections({
@@ -51,4 +58,9 @@ class MapWithNavigation extends React.Component {
     )
   }
 }
-export default MapWithNavigation
+
+export const mapState = (state) => ({
+  arts: state.arts,
+})
+
+export default connect(mapState)(MapWithNavigation)

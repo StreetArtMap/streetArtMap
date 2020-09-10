@@ -28,3 +28,7 @@
   padding: 3px;
   font-size: 1.2rem;
 }
+
+.art-icon {
+  cursor: pointer;
+}

@@ -14,7 +14,7 @@ const ProfilePage = () => {
       src={art.images[0] || DEFAULT_IMG_URL}
       alt='street art'
       onError={addDefaultImageSrc}
-      className="art-tile"
+      className='art-tile'
     />
   ))
 

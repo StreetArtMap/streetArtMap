@@ -3,7 +3,13 @@ import Button from '../../UIComponents/Button/Button'
 import './ImageUpload.css'
 import { CLOUDINARY_ENDPOINT } from '../../constants'
 
-const ImageUpload = ({ setImages, images, setPostImage, setIsUploading }) => {
+const ImageUpload = ({
+  setImages,
+  images,
+  setPostImage,
+  setIsUploading,
+  setError,
+}) => {
   const [isImageSelected, setIsImageSelected] = useState(false)
   const [imageSelected, setImageSelected] = useState(null)
 
@@ -26,9 +32,9 @@ const ImageUpload = ({ setImages, images, setPostImage, setIsUploading }) => {
         setPostImage(true)
         setIsUploading(false)
       })
-      .catch((err) => {
+      .catch((error) => {
         setIsUploading(false)
-        console.log(err)
+        setError('Error uploading an image...')
       })
   }
 
@@ -44,6 +50,7 @@ const ImageUpload = ({ setImages, images, setPostImage, setIsUploading }) => {
             setPostImage(true)
             setImages([result.info.secure_url, ...images])
           }
+          error && setError('Error uploading an image...')
         }
       )
       .open()

@@ -7,7 +7,7 @@ import ImageCarousel from '../ImageCarousel/ImageCarousel'
 import { FaHeart, FaRegHeart, FaSearch, FaRoute } from 'react-icons/fa'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 
-const MapWithMarkers = ({ setRoute, formMap, zoom, lat, lng }) => {
+const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
   const [selectedArt, setSelectedArt] = useState(null)
   const [myLocation, setMyLocation] = useState({
     latitude: 39.744137,
@@ -102,7 +102,7 @@ const MapWithMarkers = ({ setRoute, formMap, zoom, lat, lng }) => {
 
   return (
     <section className='markers-map-container'>
-      {!formMap && (
+      {!formMap && !paintingMap && (
         <section className='toggle-maps-btn' onClick={() => setRoute(true)}>
           <FaRoute />
           <p className='route'>routes</p>
