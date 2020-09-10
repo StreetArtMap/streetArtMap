@@ -98,6 +98,7 @@ const CreateForm = ({ images, setPostImage, setImages, addData, setError }) => {
       addData(parsedData)
       setIsArtUploaded(true)
     }
+  //eslint-disable-next-line
   }, [data])
   isLoading && (document.body.style.overflow = 'hidden')
   !isLoading && (document.body.style.overflow = 'scroll')
@@ -138,6 +139,7 @@ const CreateForm = ({ images, setPostImage, setImages, addData, setError }) => {
 
   const removeImageHandler = (e) => {
     e.preventDefault()
+    //eslint-disable-next-line
     const newImages = images.filter((image) => {
       if (image !== e.target.id && image !== undefined) {
         return image

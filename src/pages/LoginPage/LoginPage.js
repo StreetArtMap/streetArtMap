@@ -9,9 +9,8 @@ import './LoginPage.css'
 import PropTypes from 'prop-types'
 
 const LoginPage = ({ setIsLoggedIn, addData }) => {
-  // const { setIsLoggedIn, addData } = props
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [, setUsername] = useState('')
+  const [, setPassword] = useState('')
   const [artData, setArtData] = useState([])
   const ART_FETCH = gql`
     query {

@@ -24,6 +24,7 @@ function useDocumentScrollThrottled(callback) {
 
     return () =>
       window.removeEventListener('scroll', handleDocumentScrollThrottled)
+  //eslint-disable-next-line
   }, [])
 }
 

@@ -20,7 +20,7 @@ const ExplorePage = () => {
   }, [selectedId])
 
   const mappedArts = sortedArts.map((art) => (
-    <ArtContainer art={art} key={uuidv4()} imageLink={true}/>
+    <ArtContainer art={art} key={uuidv4()} imageLink={true} />
   ))
 
   return (

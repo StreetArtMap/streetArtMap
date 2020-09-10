@@ -41,6 +41,7 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
 
   useEffect(() => {
     getLocation()
+    //eslint-disable-next-line
   }, [myLocation])
 
   useEffect(() => {

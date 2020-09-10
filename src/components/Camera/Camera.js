@@ -29,6 +29,7 @@ const Camera = ({
       setIsSupported(false)
       setIsSupportedError(true)
     })
+    //eslint-disable-next-line
   }, [])
 
   useEffect(() => {
