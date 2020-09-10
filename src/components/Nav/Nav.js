@@ -39,7 +39,7 @@ const Nav = () => {
           to='/explore'
           className='nav-link'
           onClick={() => {
-            dispatch(selectArt(null))
+            dispatch(selectArt(''))
             window.scrollTo(0, 0)
           }}
         >
@@ -52,7 +52,7 @@ const Nav = () => {
           to='/map'
           className='nav-link'
           onClick={() => {
-            dispatch(selectArt(null))
+            dispatch(selectArt(''))
             window.scrollTo(0, 0)
           }}
         >
@@ -65,7 +65,7 @@ const Nav = () => {
           to='/create'
           className='nav-link'
           onClick={() => {
-            dispatch(selectArt(null))
+            dispatch(selectArt(''))
             window.scrollTo(0, 0)
           }}
         >
@@ -78,7 +78,7 @@ const Nav = () => {
           to='/profile'
           className='nav-link'
           onClick={() => {
-            dispatch(selectArt(null))
+            dispatch(selectArt(''))
             window.scrollTo(0, 0)
           }}
         >

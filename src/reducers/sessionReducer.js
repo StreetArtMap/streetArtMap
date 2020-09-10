@@ -1,5 +1,5 @@
 const initialSessionState = {
-  selectedArt: null,
+  selectedArt: '',
 }
 
 export const session = (state = initialSessionState, action) => {

@@ -1,9 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import './ProfilePage.css'
-import '../../variables.css'
-import { FaBookOpen, FaBookmark } from 'react-icons/fa'
 import { DEFAULT_IMG_URL, PROFILE_IMG_PLACEHOLDER } from '../../constants'
+import { FaBookOpen, FaBookmark } from 'react-icons/fa'
+import './ProfilePage.css'
 
 const ProfilePage = () => {
   const addDefaultImageSrc = (e) => {

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Webcam } from './webcam'
-import './Camera.css'
 import axios from 'axios'
+import { Webcam } from './webcam'
 import Button from '../../UIComponents/Button/Button'
 import { CLOUDINARY_ENDPOINT } from '../../constants'
+import './Camera.css'
 
 const Camera = ({
   offline,

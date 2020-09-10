@@ -1,7 +1,7 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
 import ArtDetails from '../ArtDetails/ArtDetails'
-import { useSelector } from 'react-redux'
 import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
 import './PaintingCard.css'
 

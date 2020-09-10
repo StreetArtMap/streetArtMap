@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Route,
-  Switch,
-} from 'react-router-dom'
-import './App.css'
+import { Route, Switch } from 'react-router-dom'
 import Layout from '../../UIComponents/Layout/Layout'
 import LoginPage from '../../pages/LoginPage/LoginPage'
 import ExplorePage from '../../pages/ExplorePage/ExplorePage'
@@ -11,6 +7,7 @@ import MapPage from '../../pages/MapPage/MapPage'
 import CameraPage from '../../pages/CameraPage/CameraPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 import PaintingCard from '../PaintingCard/PaintingCard'
+import './App.css'
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
