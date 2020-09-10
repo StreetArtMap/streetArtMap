@@ -4,7 +4,6 @@ import './ProfilePage.css'
 import '../../variables.css'
 import { FaBookOpen, FaBookmark } from 'react-icons/fa'
 import { DEFAULT_IMG_URL, PROFILE_IMG_PLACEHOLDER } from '../../constants'
-import PaintingCard from '../../components/PaintingCard/PaintingCard'
 
 const ProfilePage = () => {
   const addDefaultImageSrc = (e) => {
@@ -44,7 +43,6 @@ const ProfilePage = () => {
         </section>
       </section>
       <section className='photo-container'>{arts}</section>
-      <PaintingCard />
     </section>
   )
 }
