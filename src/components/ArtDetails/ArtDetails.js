@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useMutation, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
-import { selectArt } from '../../actions/userAction'
+import {
+  selectArt,
+  toggleFavorite,
+  toggleVisited,
+} from '../../actions/userAction'
 import { FaHeart, FaRegHeart, FaMapMarked } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
@@ -32,16 +36,24 @@ const ArtDetails = ({
       }
     }
   `
-  const [favoriteStreetArt, { data, loading, error }] = useMutation(FAVORITE_ART)
+  const [favoriteStreetArt, { data }] = useMutation(FAVORITE_ART)
 
   const dispatch = useDispatch()
 
-  const toggleFavorite = (e) => {
+  useEffect(() => {
+    if (data && data.favoriteStreetArt) {
+      console.log(data.favoriteStreetArt)
+      dispatch(toggleFavorite(data.favoriteStreetArt.id))
+    }
+    //eslint-disable-next-line
+  }, [data])
+
+  const toggleFavoriteHandler = (e) => {
     e.preventDefault()
     favoriteStreetArt({
       variables: {
         streetArtId: +id,
-        favorite: true,
+        favorite: !favorite,
       },
     })
   }
@@ -50,9 +62,9 @@ const ArtDetails = ({
     <section className='art-details-container'>
       <section className='art-icons-wrapper'>
         {favorite ? (
-          <FaHeart className='art-icon' onClick={toggleFavorite} />
+          <FaHeart className='art-icon' onClick={toggleFavoriteHandler} />
         ) : (
-          <FaRegHeart className='art-icon' onClick={toggleFavorite} />
+          <FaRegHeart className='art-icon' onClick={toggleFavoriteHandler} />
         )}
         {visited ? (
           <RiCheckboxCircleLine className='art-icon' />
