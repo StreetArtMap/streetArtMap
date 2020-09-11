@@ -30,8 +30,7 @@ const ImageCarousel = ({ images, height, id, imageLink }) => {
               id={id}
               src={image}
               alt={image}
-              height={height}
-              className='carousel-img'
+              className='carousel-img main-carousel'
               onError={addDefaultImageSrc}
               key={uuidv4()}
               onClick={() => {

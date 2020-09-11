@@ -11,3 +11,39 @@
   padding: 0;
   width: auto;
 }
+
+@media (min-width: 640px) {
+  .explore-container {
+    width: 85vw;
+  }
+}
+
+@media (min-width: 768px) {
+  .explore-container {
+    width: 80vw;
+  }
+}
+
+@media (min-width: 880px) {
+  .explore-container {
+    width: 75vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .explore-container {
+    width: 70vw;
+  }
+}
+
+@media (min-width: 1280px) {
+  .explore-container {
+    width: 65vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .explore-container {
+    width: 60vw;
+  }
+}
