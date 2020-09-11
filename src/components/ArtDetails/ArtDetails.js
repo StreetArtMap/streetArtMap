@@ -1,4 +1,5 @@
 import React from 'react'
+import { useMutation, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
 import { selectArt } from '../../actions/userAction'
 import { FaHeart, FaRegHeart, FaMapMarked } from 'react-icons/fa'
@@ -21,14 +22,37 @@ const ArtDetails = ({
     favorite,
   },
 }) => {
+  const FAVORITE_ART = gql`
+    mutation favoriteStreetAr($streetArtId: String!, $favorite: Bool!) {
+      favoriteStreetAr(
+        input: { streetArtId: $streetArtId, favorite: $favorite }
+      ) {
+        id
+        favorite
+      }
+    }
+  `
+  const [favoriteStreetAr, { data, loading, error }] = useMutation(FAVORITE_ART)
+
   const dispatch = useDispatch()
+
+  const toggleFavorite = (e) => {
+    e.preventDefault()
+    favoriteStreetAr({
+      variables: {
+        userId: 1,
+        favorite: true,
+      },
+    })
+  }
+
   return (
     <section className='art-details-container'>
       <section className='art-icons-wrapper'>
         {favorite ? (
-          <FaHeart className='art-icon' />
+          <FaHeart className='art-icon' onClick={toggleFavorite} />
         ) : (
-          <FaRegHeart className='art-icon' />
+          <FaRegHeart className='art-icon' onClick={toggleFavorite} />
         )}
         {visited ? (
           <RiCheckboxCircleLine className='art-icon' />
