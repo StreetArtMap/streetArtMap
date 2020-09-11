@@ -25,6 +25,7 @@ const ArtDetails = ({
     visited,
     favorite,
   },
+  setLoading,
 }) => {
   const dispatch = useDispatch()
   const FAVORITE_ART = gql`
@@ -37,7 +38,9 @@ const ArtDetails = ({
       }
     }
   `
-  const [favoriteStreetArt, { data }] = useMutation(FAVORITE_ART)
+  const [favoriteStreetArt, { dataF, loading, error }] = useMutation(
+    FAVORITE_ART
+  )
 
   const VISITED_ART = gql`
     mutation visitStreetArt($streetArtId: Int!, $visited: Boolean!) {
@@ -47,7 +50,7 @@ const ArtDetails = ({
       }
     }
   `
-  const [visitStreetArt, { visitedData }] = useMutation(VISITED_ART)
+  const [visitStreetArt, { data }] = useMutation(VISITED_ART)
 
   useEffect(() => {
     if (data && data.favoriteStreetArt) {
@@ -66,6 +69,7 @@ const ArtDetails = ({
 
   const toggleFavoriteHandler = (e) => {
     e.preventDefault()
+    // setLoading(true)
     favoriteStreetArt({
       variables: {
         streetArtId: +id,
