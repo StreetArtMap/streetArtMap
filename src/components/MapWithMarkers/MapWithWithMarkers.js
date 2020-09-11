@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectArt } from '../../actions/userAction'
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
 import Modal from '../../UIComponents/Modal/Modal'
@@ -10,7 +11,13 @@ import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 import './MapWithMarkers.css'
 
 const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
-  const [selectedArt, setSelectedArt] = useState(null)
+  const dispatch = useDispatch()
+
+  const selectedId = useSelector((state) => state.session.selectedArt)
+  const selectedArt = useSelector((state) =>
+    state.arts.find((art) => art.id === selectedId)
+  )
+  // const [selectedArt, setSelectedArt] = useState(null)
   const [geolocationSupported, setGeolocationSupported] = useState(true)
   const [myLocation, setMyLocation] = useState({
     latitude: 39.744137,
@@ -61,7 +68,8 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
   useEffect(() => {
     const listener = (e) => {
       if (e.key === 'Escape') {
-        setSelectedArt(null)
+        dispatch(selectArt(''))
+        // setSelectedArt(null)
       }
 
       if (
@@ -70,7 +78,8 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
         (!e.target.className.includes('active') ||
           !e.target.className.includes('active'))
       ) {
-        setSelectedArt(null)
+        dispatch(selectArt(''))
+        // setSelectedArt(null)
       }
     }
     window.addEventListener('keydown', listener)
@@ -90,7 +99,8 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
         className='art-location-icon'
         onClick={(e) => {
           e.preventDefault()
-          setSelectedArt(art)
+          dispatch(selectArt(art.id))
+          // setSelectedArt(art)
           e.target.classList.add('active')
         }}
       />
