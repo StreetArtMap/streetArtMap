@@ -54,6 +54,8 @@
 .art-location-icon {
   font-size: 2.5rem;
   color: var(--accent-dark);
+  position: absolute;
+  top: -30px;
 }
 
 .map-image-carousel-container {

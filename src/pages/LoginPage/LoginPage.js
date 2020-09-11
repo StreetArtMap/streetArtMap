@@ -46,7 +46,7 @@ const LoginPage = ({
   const { loading, error, data } = useQuery(ART_FETCH)
 
   const verifyUser = () => {
-    if (username === 'a' && password === 'a') {
+    if (username === '' && password === '') {
       setIsLoggedIn(true)
       getArt()
     } else {

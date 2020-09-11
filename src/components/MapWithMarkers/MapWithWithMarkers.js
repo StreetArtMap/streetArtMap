@@ -51,7 +51,7 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
       latitude={+art.latitude}
       longitude={+art.longitude}
       offsetLeft={-20}
-      offsetTop={-20}
+      offsetTop={-10}
     >
       <FaMapPin
         id={art.id}
