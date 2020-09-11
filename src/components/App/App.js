@@ -14,27 +14,27 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({})
 
   const routes = (
-    <Layout>
+    <Layout isLoggedIn={isLoggedIn}>
       <Switch>
         <Route path='/explore' exact>
-          <ExplorePage />
+          {!isLoggedIn ? <Redirect to="/" /> : <ExplorePage />}
         </Route>
         <Route path='/map' exact>
-          <MapPage />
+          {!isLoggedIn ? <Redirect to="/" /> : <MapPage />}
         </Route>
         <Route path='/create' exact>
-          <CameraPage />
+          {!isLoggedIn ? <Redirect to="/" /> : <CameraPage />}
         </Route>
         <Route path='/profile' exact>
-          <ProfilePage />
+          {!isLoggedIn ? <Redirect to="/" /> : <ProfilePage />}
         </Route>
         <Route path='/arts/:id' exact>
-          <PaintingCard />
+          {!isLoggedIn ? <Redirect to="/" /> : <PaintingCard />}
         </Route>
         <Route path='/' exact>
-      {isLoggedIn ? <Redirect to="/explore"/> 
-      : <LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
-    </Route>
+        {isLoggedIn ? <Redirect to="/explore"/> 
+        : <LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
+        </Route>
       </Switch>
     </Layout>
   )

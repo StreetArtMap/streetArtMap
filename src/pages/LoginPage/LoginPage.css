@@ -11,13 +11,13 @@
   justify-content: space-evenly;
   align-items: center;
   width: 90vw;
-  min-height: 80vh;
+  min-height: 90vh;
   height: auto;
   margin: 10vh 5vw;
-  border: 1px solid black;
-  border-radius: 7px;
+  /* border: 1px solid black; */
+  /* border-radius: 7px; */
   background-color: var(--extra-light);
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .user-validation {
