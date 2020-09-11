@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectArt } from '../../actions/userAction'
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
@@ -17,7 +18,7 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
   const selectedArt = useSelector((state) =>
     state.arts.find((art) => art.id === selectedId)
   )
-  // const [selectedArt, setSelectedArt] = useState(null)
+
   const [geolocationSupported, setGeolocationSupported] = useState(true)
   const [myLocation, setMyLocation] = useState({
     latitude: 39.744137,
@@ -69,7 +70,6 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
     const listener = (e) => {
       if (e.key === 'Escape') {
         dispatch(selectArt(''))
-        // setSelectedArt(null)
       }
 
       if (
@@ -79,7 +79,6 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
           !e.target.className.includes('active'))
       ) {
         dispatch(selectArt(''))
-        // setSelectedArt(null)
       }
     }
     window.addEventListener('keydown', listener)
@@ -100,7 +99,6 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
         onClick={(e) => {
           e.preventDefault()
           dispatch(selectArt(art.id))
-          // setSelectedArt(art)
           e.target.classList.add('active')
         }}
       />
@@ -156,7 +154,9 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
                 ) : (
                   <RiCheckboxBlankCircleLine className='map-art-icon' />
                 )}
-                <FaSearch className='map-art-icon' />
+                <Link to={`/arts/${selectedId}`}>
+                  <FaSearch className='map-art-icon' />
+                </Link>
               </section>
 
               <p className='map-artist-name'>{selectedArt.artist_name}</p>
