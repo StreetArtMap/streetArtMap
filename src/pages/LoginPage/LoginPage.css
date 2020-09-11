@@ -28,5 +28,9 @@
   align-items: center;
 }
 
+.credentials-error {
+  color: var(--error);
+}
+
 @media only screen and (max-width: 600px) {
 }

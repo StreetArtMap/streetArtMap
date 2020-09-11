@@ -17,7 +17,7 @@ const Input = (props) => {
   } = props
 
   const tag = !element ? (
-    <input type={type} placeholder={placeholder} {...other} />
+    <input type={type} placeholder={placeholder} onChange={onChange} {...other} />
   ) : (
     <textarea rows={rows || 3} placeholder={placeholder} {...other} />
   )
