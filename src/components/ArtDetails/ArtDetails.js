@@ -23,8 +23,8 @@ const ArtDetails = ({
   },
 }) => {
   const FAVORITE_ART = gql`
-    mutation favoriteStreetAr($streetArtId: String!, $favorite: Bool!) {
-      favoriteStreetAr(
+    mutation favoriteStreetArt($streetArtId: Int!, $favorite: Boolean!) {
+      favoriteStreetArt(
         input: { streetArtId: $streetArtId, favorite: $favorite }
       ) {
         id
@@ -32,15 +32,15 @@ const ArtDetails = ({
       }
     }
   `
-  const [favoriteStreetAr, { data, loading, error }] = useMutation(FAVORITE_ART)
+  const [favoriteStreetArt, { data, loading, error }] = useMutation(FAVORITE_ART)
 
   const dispatch = useDispatch()
 
   const toggleFavorite = (e) => {
     e.preventDefault()
-    favoriteStreetAr({
+    favoriteStreetArt({
       variables: {
-        userId: 1,
+        streetArtId: +id,
         favorite: true,
       },
     })
