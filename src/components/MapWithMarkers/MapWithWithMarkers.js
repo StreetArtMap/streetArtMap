@@ -6,10 +6,13 @@ import {
   toggleFavorite,
   toggleVisited,
 } from '../../actions/userAction'
-import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
+import ReactMapGL, {
+  Marker,
+  Popup,
+  NavigationControl,
+  GeolocateControl,
+} from 'react-map-gl'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
-import Modal from '../../UIComponents/Modal/Modal'
-import Button from '../../UIComponents/Button/Button'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
@@ -23,41 +26,13 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
     state.arts.find((art) => art.id === selectedId)
   )
 
-  const [geolocationSupported, setGeolocationSupported] = useState(true)
-  const [myLocation, setMyLocation] = useState({
-    latitude: 39.744137,
-    longitude: -104.95005,
-  })
-
   const [viewport, setViewport] = useState({
-    latitude: lat || myLocation.latitude,
-    longitude: lng || myLocation.longitude,
+    latitude: lat || 39.744137,
+    longitude: lng || -104.95005,
     zoom: zoom || 10,
     width: '100%',
     height: '100%',
   })
-
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      return navigator.geolocation.getCurrentPosition(showPosition)
-    } else {
-      setGeolocationSupported(false)
-    }
-  }
-
-  const showPosition = (position) => {
-    const location = {
-      longitude: position.coords.longitude,
-      latitude: position.coords.latitude,
-    }
-    setMyLocation(location)
-    return location
-  }
-
-  useEffect(() => {
-    getLocation()
-    //eslint-disable-next-line
-  }, [myLocation])
 
   useEffect(() => {
     selectedArt &&
@@ -90,12 +65,6 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
     </Marker>
   ))
 
-  const myMarker = (
-    <Marker latitude={myLocation.latitude} longitude={myLocation.longitude}>
-      <FaMapMarkerAlt className='my-location-icon' />
-    </Marker>
-  )
-
   return (
     <section className='markers-map-container'>
       <ReactMapGL
@@ -107,9 +76,14 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
         }}
         className='react-map-container'
       >
+        <GeolocateControl
+          className='geolocation-control'
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+          showUserLocation={true}
+        />
         <NavigationControl className='navigation-control' />
         {!formMap && markers}
-        {myMarker}
         {selectedArt && (
           <Popup
             latitude={+selectedArt.latitude}
@@ -145,14 +119,6 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
           </Popup>
         )}
       </ReactMapGL>
-      <Modal show={!geolocationSupported}>
-        <p className='modal-message error-message'>
-          Geolocation is not supported on your device...
-        </p>
-        <Button styling='padding' onClick={() => setGeolocationSupported(true)}>
-          back
-        </Button>
-      </Modal>
     </section>
   )
 }

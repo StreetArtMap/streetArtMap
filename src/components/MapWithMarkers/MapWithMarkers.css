@@ -38,6 +38,14 @@
   bottom: 15%;
 }
 
+.geolocation-control {
+  display: inline-block;
+  margin: auto;
+  position: absolute;
+  right: 3%;
+  bottom: 30%;
+}
+
 .my-location-icon {
   font-size: 2.5rem;
   color: var(--urgent);
