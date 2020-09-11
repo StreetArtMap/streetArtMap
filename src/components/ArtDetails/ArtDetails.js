@@ -26,6 +26,7 @@ const ArtDetails = ({
     favorite,
   },
 }) => {
+  const dispatch = useDispatch()
   const FAVORITE_ART = gql`
     mutation favoriteStreetArt($streetArtId: Int!, $favorite: Boolean!) {
       favoriteStreetArt(
@@ -38,12 +39,27 @@ const ArtDetails = ({
   `
   const [favoriteStreetArt, { data }] = useMutation(FAVORITE_ART)
 
-  const dispatch = useDispatch()
+  const VISITED_ART = gql`
+    mutation visitStreetArt($streetArtId: Int!, $visited: Boolean!) {
+      visitStreetArt(input: { streetArtId: $streetArtId, visited: $visited }) {
+        id
+        visited
+      }
+    }
+  `
+  const [visitStreetArt, { visitedData }] = useMutation(VISITED_ART)
 
   useEffect(() => {
     if (data && data.favoriteStreetArt) {
-      console.log(data.favoriteStreetArt)
       dispatch(toggleFavorite(data.favoriteStreetArt.id))
+    }
+    //eslint-disable-next-line
+  }, [data])
+
+  useEffect(() => {
+    if (data && data.visitStreetArt) {
+      console.log(data.visitStreetArt)
+      dispatch(toggleVisited(data.visitStreetArt.id))
     }
     //eslint-disable-next-line
   }, [data])
@@ -58,6 +74,16 @@ const ArtDetails = ({
     })
   }
 
+  const toggleVisitedHandler = (e) => {
+    e.preventDefault()
+    visitStreetArt({
+      variables: {
+        streetArtId: +id,
+        visited: !visited,
+      },
+    })
+  }
+
   return (
     <section className='art-details-container'>
       <section className='art-icons-wrapper'>
@@ -67,9 +93,15 @@ const ArtDetails = ({
           <FaRegHeart className='art-icon' onClick={toggleFavoriteHandler} />
         )}
         {visited ? (
-          <RiCheckboxCircleLine className='art-icon' />
+          <RiCheckboxCircleLine
+            className='art-icon'
+            onClick={toggleVisitedHandler}
+          />
         ) : (
-          <RiCheckboxBlankCircleLine className='art-icon' />
+          <RiCheckboxBlankCircleLine
+            className='art-icon'
+            onClick={toggleVisitedHandler}
+          />
         )}
         <FaMapMarked
           className='art-icon'
