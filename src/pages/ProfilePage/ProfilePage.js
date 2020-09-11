@@ -9,12 +9,14 @@ const ProfilePage = () => {
     e.target.src = DEFAULT_IMG_URL
   }
   const arts = useSelector((state) => state.arts).map((art) => (
-    <img
-      src={art.images[0] || DEFAULT_IMG_URL}
-      alt='street art'
-      onError={addDefaultImageSrc}
-      className='art-tile'
-    />
+    <section className='photo-wrapper'>
+      <img
+        src={art.images[0] || DEFAULT_IMG_URL}
+        alt='street art'
+        onError={addDefaultImageSrc}
+        className='art-tile'
+      />
+    </section>
   ))
 
   return (
