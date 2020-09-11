@@ -9,6 +9,7 @@ import style from './mapWithNavigationStyle'
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY
 
 class MapWithNavigation extends React.Component {
+  //eslint-disable-next-line
   constructor(props) {
     super(props)
   }

@@ -17,6 +17,7 @@ const ExplorePage = () => {
       const selectedArt = sortedArts.find((art) => art.id === selectedId)
       setTargetArt(selectedArt)
     }
+  //eslint-disable-next-line
   }, [selectedId])
 
   const mappedArts = sortedArts.map((art) => (

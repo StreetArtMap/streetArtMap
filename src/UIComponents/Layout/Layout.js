@@ -2,12 +2,12 @@ import React from 'react'
 import Nav from '../../components/Nav/Nav'
 import Header from '../Header/Header'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, isLoggedIn }) => {
   return (
     <section className="layout-container">
-      <Header />
+      {isLoggedIn && <Header />}
       {children}
-      <Nav />
+      {isLoggedIn && <Nav />}
     </section>
   )
 }

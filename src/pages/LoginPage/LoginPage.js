@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { useQuery, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
 import { addData } from '../../actions/userAction'
@@ -8,10 +8,12 @@ import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
 import './LoginPage.css'
 
-const LoginPage = ({ setIsLoggedIn }) => {
+const LoginPage = ({ setIsLoggedIn, isLoggedIn, currentUser, setCurrentUser }) => {
   const dispatch = useDispatch()
-  const [, setUsername] = useState('')
-  const [, setPassword] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [credentialsError, setCredentialsError] = useState(false)
+  //eslint-disable-next-line
   const [artData, setArtData] = useState([])
   const ART_FETCH = gql`
     query {
@@ -37,6 +39,16 @@ const LoginPage = ({ setIsLoggedIn }) => {
     }
   `
   const { loading, error, data } = useQuery(ART_FETCH)
+
+  const verifyUser = () => {
+    if (username === 'Matt Example' && password === 'password') {
+      setIsLoggedIn(true)
+      getArt()
+    } else {
+      setCredentialsError(true)
+    }
+  }
+
   const getArt = () => {
     if (data) {
       const parsedData = data.streetArts.map((item) => {
@@ -48,6 +60,13 @@ const LoginPage = ({ setIsLoggedIn }) => {
       })
       dispatch(addData(parsedData))
       setArtData(parsedData)
+      setCurrentUser({
+        name: "Matt Example",
+        posts: parsedData.length,
+        location: 'Denver, CO',
+        favorites: ''
+      })
+
     } else if (loading) {
       return <p>Loading...</p>
     } else if (error) {
@@ -70,11 +89,10 @@ const LoginPage = ({ setIsLoggedIn }) => {
             type='password'
             placeholder='Password...'
           ></Input>
-          <Link to='/explore' onClick={() => setIsLoggedIn(true)}>
-            <Button onClick={() => getArt()} type='submit'>
+          {credentialsError && <p className="credentials-error">Please Enter Valid Username and Password</p>}
+          <Button onClick={() => verifyUser()}  type='submit' to={currentUser.name ? "/explore" : "/"}>
               LOG IN
-            </Button>
-          </Link>
+          </Button>
         </section>
         <p>Don't have an account?</p>
         <Button>SIGN UP</Button>

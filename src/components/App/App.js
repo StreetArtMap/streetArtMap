@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import Layout from '../../UIComponents/Layout/Layout'
 import LoginPage from '../../pages/LoginPage/LoginPage'
 import ExplorePage from '../../pages/ExplorePage/ExplorePage'
@@ -11,34 +11,37 @@ import './App.css'
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [currentUser, setCurrentUser] = useState({})
 
-  const routes = isLoggedIn ? (
-    <Layout>
+  const routes = (
+    <Layout isLoggedIn={isLoggedIn}>
       <Switch>
         <Route path='/explore' exact>
-          <ExplorePage />
+          {!isLoggedIn ? <Redirect to="/" /> : <ExplorePage />}
         </Route>
         <Route path='/map' exact>
-          <MapPage />
+          {!isLoggedIn ? <Redirect to="/" /> : <MapPage />}
         </Route>
         <Route path='/create' exact>
-          <CameraPage />
+          {!isLoggedIn ? <Redirect to="/" /> : <CameraPage />}
         </Route>
         <Route path='/profile' exact>
-          <ProfilePage />
+          {!isLoggedIn ? <Redirect to="/" /> : <ProfilePage />}
         </Route>
         <Route path='/arts/:id' exact>
-          <PaintingCard />
+          {!isLoggedIn ? <Redirect to="/" /> : <PaintingCard />}
+        </Route>
+        <Route path='/' >
+        {isLoggedIn ? <Redirect to="/explore"/> 
+        : <LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
         </Route>
       </Switch>
     </Layout>
-  ) : (
-    <Route path='/' exact>
-      <LoginPage setIsLoggedIn={setIsLoggedIn} />
-    </Route>
   )
 
-  return <section className='app-container'>{routes}</section>
+  return (
+    <section className='app-container'>{routes}</section>
+  )
 }
 
 export default App
