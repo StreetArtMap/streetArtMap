@@ -61,7 +61,6 @@ const ArtDetails = ({
 
   useEffect(() => {
     if (data && data.visitStreetArt) {
-      console.log(data.visitStreetArt)
       dispatch(toggleVisited(data.visitStreetArt.id))
     }
     //eslint-disable-next-line
@@ -86,6 +85,8 @@ const ArtDetails = ({
         visited: !visited,
       },
     })
+    // ISSUE: DELETE AFTER USEMUTATION IS COMBINED
+    dispatch(toggleVisited(id))
   }
 
   return (
