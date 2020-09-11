@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectArt } from '../../actions/userAction'
+import {
+  selectArt,
+  toggleFavorite,
+  toggleVisited,
+} from '../../actions/userAction'
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
 import Modal from '../../UIComponents/Modal/Modal'
@@ -121,18 +125,20 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
               </Link>
             </section>
             <section className='map-art-details-container'>
-              <section className='map-art-icons-wrapper'>
-                {selectedArt.favorite ? (
-                  <FaHeart className='map-art-icon' />
-                ) : (
-                  <FaRegHeart className='map-art-icon' />
-                )}
-                {selectedArt.visited ? (
-                  <RiCheckboxCircleLine className='map-art-icon' />
-                ) : (
-                  <RiCheckboxBlankCircleLine className='map-art-icon' />
-                )}
-              </section>
+              {!paintingMap && (
+                <section className='map-art-icons-wrapper'>
+                  {selectedArt.favorite ? (
+                    <FaHeart className='map-art-icon' />
+                  ) : (
+                    <FaRegHeart className='map-art-icon' />
+                  )}
+                  {selectedArt.visited ? (
+                    <RiCheckboxCircleLine className='map-art-icon' />
+                  ) : (
+                    <RiCheckboxBlankCircleLine className='map-art-icon' />
+                  )}
+                </section>
+              )}
               <p className='map-artist-name'>{selectedArt.artist_name}</p>
             </section>
           </Popup>
