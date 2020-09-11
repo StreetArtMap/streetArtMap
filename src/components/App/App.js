@@ -17,31 +17,37 @@ const App = () => {
     <Layout isLoggedIn={isLoggedIn}>
       <Switch>
         <Route path='/explore' exact>
-          {!isLoggedIn ? <Redirect to="/" /> : <ExplorePage />}
+          {!isLoggedIn ? <Redirect to='/' /> : <ExplorePage />}
         </Route>
         <Route path='/map' exact>
-          {!isLoggedIn ? <Redirect to="/" /> : <MapPage />}
+          {!isLoggedIn ? <Redirect to='/' /> : <MapPage />}
         </Route>
         <Route path='/create' exact>
-          {!isLoggedIn ? <Redirect to="/" /> : <CameraPage />}
+          {!isLoggedIn ? <Redirect to='/' /> : <CameraPage />}
         </Route>
         <Route path='/profile' exact>
-          {!isLoggedIn ? <Redirect to="/" /> : <ProfilePage />}
+          {!isLoggedIn ? <Redirect to='/' /> : <ProfilePage />}
         </Route>
         <Route path='/arts/:id' exact>
-          {!isLoggedIn ? <Redirect to="/" /> : <PaintingCard />}
+          {!isLoggedIn ? <Redirect to='/' /> : <PaintingCard />}
         </Route>
-        <Route path='/' >
-        {isLoggedIn ? <Redirect to="/explore"/> 
-        : <LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
+        <Route path='/'>
+          {isLoggedIn ? (
+            <Redirect to='/explore' />
+          ) : (
+            <LoginPage
+              setIsLoggedIn={setIsLoggedIn}
+              isLoggedIn={isLoggedIn}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
+          )}
         </Route>
       </Switch>
     </Layout>
   )
 
-  return (
-    <section className='app-container'>{routes}</section>
-  )
+  return <section className='app-container'>{routes}</section>
 }
 
 export default App

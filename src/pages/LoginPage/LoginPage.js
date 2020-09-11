@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { useQuery, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
-import { addData } from '../../actions/userAction'
+import { addData, login } from '../../actions/userAction'
 import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
 import './LoginPage.css'
@@ -46,8 +46,9 @@ const LoginPage = ({
   const { loading, error, data } = useQuery(ART_FETCH)
 
   const verifyUser = () => {
-    if (username === '' && password === '') {
+    if (username === 'a' && password === 'a') {
       setIsLoggedIn(true)
+      dispatch(login(username))
       getArt()
     } else {
       setCredentialsError(true)
