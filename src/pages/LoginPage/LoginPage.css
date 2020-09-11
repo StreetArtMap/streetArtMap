@@ -56,6 +56,8 @@
   .login-container {
     width: 40vw;
   }
+}
+
 .credentials-error {
   color: var(--error);
 }

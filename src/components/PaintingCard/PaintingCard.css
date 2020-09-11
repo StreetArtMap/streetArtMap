@@ -6,12 +6,9 @@
   margin: auto;
 }
 
-.painting-card-map {
+.painting-card-map-container {
+  height: 50vh;
   width: 100%;
-}
-
-.map-container {
-  height: 100vh;
 }
 
 @media (min-width: 640px) {
