@@ -5,7 +5,7 @@ import Header from '../Header/Header'
 const Layout = ({ children, isLoggedIn }) => {
   return (
     <section className="layout-container">
-      <Header />
+      {isLoggedIn && <Header />}
       {children}
       {isLoggedIn && <Nav />}
     </section>

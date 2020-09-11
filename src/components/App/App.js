@@ -31,19 +31,13 @@ const App = () => {
         <Route path='/arts/:id' exact>
           {!isLoggedIn ? <Redirect to="/" /> : <PaintingCard />}
         </Route>
-        <Route path='/' exact>
+        <Route path='/' >
         {isLoggedIn ? <Redirect to="/explore"/> 
         : <LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
         </Route>
       </Switch>
     </Layout>
   )
-  //  : (
-  //   <Route path='/' exact>
-  //     {isLoggedIn ? <Redirect to="/explore"/> 
-  //     : <LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} />}
-  //   </Route>
-  // )
 
   return (
     <section className='app-container'>{routes}</section>
