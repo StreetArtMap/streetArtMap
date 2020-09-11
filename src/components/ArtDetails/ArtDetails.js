@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react'
 import { useMutation, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
-import {
-  selectArt,
-  toggleFavorite,
-  toggleVisited,
-} from '../../actions/userAction'
-import { FaHeart, FaRegHeart, FaMapMarked } from 'react-icons/fa'
+import { toggleFavorite, toggleVisited } from '../../actions/userAction'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 import './ArtDetails.css'
@@ -108,10 +104,6 @@ const ArtDetails = ({
             onClick={toggleVisitedHandler}
           />
         )}
-        <FaMapMarked
-          className='art-icon'
-          onClick={() => dispatch(selectArt(id))}
-        />
       </section>
       {artName && <p className='artist-name'>{artName}</p>}
       {artistName && <p className='artist-name'>{artistName}</p>}
