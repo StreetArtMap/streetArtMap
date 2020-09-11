@@ -76,3 +76,11 @@
   font-size: 3rem;
   padding: 10px;
 }
+
+.mapboxgl-popup-close-button {
+  z-index: 10;
+  font-size: 4rem;
+  color: var(--extra-light);
+  line-height: 0.5;
+  padding: 10px;
+}

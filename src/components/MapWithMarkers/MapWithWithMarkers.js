@@ -78,7 +78,7 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
         (!e.target.className.includes('active') ||
           !e.target.className.includes('active'))
       ) {
-        dispatch(selectArt(''))
+        // dispatch(selectArt(''))
       }
     }
     window.addEventListener('keydown', listener)
@@ -136,11 +136,14 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
             latitude={+selectedArt.latitude}
             longitude={+selectedArt.longitude}
             closeOnClick={false}
-            closeButton={false}
+            closeButton={true}
+            onClose={() => dispatch(selectArt(''))}
             isOpen={true}
           >
             <section className='map-image-carousel-container'>
-              <ImageCarousel images={selectedArt.images} height={200} />
+              <Link to={`/arts/${selectedId}`}>
+                <ImageCarousel images={selectedArt.images} height={200} />
+              </Link>
             </section>
             <section className='map-art-details-container'>
               <section className='map-art-icons-wrapper'>
@@ -154,11 +157,7 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
                 ) : (
                   <RiCheckboxBlankCircleLine className='map-art-icon' />
                 )}
-                <Link to={`/arts/${selectedId}`}>
-                  <FaSearch className='map-art-icon' />
-                </Link>
               </section>
-
               <p className='map-artist-name'>{selectedArt.artist_name}</p>
             </section>
           </Popup>
