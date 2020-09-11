@@ -38,7 +38,7 @@ const ArtDetails = ({
       }
     }
   `
-  const [favoriteStreetArt, { dataF, loading, error }] = useMutation(
+  const [favoriteStreetArt, { data, loading, error }] = useMutation(
     FAVORITE_ART
   )
 
@@ -50,7 +50,7 @@ const ArtDetails = ({
       }
     }
   `
-  const [visitStreetArt, { data }] = useMutation(VISITED_ART)
+  const [visitStreetArt, { CHANGENAME }] = useMutation(VISITED_ART)
 
   useEffect(() => {
     if (data && data.favoriteStreetArt) {

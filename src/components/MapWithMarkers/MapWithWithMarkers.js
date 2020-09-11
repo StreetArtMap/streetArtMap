@@ -105,12 +105,12 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
 
   return (
     <section className='markers-map-container'>
-      {!formMap && !paintingMap && (
+      {/* {!formMap && !paintingMap && (
         <section className='toggle-maps-btn' onClick={() => setRoute(true)}>
           <FaRoute />
           <p className='route'>routes</p>
         </section>
-      )}
+      )} */}
       <ReactMapGL
         {...viewport}
         mapStyle='mapbox://styles/edignot/ckemah34j0amm19oe5hjne20p'
