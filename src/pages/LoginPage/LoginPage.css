@@ -17,7 +17,7 @@
   margin: 10vh auto;
   border-radius: 7px;
   background-color: var(--extra-light);
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .user-validation {
@@ -56,4 +56,6 @@
   .login-container {
     width: 40vw;
   }
+.credentials-error {
+  color: var(--error);
 }
