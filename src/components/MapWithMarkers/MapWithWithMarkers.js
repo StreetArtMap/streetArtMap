@@ -6,12 +6,12 @@ import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
 import Modal from '../../UIComponents/Modal/Modal'
 import Button from '../../UIComponents/Button/Button'
-import { FaHeart, FaRegHeart, FaSearch, FaRoute } from 'react-icons/fa'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 import './MapWithMarkers.css'
 
-const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
+const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
   const dispatch = useDispatch()
 
   const selectedId = useSelector((state) => state.session.selectedArt)
@@ -94,12 +94,6 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
 
   return (
     <section className='markers-map-container'>
-      {/* {!formMap && !paintingMap && (
-        <section className='toggle-maps-btn' onClick={() => setRoute(true)}>
-          <FaRoute />
-          <p className='route'>routes</p>
-        </section>
-      )} */}
       <ReactMapGL
         {...viewport}
         mapStyle='mapbox://styles/edignot/ckemah34j0amm19oe5hjne20p'
@@ -117,7 +111,7 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
             latitude={+selectedArt.latitude}
             longitude={+selectedArt.longitude}
             closeOnClick={false}
-            closeButton={true}
+            closeButton={!paintingMap && true}
             onClose={() => dispatch(selectArt(''))}
             isOpen={true}
           >
