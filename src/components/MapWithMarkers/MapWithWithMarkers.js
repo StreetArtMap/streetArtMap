@@ -66,25 +66,6 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
       })
   }, [selectedArt])
 
-  useEffect(() => {
-    const listener = (e) => {
-      if (e.key === 'Escape') {
-        dispatch(selectArt(''))
-      }
-
-      if (
-        e.target.className &&
-        typeof e.target.className.includes !== 'undefined' &&
-        (!e.target.className.includes('active') ||
-          !e.target.className.includes('active'))
-      ) {
-        // dispatch(selectArt(''))
-      }
-    }
-    window.addEventListener('keydown', listener)
-    window.addEventListener('click', listener)
-  }, [])
-
   const markers = useSelector((state) => state.arts).map((art) => (
     <Marker
       key={art.id}
