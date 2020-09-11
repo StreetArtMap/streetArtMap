@@ -41,9 +41,3 @@
     width: 65vw;
   }
 }
-
-@media (min-width: 1024px) {
-  .explore-container {
-    width: 60vw;
-  }
-}
