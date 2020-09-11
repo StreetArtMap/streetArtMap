@@ -12,7 +12,7 @@ const PaintingCard = () => {
   )
   return (
     <section className='painting-card-container'>
-      <ImageCarousel images={art.images} height={500} />
+      <ImageCarousel images={art.images} paintingCardCarousel={true} />
       <ArtDetails art={art} />
       <section className='map-container'>
         <MapWithMarkers

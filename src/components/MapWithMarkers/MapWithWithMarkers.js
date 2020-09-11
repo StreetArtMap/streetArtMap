@@ -123,7 +123,7 @@ const MapWithMarkers = ({ setRoute, formMap, paintingMap, zoom, lat, lng }) => {
           >
             <section className='map-image-carousel-container'>
               <Link to={`/arts/${selectedId}`}>
-                <ImageCarousel images={selectedArt.images} height={200} />
+                <ImageCarousel images={selectedArt.images} mapCarousel={true} />
               </Link>
             </section>
             <section className='map-art-details-container'>

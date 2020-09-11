@@ -9,7 +9,6 @@ const ArtContainer = ({ art, imageLink, setLoading }) => {
       <ImageCarousel
         images={art.images}
         id={art.id}
-        height={300}
         imageLink={imageLink}
       />
       <ArtDetails art={art} setLoading={setLoading} />

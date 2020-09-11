@@ -9,7 +9,14 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './ImageCarousel.css'
 
-const ImageCarousel = ({ images, height, id, imageLink }) => {
+const ImageCarousel = ({
+  images,
+  height,
+  id,
+  imageLink,
+  mapCarousel,
+  paintingCardCarousel,
+}) => {
   const dispatch = useDispatch()
   const addDefaultImageSrc = (e) => {
     e.target.src = DEFAULT_IMG_URL
@@ -30,7 +37,7 @@ const ImageCarousel = ({ images, height, id, imageLink }) => {
               id={id}
               src={image}
               alt={image}
-              className='carousel-img main-carousel'
+              className={`carousel-img main-carousel`}
               onError={addDefaultImageSrc}
               key={uuidv4()}
               onClick={() => {
@@ -48,7 +55,9 @@ const ImageCarousel = ({ images, height, id, imageLink }) => {
             src={image}
             alt={image}
             height={height}
-            className='carousel-img'
+            className={`carousel-img ${mapCarousel && 'map-carousel'} ${
+              paintingCardCarousel && 'painting-card-carousel'
+            }`}
             onError={addDefaultImageSrc}
             key={uuidv4()}
           />

@@ -8,9 +8,20 @@
   height: 35vh;
 }
 
+.map-carousel {
+  height: 200px;
+}
+
+.painting-card-carousel {
+  height: 45vh;
+}
+
 @media (min-width: 640px) {
   .main-carousel {
     height: 42vh;
+  }
+  .painting-card-carousel {
+    height: 52vh;
   }
 }
 
@@ -18,17 +29,26 @@
   .main-carousel {
     height: 49vh;
   }
+  .painting-card-carousel {
+    height: 59vh;
+  }
 }
 
 @media (min-width: 880px) {
   .main-carousel {
     height: 56vh;
   }
+  .painting-card-carousel {
+    height: 66vh;
+  }
 }
 
 @media (min-width: 1024px) {
   .main-carousel {
     height: 63vh;
+  }
+  .painting-card-carousel {
+    height: 73vh;
   }
 }
 

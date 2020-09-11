@@ -7,9 +7,39 @@
 }
 
 .painting-card-map {
-  width: 100;
+  width: 100%;
 }
 
 .map-container {
   height: 100vh;
+}
+
+@media (min-width: 640px) {
+  .painting-card-container {
+    width: 85vw;
+  }
+}
+
+@media (min-width: 768px) {
+  .painting-card-container {
+    width: 80vw;
+  }
+}
+
+@media (min-width: 880px) {
+  .painting-card-container {
+    width: 75vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .painting-card-container {
+    width: 70vw;
+  }
+}
+
+@media (min-width: 1280px) {
+  .painting-card-container {
+    width: 65vw;
+  }
 }
