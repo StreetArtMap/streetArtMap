@@ -66,12 +66,12 @@ const LoginPage = ({
       })
       dispatch(addData(parsedData))
       setArtData(parsedData)
-      setCurrentUser({
-        name: 'Matt Example',
-        posts: parsedData.length,
-        location: 'Denver, CO',
-        favorites: '',
-      })
+      // setCurrentUser({
+      //   name: 'Matt Example',
+      //   posts: parsedData.length,
+      //   location: 'Denver, CO',
+      //   favorites: '',
+      // })
     } else if (loading) {
       return <p>Loading...</p>
     } else if (error) {
@@ -118,4 +118,4 @@ LoginPage.propTypes = {
   setIsLoggedIn: PropTypes.func,
 }
 
-export default withRouter(LoginPage)
+export default LoginPage

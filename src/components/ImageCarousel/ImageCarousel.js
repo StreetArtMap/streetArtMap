@@ -54,6 +54,7 @@ const ImageCarousel = ({
             src={image}
             alt={image}
             height={height}
+            key={uuidv4()}
             className={`carousel-img ${mapCarousel && 'map-carousel'} ${
               paintingCardCarousel && 'painting-card-carousel'
             }`}

@@ -4,18 +4,22 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { selectArt } from '../../actions/userAction'
 import { DEFAULT_IMG_URL, PROFILE_IMG_PLACEHOLDER } from '../../constants'
+import Modal from '../../UIComponents/Modal/Modal'
+import Button from '../../UIComponents/Button/Button'
 import { FaBookOpen, FaHeart, FaRunning } from 'react-icons/fa'
+import { v4 as uuidv4 } from 'uuid'
 import './ProfilePage.css'
 
 const ProfilePage = () => {
   const [showFavorites, setShowFavorites] = useState(false)
+  const [displayModal, setDisplayModal] = useState(false)
   const dispatch = useDispatch()
   const addDefaultImageSrc = (e) => {
     e.target.src = DEFAULT_IMG_URL
   }
   const username = useSelector(state => state.user.name)
   const arts = useSelector((state) => state.arts).map((art) => (
-    <section className='photo-wrapper'>
+    <section className='photo-wrapper' key={uuidv4()}>
       <Link to={`/arts/${art.id}`}>
         <img
           src={art.images[0] || DEFAULT_IMG_URL}
@@ -36,16 +40,15 @@ const ProfilePage = () => {
   }
 
   const handleFavorites = () => {
-    debugger
     setShowFavorites(true)
   }
 
   const handleShowTours = () => {
-
+    setDisplayModal(true)
   }
   const favoritedArts = useSelector((state) => state.arts).filter(art => art.favorite).map((art) => {
     return (
-      <section className='photo-wrapper'>
+      <section className='photo-wrapper' key={uuidv4()}>
         <Link to={`/arts/${art.id}`}>
           <img
             src={art.images[0] || DEFAULT_IMG_URL}
@@ -89,6 +92,12 @@ const ProfilePage = () => {
         </section>
       </section>
       {showFavorites ? <section className='photo-container'>{favoritedArts}</section> : <section className='photo-container'>{arts}</section>}
+      <Modal show={displayModal}>
+        <p className="modal-message">Curated Waking Tours</p>
+        <Button styling="padding" onClick={() => setDisplayModal(false)}>
+          back
+        </Button>
+      </Modal>
     </section>
   )
 }
