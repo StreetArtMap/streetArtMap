@@ -2,7 +2,7 @@
   width: 88vw;
   min-height: 80vh;
   height: auto;
-  padding: 20vh 0;
+  padding: 8vh 0;
   margin: auto;
 }
 
@@ -13,7 +13,6 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border-top: 2px solid var(--light-medium);
   background-color: var(--light);
 }
 
