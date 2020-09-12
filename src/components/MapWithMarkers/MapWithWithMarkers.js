@@ -65,6 +65,12 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
     </Marker>
   ))
 
+  const myMarker = (
+    <Marker latitude={lat} longitude={lng}>
+      <FaMapMarkerAlt className='my-location-icon' />
+    </Marker>
+  )
+
   return (
     <section className='markers-map-container'>
       <ReactMapGL
@@ -84,6 +90,7 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
         />
         <NavigationControl className='navigation-control' />
         {!formMap && markers}
+        {formMap && lat && lng && myMarker}
         {selectedArt && (
           <Popup
             latitude={+selectedArt.latitude}
