@@ -6,7 +6,7 @@ import { selectArt } from '../../actions/userAction'
 import { DEFAULT_IMG_URL, PROFILE_IMG_PLACEHOLDER } from '../../constants'
 import Modal from '../../UIComponents/Modal/Modal'
 import Button from '../../UIComponents/Button/Button'
-import { FaBookOpen, FaHeart, FaRunning } from 'react-icons/fa'
+import { FaBookOpen, FaHeart, FaRoute } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid'
 import './ProfilePage.css'
 
@@ -79,11 +79,11 @@ const ProfilePage = () => {
           <p className='username'>{username}</p>
           <p className='user-image-count'>{arts.length} Posts</p>
           <section className='button-container'>
+            <section className='tours-button' onClick={handleShowTours}>
+              <FaRoute className='art-icon' title='tours-icon' />
+            </section>
             <section className='all-button' onClick={handleShowAll}>
               <FaBookOpen className='art-icon' title='collection-icon' />
-            </section>
-            <section className='tours-button' onClick={handleShowTours}>
-              <FaRunning className='art-icon' title='tours-icon' />
             </section>
             <section className='saved-button' onClick={handleFavorites}>
               <FaHeart className='art-icon' title='bookmark-icon' />

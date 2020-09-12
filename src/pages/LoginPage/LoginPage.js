@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
 import { useQuery, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
 import { addData, login } from '../../actions/userAction'

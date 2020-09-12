@@ -10,6 +10,8 @@ This application was bootstrapped using Create-React-App with Redux and Hooks, w
 
 [Production link](https://streetartwalk.netlify.app/)
 
+## Application Demo 
+
 ## Tech Stack
 
 - JavaScript

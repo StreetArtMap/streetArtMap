@@ -5,4 +5,4 @@ export const CLOUDINARY_ENDPOINT =
   'https://api.cloudinary.com/v1_1/ds6dxgvxo/image/upload'
 
 export const PROFILE_IMG_PLACEHOLDER =
-  'https://images.unsplash.com/photo-1595790752141-3bad67318327?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+"https://immedilet-invest.com/wp-content/uploads/2016/01/user-placeholder.jpg"

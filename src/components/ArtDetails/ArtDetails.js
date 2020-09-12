@@ -46,6 +46,7 @@ const ArtDetails = ({
     onCompleted(data) {
       if (data && data.favoriteStreetArt) {
         dispatch(toggleFavorite(data.favoriteStreetArt.id))
+        setLoading(false)
       }
     },
     onError(error) {
@@ -57,6 +58,7 @@ const ArtDetails = ({
     onCompleted(data) {
       if (data && data.visitStreetArt) {
         dispatch(toggleVisited(data.visitStreetArt.id))
+        setLoading(false)
       }
     },
     onError(error) {
@@ -64,8 +66,8 @@ const ArtDetails = ({
     }
   })
 
-  const toggleFavoriteHandler = (e) => {
-    e.preventDefault()
+  const toggleFavoriteHandler = () => {
+    setLoading(true)
     favoriteStreetArt({
       variables: {
         streetArtId: +id,
@@ -74,16 +76,14 @@ const ArtDetails = ({
     })
   }
 
-  const toggleVisitedHandler = (e) => {
-    e.preventDefault()
+  const toggleVisitedHandler = () => {
+    setLoading(true)
     visitStreetArt({
       variables: {
         streetArtId: +id,
         visited: !visited,
       },
     })
-    // ISSUE: DELETE AFTER USEMUTATION IS COMBINED
-    // dispatch(toggleVisited(id))
   }
 
   return (
