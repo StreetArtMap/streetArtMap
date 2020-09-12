@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useMutation, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
 import { toggleFavorite, toggleVisited } from '../../actions/userAction'
