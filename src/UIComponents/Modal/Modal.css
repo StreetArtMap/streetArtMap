@@ -31,3 +31,33 @@
 .display-none {
   display: none;
 }
+
+@media (min-width: 640px) {
+  .modal-main {
+    width: 70vw;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-main {
+    width: 60vw;
+  }
+}
+
+@media (min-width: 880px) {
+  .modal-main {
+    width: 50vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal-main {
+    width: 40vw;
+  }
+}
+
+@media (min-width: 1280px) {
+  .modal-main {
+    width: 30vw;
+  }
+}

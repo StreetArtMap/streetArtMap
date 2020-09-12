@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
+import { useMutation, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
 import { addData } from '../../actions/userAction'
 import { DEFAULT_IMG_URL } from '../../constants'
@@ -9,7 +10,6 @@ import Modal from '../../UIComponents/Modal/Modal'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
 import { TiDelete } from 'react-icons/ti'
-import { useMutation, gql } from '@apollo/client'
 import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
 import { ImCamera } from 'react-icons/im'
 import './CreateForm.css'
@@ -200,11 +200,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
     return (
       <section className='form-image-wrapper'>
         <section onClick={removeImageHandler}>
-          <TiDelete
-            id={image}
-            onClick={removeImageHandler}
-            className='image-delete-btn'
-          />
+          <TiDelete id={image} className='image-delete-btn' />
         </section>
 
         <img
@@ -231,7 +227,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
         <p className='no-images-error'>Please add at least one photo</p>
       )}
       <Button onClick={() => setPostImage(false)}>
-        ADD MORE PHOTOS <ImCamera />
+        ADD MORE PHOTOS <ImCamera className='btn-icon' />
       </Button>
       <form onSubmit={postArtHandler} className='create-art-form'>
         <Input
@@ -297,7 +293,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           </>
         )}
 
-        {!addressInput && currentLocation && (
+        {!addressInput && currentLocation && !isArtUploaded && (
           <>
             <section className='current-location-map'>
               <MapWithMarkers
@@ -317,7 +313,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
             <section className='form-btn-wrapper my-location-btn'>
               <Button onClick={getCurrentLocationHandler}>
                 my location
-                <FaMapMarkerAlt />
+                <FaMapMarkerAlt className='btn-icon' />
               </Button>
             </section>
           </>
@@ -331,7 +327,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
             <section className='form-btn-wrapper address-btn'>
               <Button onClick={toggleAddressOrLocationHandler}>
                 enter address
-                <FaMapMarkerAlt />
+                <FaMapMarkerAlt className='btn-icon' />
               </Button>
             </section>
           </>

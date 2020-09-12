@@ -1,10 +1,17 @@
 .camera-container {
   width: 88vw;
   min-height: 80vh;
-  height: auto;
-  padding: 10vh 0;
-  margin: 10vh auto;
+  height: 100vh;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding: 10vh 0;
+}
+
+.form-container {
+  width: 88vw;
+  margin: auto;
+  padding: 10vh 0 15vh;
 }

@@ -1,17 +1,16 @@
 .form-images-container {
   display: grid;
-  margin-bottom: 20px;
-  grid-template: auto / repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(2, 1fr));
   grid-auto-rows: 1fr;
+  margin: auto;
+  margin-bottom: 20px;
 }
 
 .form-image-wrapper {
   position: relative;
-  border-radius: 7px;
-  height: 180px;
+  height: 30vh;
 }
 
 .image-delete-btn {
@@ -83,4 +82,50 @@
 
 .error-message {
   color: var(--error);
+}
+
+.btn-icon {
+  padding-left: 3px;
+}
+
+@media (min-width: 640px) {
+  .form-images-container {
+    width: 95%;
+  }
+  .form-image-wrapper {
+    height: 35vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .form-images-container {
+    width: 90%;
+  }
+  .form-images-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .form-image-wrapper {
+    height: 40vh;
+  }
+}
+
+@media (min-width: 880px) {
+  .form-images-container {
+    width: 85%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .form-images-container {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .form-images-container {
+    width: 75%;
+  }
+  .form-images-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

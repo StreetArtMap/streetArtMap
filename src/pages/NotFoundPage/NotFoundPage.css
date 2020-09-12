@@ -1,0 +1,11 @@
+.not-found-container {
+  min-height: 80vh;
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  padding: 10vh 0;
+}
+
+.not-found-message {
+  margin: auto;
+}

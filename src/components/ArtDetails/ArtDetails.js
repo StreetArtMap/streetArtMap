@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useMutation, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
-import { selectArt } from '../../actions/userAction'
-import { FaHeart, FaRegHeart, FaMapMarked } from 'react-icons/fa'
+import { toggleFavorite, toggleVisited } from '../../actions/userAction'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 import './ArtDetails.css'
@@ -20,25 +21,89 @@ const ArtDetails = ({
     visited,
     favorite,
   },
+  setLoading,
 }) => {
   const dispatch = useDispatch()
+  const FAVORITE_ART = gql`
+    mutation favoriteStreetArt($streetArtId: Int!, $favorite: Boolean!) {
+      favoriteStreetArt(
+        input: { streetArtId: $streetArtId, favorite: $favorite }
+      ) {
+        id
+        favorite
+      }
+    }
+  `
+  const [favoriteStreetArt, { data, loading, error }] = useMutation(
+    FAVORITE_ART
+  )
+
+  const VISITED_ART = gql`
+    mutation visitStreetArt($streetArtId: Int!, $visited: Boolean!) {
+      visitStreetArt(input: { streetArtId: $streetArtId, visited: $visited }) {
+        id
+        visited
+      }
+    }
+  `
+  const [visitStreetArt, { CHANGENAME }] = useMutation(VISITED_ART)
+
+  useEffect(() => {
+    if (data && data.favoriteStreetArt) {
+      dispatch(toggleFavorite(data.favoriteStreetArt.id))
+    }
+    //eslint-disable-next-line
+  }, [data])
+
+  useEffect(() => {
+    if (data && data.visitStreetArt) {
+      dispatch(toggleVisited(data.visitStreetArt.id))
+    }
+    //eslint-disable-next-line
+  }, [data])
+
+  const toggleFavoriteHandler = (e) => {
+    e.preventDefault()
+    // setLoading(true)
+    favoriteStreetArt({
+      variables: {
+        streetArtId: +id,
+        favorite: !favorite,
+      },
+    })
+  }
+
+  const toggleVisitedHandler = (e) => {
+    e.preventDefault()
+    visitStreetArt({
+      variables: {
+        streetArtId: +id,
+        visited: !visited,
+      },
+    })
+    // ISSUE: DELETE AFTER USEMUTATION IS COMBINED
+    dispatch(toggleVisited(id))
+  }
+
   return (
     <section className='art-details-container'>
       <section className='art-icons-wrapper'>
         {favorite ? (
-          <FaHeart className='art-icon' />
+          <FaHeart className='art-icon' onClick={toggleFavoriteHandler} />
         ) : (
-          <FaRegHeart className='art-icon' />
+          <FaRegHeart className='art-icon' onClick={toggleFavoriteHandler} />
         )}
         {visited ? (
-          <RiCheckboxCircleLine className='art-icon' />
+          <RiCheckboxCircleLine
+            className='art-icon'
+            onClick={toggleVisitedHandler}
+          />
         ) : (
-          <RiCheckboxBlankCircleLine className='art-icon' />
+          <RiCheckboxBlankCircleLine
+            className='art-icon'
+            onClick={toggleVisitedHandler}
+          />
         )}
-        <FaMapMarked
-          className='art-icon'
-          onClick={() => dispatch(selectArt(id))}
-        />
       </section>
       {artName && <p className='artist-name'>{artName}</p>}
       {artistName && <p className='artist-name'>{artistName}</p>}

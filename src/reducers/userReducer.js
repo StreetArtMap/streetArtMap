@@ -5,7 +5,7 @@ export const initialUserState = {
 export const user = (state = initialUserState, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return { ...state }
+      return { ...state, name: action.user }
     default:
       return state
   }

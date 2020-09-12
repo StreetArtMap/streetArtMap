@@ -1,20 +1,32 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { selectArt } from '../../actions/userAction'
 import { DEFAULT_IMG_URL, PROFILE_IMG_PLACEHOLDER } from '../../constants'
 import { FaBookOpen, FaBookmark } from 'react-icons/fa'
 import './ProfilePage.css'
 
 const ProfilePage = () => {
+  const dispatch = useDispatch()
   const addDefaultImageSrc = (e) => {
     e.target.src = DEFAULT_IMG_URL
   }
   const arts = useSelector((state) => state.arts).map((art) => (
-    <img
-      src={art.images[0] || DEFAULT_IMG_URL}
-      alt='street art'
-      onError={addDefaultImageSrc}
-      className='art-tile'
-    />
+    <section className='photo-wrapper'>
+      <Link to={`/arts/${art.id}`}>
+        <img
+          src={art.images[0] || DEFAULT_IMG_URL}
+          alt='street art'
+          onError={addDefaultImageSrc}
+          className='art-tile'
+          onClick={() => {
+            dispatch(selectArt(art.id))
+            window.scrollTo(0, 0)
+          }}
+        />
+      </Link>
+    </section>
   ))
 
   return (

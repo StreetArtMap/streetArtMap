@@ -38,6 +38,14 @@
   bottom: 15%;
 }
 
+.geolocation-control {
+  display: inline-block;
+  margin: auto;
+  position: absolute;
+  right: 3%;
+  bottom: 30%;
+}
+
 .my-location-icon {
   font-size: 2.5rem;
   color: var(--urgent);
@@ -46,6 +54,8 @@
 .art-location-icon {
   font-size: 2.5rem;
   color: var(--accent-dark);
+  position: absolute;
+  top: -30px;
 }
 
 .map-image-carousel-container {
@@ -74,5 +84,13 @@
 .map-art-icon {
   color: var(--medium-dark);
   font-size: 3rem;
+  padding: 10px;
+}
+
+.mapboxgl-popup-close-button {
+  z-index: 10;
+  font-size: 4rem;
+  color: var(--extra-light);
+  line-height: 0.5;
   padding: 10px;
 }

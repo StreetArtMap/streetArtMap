@@ -1,5 +1,59 @@
 .carousel-img {
   object-fit: cover;
   width: 100%;
+  height: 100px;
 }
 
+.main-carousel {
+  height: 35vh;
+}
+
+.map-carousel {
+  height: 200px;
+}
+
+.painting-card-carousel {
+  height: 45vh;
+}
+
+@media (min-width: 640px) {
+  .main-carousel {
+    height: 42vh;
+  }
+  .painting-card-carousel {
+    height: 52vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-carousel {
+    height: 49vh;
+  }
+  .painting-card-carousel {
+    height: 59vh;
+  }
+}
+
+@media (min-width: 880px) {
+  .main-carousel {
+    height: 56vh;
+  }
+  .painting-card-carousel {
+    height: 66vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-carousel {
+    height: 63vh;
+  }
+  .painting-card-carousel {
+    height: 73vh;
+  }
+}
+
+@media (min-width: 1280px) {
+  .main-carousel {
+    height: 70vh;
+  }
+}
