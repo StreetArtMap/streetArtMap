@@ -15,7 +15,7 @@ const ImageCarousel = ({
   id,
   imageLink,
   mapCarousel,
-  paintingCardCarousel,
+  paintingMapImage
 }) => {
   const dispatch = useDispatch()
   const addDefaultImageSrc = (e) => {
@@ -56,8 +56,8 @@ const ImageCarousel = ({
             height={height}
             key={uuidv4()}
             className={`carousel-img ${mapCarousel && 'map-carousel'} ${
-              paintingCardCarousel && 'painting-card-carousel'
-            }`}
+              paintingMapImage && 'painting-card-carousel'
+            } `}
             onError={addDefaultImageSrc}
           />
         ))}

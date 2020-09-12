@@ -90,7 +90,7 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
         />
         <NavigationControl className='navigation-control' />
         {!formMap && markers}
-        {formMap && lat && lng && myMarker}
+        {formMap && myMarker}
         {selectedArt && (
           <Popup
             latitude={+selectedArt.latitude}
@@ -99,11 +99,19 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
             closeButton={!paintingMap && true}
             onClose={() => dispatch(selectArt(''))}
             isOpen={true}
-            offsetTop={130}
+            offsetTop={!paintingMap && 130}
           >
-            <section className='map-image-carousel-container'>
+            <section
+              className={`map-image-carousel-container ${
+                paintingMap && 'painting-card-carousel-container'
+              }`}
+            >
               <Link to={`/arts/${selectedId}`}>
-                <ImageCarousel images={selectedArt.images} mapCarousel={true} />
+                <ImageCarousel
+                  images={selectedArt.images}
+                  mapCarousel={true}
+                  paintingMapImage={paintingMap}
+                />
               </Link>
             </section>
             <section className='map-art-details-container'>

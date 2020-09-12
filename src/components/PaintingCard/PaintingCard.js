@@ -5,8 +5,6 @@ import ArtDetails from '../ArtDetails/ArtDetails'
 import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
 import './PaintingCard.css'
 
-
-
 const PaintingCard = () => {
   const selectedId = useSelector((state) => state.session.selectedArt)
   const art = useSelector((state) =>
@@ -15,10 +13,7 @@ const PaintingCard = () => {
 
   return (
     <section className='painting-card-container'>
-      <ImageCarousel 
-        images={art.images} 
-        paintingCardCarousel={true} 
-      />
+      <ImageCarousel images={art.images} />
       <ArtDetails art={art} />
       <section className='painting-card-map-container'>
         <MapWithMarkers
