@@ -12,8 +12,12 @@
   height: 200px;
 }
 
-.painting-card-carousel {
+.painting-card-map-carousel {
   height: 50px;
+}
+
+.painting-card-carousel {
+  height: 45vh;
 }
 
 @media (min-width: 640px) {
