@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
 import { useQuery, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
 import { addData, login } from '../../actions/userAction'
@@ -66,12 +65,12 @@ const LoginPage = ({
       })
       dispatch(addData(parsedData))
       setArtData(parsedData)
-      setCurrentUser({
-        name: 'Matt Example',
-        posts: parsedData.length,
-        location: 'Denver, CO',
-        favorites: '',
-      })
+      // setCurrentUser({
+      //   name: 'Matt Example',
+      //   posts: parsedData.length,
+      //   location: 'Denver, CO',
+      //   favorites: '',
+      // })
     } else if (loading) {
       return <p>Loading...</p>
     } else if (error) {
@@ -118,4 +117,4 @@ LoginPage.propTypes = {
   setIsLoggedIn: PropTypes.func,
 }
 
-export default withRouter(LoginPage)
+export default LoginPage

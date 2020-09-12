@@ -2,7 +2,7 @@
   width: 88vw;
   min-height: 80vh;
   height: auto;
-  padding: 20vh 0;
+  padding: 8vh 0;
   margin: auto;
 }
 
@@ -13,7 +13,6 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border-top: 2px solid var(--light-medium);
   background-color: var(--light);
 }
 
@@ -51,10 +50,13 @@
 
 .all-button:hover,
 .saved-button:hover,
+.tours-button:hover,
 .all-button:active,
 .saved-button:active,
+.tours-button:active,
 .all-button:focus,
-.saved-button:focus {
+.saved-button:focus,
+.tours-button:focus {
   box-shadow: 0 0 3px 3px var(--medium);
   transform: scale(1.05);
   transition: transform 0.3s;

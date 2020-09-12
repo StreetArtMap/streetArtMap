@@ -9,6 +9,7 @@ import MapWithMarkers from '../MapWithMarkers/MapWithWithMarkers'
 import Modal from '../../UIComponents/Modal/Modal'
 import Input from '../../UIComponents/Input/Input'
 import Button from '../../UIComponents/Button/Button'
+import { v4 as uuidv4 } from 'uuid'
 import { TiDelete } from 'react-icons/ti'
 import { FaMapMarkerAlt, FaTelegramPlane } from 'react-icons/fa'
 import { ImCamera } from 'react-icons/im'
@@ -198,7 +199,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
 
   const mappedImages = images.map((image) => {
     return (
-      <section className='form-image-wrapper'>
+      <section className='form-image-wrapper' key={uuidv4()} >
         <section onClick={removeImageHandler}>
           <TiDelete id={image} className='image-delete-btn' />
         </section>
