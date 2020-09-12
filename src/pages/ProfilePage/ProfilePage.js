@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { selectArt } from '../../actions/userAction'
 import { DEFAULT_IMG_URL, PROFILE_IMG_PLACEHOLDER } from '../../constants'
-import { FaBookOpen, FaBookmark } from 'react-icons/fa'
+import { FaBookOpen, FaHeart } from 'react-icons/fa'
 import './ProfilePage.css'
 
 const ProfilePage = () => {
@@ -12,6 +12,7 @@ const ProfilePage = () => {
   const addDefaultImageSrc = (e) => {
     e.target.src = DEFAULT_IMG_URL
   }
+  const username = useSelector(state => state.user.name)
   const arts = useSelector((state) => state.arts).map((art) => (
     <section className='photo-wrapper'>
       <Link to={`/arts/${art.id}`}>
@@ -40,15 +41,14 @@ const ProfilePage = () => {
           />
         </section>
         <section className='user-stats'>
-          <p className='username'>UserName Here</p>
-          <p className='user-image-count'>10 Images Saved</p>
-          <p className='user-image-count'>55 Posts</p>
+          <p className='username'>{username}</p>
+          <p className='user-image-count'>{arts.length} Posts</p>
           <section className='button-container'>
             <section className='all-button'>
               <FaBookOpen className='art-icon' title='collection-icon' />
             </section>
             <section className='saved-button'>
-              <FaBookmark className='art-icon' title='bookmark-icon' />
+              <FaHeart className='art-icon' title='bookmark-icon' />
             </section>
           </section>
         </section>
