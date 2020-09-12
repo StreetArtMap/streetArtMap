@@ -34,10 +34,6 @@ const ArtDetails = ({
       }
     }
   `
-  const [favoriteStreetArt, { data, loading, error }] = useMutation(
-    FAVORITE_ART
-  )
-
   const VISITED_ART = gql`
     mutation visitStreetArt($streetArtId: Int!, $visited: Boolean!) {
       visitStreetArt(input: { streetArtId: $streetArtId, visited: $visited }) {
@@ -45,26 +41,31 @@ const ArtDetails = ({
         visited
       }
     }
-  `
-  const [visitStreetArt, { CHANGENAME }] = useMutation(VISITED_ART)
-
-  useEffect(() => {
-    if (data && data.favoriteStreetArt) {
-      dispatch(toggleFavorite(data.favoriteStreetArt.id))
+  ` 
+  const [favoriteStreetArt] = useMutation(FAVORITE_ART, {
+    onCompleted(data) {
+      if (data && data.favoriteStreetArt) {
+        dispatch(toggleFavorite(data.favoriteStreetArt.id))
+      }
+    },
+    onError(error) {
+      console.log(error.message)
     }
-    //eslint-disable-next-line
-  }, [data])
-
-  useEffect(() => {
-    if (data && data.visitStreetArt) {
-      dispatch(toggleVisited(data.visitStreetArt.id))
+  })
+            
+  const [visitStreetArt] = useMutation(VISITED_ART, {
+    onCompleted(data) {
+      if (data && data.visitStreetArt) {
+        dispatch(toggleVisited(data.visitStreetArt.id))
+      }
+    },
+    onError(error) {
+      console.log(error)
     }
-    //eslint-disable-next-line
-  }, [data])
+  })
 
   const toggleFavoriteHandler = (e) => {
     e.preventDefault()
-    // setLoading(true)
     favoriteStreetArt({
       variables: {
         streetArtId: +id,
@@ -82,7 +83,7 @@ const ArtDetails = ({
       },
     })
     // ISSUE: DELETE AFTER USEMUTATION IS COMBINED
-    dispatch(toggleVisited(id))
+    // dispatch(toggleVisited(id))
   }
 
   return (
