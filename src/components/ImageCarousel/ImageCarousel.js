@@ -32,14 +32,13 @@ const ImageCarousel = ({
       {images &&
         imageLink &&
         images.map((image) => (
-          <Link to={`/arts/${id}`}>
+          <Link to={`/arts/${id}`} key={uuidv4()}>
             <img
               id={id}
               src={image}
               alt={image}
               className={`carousel-img main-carousel`}
               onError={addDefaultImageSrc}
-              key={uuidv4()}
               onClick={() => {
                 dispatch(selectArt(id))
                 window.scrollTo(0, 0)
@@ -59,7 +58,6 @@ const ImageCarousel = ({
               paintingCardCarousel && 'painting-card-carousel'
             }`}
             onError={addDefaultImageSrc}
-            key={uuidv4()}
           />
         ))}
     </Slider>
