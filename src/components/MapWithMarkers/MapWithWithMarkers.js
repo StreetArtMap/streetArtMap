@@ -5,7 +5,7 @@ import {
   selectArt,
   toggleFavorite,
   toggleVisited,
-} from '../../actions/userAction'
+} from '../../actions/actions'
 import ReactMapGL, {
   Marker,
   Popup,

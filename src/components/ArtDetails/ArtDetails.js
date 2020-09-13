@@ -1,7 +1,7 @@
 import React from 'react'
 import { useMutation, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
-import { toggleFavorite, toggleVisited } from '../../actions/userAction'
+import { toggleFavorite, toggleVisited } from '../../actions/actions'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'

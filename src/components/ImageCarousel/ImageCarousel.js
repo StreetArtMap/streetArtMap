@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { selectArt } from '../../actions/userAction'
+import { selectArt } from '../../actions/actions'
 import { v4 as uuidv4 } from 'uuid'
 import { DEFAULT_IMG_URL } from '../../constants'
 import Slider from 'react-slick'
