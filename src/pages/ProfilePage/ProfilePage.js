@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { selectArt } from '../../actions/userAction'
+import { selectArt } from '../../actions/actions'
 import { DEFAULT_IMG_URL, PROFILE_IMG_PLACEHOLDER } from '../../constants'
 import Modal from '../../UIComponents/Modal/Modal'
 import Button from '../../UIComponents/Button/Button'
@@ -17,7 +17,7 @@ const ProfilePage = () => {
   const addDefaultImageSrc = (e) => {
     e.target.src = DEFAULT_IMG_URL
   }
-  const username = useSelector(state => state.user.name)
+  const username = useSelector((state) => state.user.name)
   const arts = useSelector((state) => state.arts).map((art) => (
     <section className='photo-wrapper' key={uuidv4()}>
       <Link to={`/arts/${art.id}`}>
@@ -46,24 +46,26 @@ const ProfilePage = () => {
   const handleShowTours = () => {
     setDisplayModal(true)
   }
-  const favoritedArts = useSelector((state) => state.arts).filter(art => art.favorite).map((art) => {
-    return (
-      <section className='photo-wrapper' key={uuidv4()}>
-        <Link to={`/arts/${art.id}`}>
-          <img
-            src={art.images[0] || DEFAULT_IMG_URL}
-            alt='street art'
-            onError={addDefaultImageSrc}
-            className='art-tile'
-            onClick={() => {
-              dispatch(selectArt(art.id))
-              window.scrollTo(0, 0)
-            }}
-          />
-        </Link>
-      </section>
-    )
-  })
+  const favoritedArts = useSelector((state) => state.arts)
+    .filter((art) => art.favorite)
+    .map((art) => {
+      return (
+        <section className='photo-wrapper' key={uuidv4()}>
+          <Link to={`/arts/${art.id}`}>
+            <img
+              src={art.images[0] || DEFAULT_IMG_URL}
+              alt='street art'
+              onError={addDefaultImageSrc}
+              className='art-tile'
+              onClick={() => {
+                dispatch(selectArt(art.id))
+                window.scrollTo(0, 0)
+              }}
+            />
+          </Link>
+        </section>
+      )
+    })
 
   return (
     <section className='profile-container'>
@@ -91,10 +93,14 @@ const ProfilePage = () => {
           </section>
         </section>
       </section>
-      {showFavorites ? <section className='photo-container'>{favoritedArts}</section> : <section className='photo-container'>{arts}</section>}
+      {showFavorites ? (
+        <section className='photo-container'>{favoritedArts}</section>
+      ) : (
+        <section className='photo-container'>{arts}</section>
+      )}
       <Modal show={displayModal}>
-        <p className="modal-message">Curated Waking Tours</p>
-        <Button styling="padding" onClick={() => setDisplayModal(false)}>
+        <p className='modal-message'>Curated Waking Tours</p>
+        <Button styling='padding' onClick={() => setDisplayModal(false)}>
           back
         </Button>
       </Modal>

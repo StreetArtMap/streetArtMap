@@ -1,7 +1,7 @@
 import React from 'react'
 import { useMutation, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
-import { toggleFavorite, toggleVisited } from '../../actions/userAction'
+import { toggleFavorite, toggleVisited } from '../../actions/actions'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
@@ -22,6 +22,7 @@ const ArtDetails = ({
     favorite,
   },
   setLoading,
+  setError,
 }) => {
   const dispatch = useDispatch()
   const FAVORITE_ART = gql`
@@ -41,7 +42,7 @@ const ArtDetails = ({
         visited
       }
     }
-  ` 
+  `
   const [favoriteStreetArt] = useMutation(FAVORITE_ART, {
     onCompleted(data) {
       if (data && data.favoriteStreetArt) {
@@ -51,9 +52,11 @@ const ArtDetails = ({
     },
     onError(error) {
       console.log(error.message)
-    }
+      setError('Something went wrong... ')
+      setLoading(false)
+    },
   })
-            
+
   const [visitStreetArt] = useMutation(VISITED_ART, {
     onCompleted(data) {
       if (data && data.visitStreetArt) {
@@ -63,7 +66,9 @@ const ArtDetails = ({
     },
     onError(error) {
       console.log(error)
-    }
+      setError('Something went wrong... ')
+      setLoading(false)
+    },
   })
 
   const toggleFavoriteHandler = () => {

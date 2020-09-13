@@ -1,6 +1,6 @@
 .form-images-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 10px;
   width: 100%;
   grid-auto-rows: 1fr;
@@ -9,8 +9,20 @@
 }
 
 .form-image-wrapper {
+  padding-top: 100%;
+  overflow: hidden;
   position: relative;
-  height: 30vh;
+}
+
+.form-image {
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  border-radius: 7px;
+  box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.03);
 }
 
 .image-delete-btn {
@@ -18,15 +30,9 @@
   font-size: 3rem;
   cursor: pointer;
   position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.form-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.03);
+  top: 5px;
+  right: 5px;
+  z-index: 10;
 }
 
 .create-art-form {
@@ -101,9 +107,6 @@
   .form-images-container {
     width: 90%;
   }
-  .form-images-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
   .form-image-wrapper {
     height: 40vh;
   }
@@ -124,8 +127,5 @@
 @media (min-width: 1280px) {
   .form-images-container {
     width: 75%;
-  }
-  .form-images-container {
-    grid-template-columns: repeat(4, 1fr);
   }
 }

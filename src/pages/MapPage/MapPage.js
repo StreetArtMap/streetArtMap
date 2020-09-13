@@ -4,7 +4,7 @@ import './MapPage.css'
 
 const MapPage = () => {
   return (
-    <section className='map-container'>
+    <section className='map-container' data-testid='map-container'>
       <MapWithMarkers />
     </section>
   )

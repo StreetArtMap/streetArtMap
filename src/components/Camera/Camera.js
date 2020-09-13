@@ -34,7 +34,7 @@ const Camera = ({
 
   useEffect(() => {
     capturedImage && uploadImage()
-       //eslint-disable-next-line
+    //eslint-disable-next-line
   }, [capturedImage])
 
   const captureImage = async () => {

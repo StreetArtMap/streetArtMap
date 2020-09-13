@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.4"
+    "@testing-library/jest-dom": "^5.11.4",
+    "redux-mock-store": "^1.5.4"
   }
 }

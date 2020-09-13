@@ -5,7 +5,7 @@ import {
   selectArt,
   toggleFavorite,
   toggleVisited,
-} from '../../actions/userAction'
+} from '../../actions/actions'
 import ReactMapGL, {
   Marker,
   Popup,
@@ -65,6 +65,12 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
     </Marker>
   ))
 
+  const myMarker = (
+    <Marker latitude={lat} longitude={lng}>
+      <FaMapMarkerAlt className='my-location-icon' />
+    </Marker>
+  )
+
   return (
     <section className='markers-map-container'>
       <ReactMapGL
@@ -84,6 +90,7 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
         />
         <NavigationControl className='navigation-control' />
         {!formMap && markers}
+        {formMap && myMarker}
         {selectedArt && (
           <Popup
             latitude={+selectedArt.latitude}
@@ -92,11 +99,19 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
             closeButton={!paintingMap && true}
             onClose={() => dispatch(selectArt(''))}
             isOpen={true}
-            offsetTop={130}
+            offsetTop={!paintingMap && 130}
           >
-            <section className='map-image-carousel-container'>
+            <section
+              className={`map-image-carousel-container ${
+                paintingMap && 'painting-card-carousel-container'
+              }`}
+            >
               <Link to={`/arts/${selectedId}`}>
-                <ImageCarousel images={selectedArt.images} mapCarousel={true} />
+                <ImageCarousel
+                  images={selectedArt.images}
+                  mapCarousel={true}
+                  paintingMapImage={paintingMap}
+                />
               </Link>
             </section>
             <section className='map-art-details-container'>

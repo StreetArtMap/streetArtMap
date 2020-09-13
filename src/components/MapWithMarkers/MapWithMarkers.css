@@ -63,6 +63,11 @@
   height: 200px;
 }
 
+.painting-card-carousel-container {
+  width: 50px;
+  height: 50px;
+}
+
 .map-art-details-container {
   padding: 10px;
   padding-bottom: 0;

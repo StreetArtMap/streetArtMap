@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { selectArt } from '../../actions/userAction'
+import { selectArt } from '../../actions/actions'
 import ScrollHide from '../../UIComponents/ScrollHide/ScrollHide'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { FaMapMarked, FaSearch } from 'react-icons/fa'

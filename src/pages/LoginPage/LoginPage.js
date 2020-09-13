@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useQuery, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
-import { addData, login } from '../../actions/userAction'
+import { addData, login } from '../../actions/actions'
 import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
 import './LoginPage.css'
@@ -65,12 +65,6 @@ const LoginPage = ({
       })
       dispatch(addData(parsedData))
       setArtData(parsedData)
-      // setCurrentUser({
-      //   name: 'Matt Example',
-      //   posts: parsedData.length,
-      //   location: 'Denver, CO',
-      //   favorites: '',
-      // })
     } else if (loading) {
       return <p>Loading...</p>
     } else if (error) {

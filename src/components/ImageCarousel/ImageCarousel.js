@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { selectArt } from '../../actions/userAction'
+import { selectArt } from '../../actions/actions'
 import { v4 as uuidv4 } from 'uuid'
 import { DEFAULT_IMG_URL } from '../../constants'
 import Slider from 'react-slick'
@@ -15,6 +15,7 @@ const ImageCarousel = ({
   id,
   imageLink,
   mapCarousel,
+  paintingMapImage,
   paintingCardCarousel,
 }) => {
   const dispatch = useDispatch()
@@ -56,8 +57,8 @@ const ImageCarousel = ({
             height={height}
             key={uuidv4()}
             className={`carousel-img ${mapCarousel && 'map-carousel'} ${
-              paintingCardCarousel && 'painting-card-carousel'
-            }`}
+              paintingMapImage && 'painting-card-map-carousel'
+            } ${paintingCardCarousel && 'painting-card-carousel'}`}
             onError={addDefaultImageSrc}
           />
         ))}
