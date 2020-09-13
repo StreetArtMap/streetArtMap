@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import Button from '../../UIComponents/Button/Button'
 import { CLOUDINARY_ENDPOINT } from '../../constants'
 import './ImageUpload.css'
@@ -90,3 +91,11 @@ const ImageUpload = ({
 }
 
 export default ImageUpload
+
+ArtContainer.propTypes = {
+  setImages: PropTypes.func,
+  images: PropTypes.array,
+  setPostImage: PropTypes.func,
+  setError: PropTypes.func,
+  setIsUploading: PropTypes.func
+}

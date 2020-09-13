@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -20,7 +21,6 @@ import './MapWithMarkers.css'
 
 const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
   const dispatch = useDispatch()
-
   const selectedId = useSelector((state) => state.session.selectedArt)
   const selectedArt = useSelector((state) =>
     state.arts.find((art) => art.id === selectedId)
@@ -139,3 +139,11 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
 }
 
 export default MapWithMarkers
+
+MapWithMarkers.propTypes = {
+  formMap: PropTypes.bool,
+  paintingMap: PropTypes.bool,
+  zoom: PropTypes.number,
+  lat: PropTypes.string,
+  lng: PropTypes.string
+}

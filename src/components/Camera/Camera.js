@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 import { Webcam } from './webcam'
 import { CLOUDINARY_ENDPOINT } from '../../constants'
@@ -112,3 +113,14 @@ const Camera = ({
 }
 
 export default Camera
+
+Camera.propTypes = {
+  offline: PropTypes.bool,
+  images: PropTypes.array,
+  setImages: PropTypes.func,
+  setIsSupported: PropTypes.func,
+  setPostImage: PropTypes.func,
+  setIsSupportedError: PropTypes.func,
+  setIsUploading: PropTypes.func,
+  setError: PropTypes.func
+}
