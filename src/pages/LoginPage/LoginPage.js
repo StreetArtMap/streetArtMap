@@ -108,7 +108,10 @@ const LoginPage = ({
 }
 
 LoginPage.propTypes = {
+  isLoggedIn: PropTypes.bool,
   setIsLoggedIn: PropTypes.func,
+  currentUser: PropTypes.object,
+  setCurrentUser: PropTypes.func
 }
 
 export default LoginPage
