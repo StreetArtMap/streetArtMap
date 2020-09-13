@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import ExplorePage from './ExplorePage'
 import Nav from '../../components/Nav/Nav'
 
-describe('ProfilePage', () => {
+describe('ExplorePage', () => {
   let ExplorePageContainer
   let store
   let client
@@ -29,10 +29,10 @@ describe('ProfilePage', () => {
           city: 'city1',
           state: 'state1',
           zipcode: 'zip1',
-          image_urls: ['url2', 'url1'],
+          imageUrls: ['url2', 'url1'],
           description: 'something about this art',
           artistName: 'artist name',
-          instagram_handle: null,
+          instagramHandle: null,
           favorite: true,
           visited: false,
         },

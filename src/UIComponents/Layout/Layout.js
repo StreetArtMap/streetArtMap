@@ -4,7 +4,7 @@ import Header from '../Header/Header'
 
 const Layout = ({ children, isLoggedIn }) => {
   return (
-    <section className="layout-container">
+    <section className='layout-container'>
       {isLoggedIn && <Header />}
       {children}
       {isLoggedIn && <Nav />}
