@@ -107,9 +107,6 @@
   .form-images-container {
     width: 90%;
   }
-  /* .form-images-container {
-    grid-template-columns: repeat(3, 1fr);
-  } */
   .form-image-wrapper {
     height: 40vh;
   }
@@ -131,7 +128,4 @@
   .form-images-container {
     width: 75%;
   }
-  /* .form-images-container {
-    grid-template-columns: repeat(4, 1fr);
-  } */
 }
