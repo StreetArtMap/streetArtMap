@@ -92,7 +92,7 @@ const ImageUpload = ({
 
 export default ImageUpload
 
-ArtContainer.propTypes = {
+ImageUpload.propTypes = {
   setImages: PropTypes.func,
   images: PropTypes.array,
   setPostImage: PropTypes.func,

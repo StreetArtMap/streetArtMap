@@ -20,6 +20,10 @@
   opacity: 0.8;
 }
 
+.login-title {
+  font-size: 4vh;
+}
+
 .user-validation {
   display: flex;
   flex-direction: column;
