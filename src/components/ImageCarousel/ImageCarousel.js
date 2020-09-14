@@ -72,9 +72,9 @@ export default ImageCarousel
 ImageCarousel.propTypes = {
   images: PropTypes.array,
   height: PropTypes.number,
-  id: PropTypes.number,
+  id: PropTypes.string,
   imageLink: PropTypes.bool,
-  mapCarousel: PropTypes.func,
-  paintingMapImage: PropTypes.string,
-  paintingCardCarousel: PropTypes.string
+  mapCarousel: PropTypes.bool,
+  paintingMapImage: PropTypes.bool,
+  paintingCardCarousel: PropTypes.bool
 }

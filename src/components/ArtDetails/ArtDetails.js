@@ -135,7 +135,7 @@ export default ArtDetails
 
 ArtDetails.propTypes = {
   art: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     address: PropTypes.string,
     city: PropTypes.string,
     state: PropTypes.string,

@@ -21,7 +21,7 @@ describe('ExplorePage', () => {
       },
       arts: [
         {
-          id: 1,
+          id: '1',
           latitude: +'39.744137',
           longitude: +'-104.95005',
           address: 'address1',
@@ -36,7 +36,7 @@ describe('ExplorePage', () => {
           visited: false,
         },
         {
-          id: 2,
+          id: '2',
           latitude: +'39.744137',
           longitude: +'-104.95005',
           address: 'address2',

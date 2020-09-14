@@ -99,7 +99,7 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, latitude, longitude }) => 
             closeButton={!paintingMap && true}
             onClose={() => dispatch(selectArt(''))}
             isOpen={true}
-            offsetTop={!paintingMap && 130}
+            offsetTop={!paintingMap ? 130 : 0}
           >
             <section
               className={`map-image-carousel-container ${
