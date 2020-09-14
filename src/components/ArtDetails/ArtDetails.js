@@ -22,7 +22,6 @@ const ArtDetails = ({
     visited,
     favorite,
   },
-  setLoading,
   setError,
 }) => {
   const dispatch = useDispatch()
@@ -45,35 +44,21 @@ const ArtDetails = ({
     }
   `
   const [favoriteStreetArt] = useMutation(FAVORITE_ART, {
-    onCompleted(data) {
-      if (data && data.favoriteStreetArt) {
-        dispatch(toggleFavorite(data.favoriteStreetArt.id))
-        setLoading(false)
-      }
-    },
     onError(error) {
       console.log(error.message)
       setError('Something went wrong... ')
-      setLoading(false)
     },
   })
 
   const [visitStreetArt] = useMutation(VISITED_ART, {
-    onCompleted(data) {
-      if (data && data.visitStreetArt) {
-        dispatch(toggleVisited(data.visitStreetArt.id))
-        setLoading(false)
-      }
-    },
     onError(error) {
       console.log(error)
       setError('Something went wrong... ')
-      setLoading(false)
     },
   })
 
   const toggleFavoriteHandler = () => {
-    setLoading(true)
+    dispatch(toggleFavorite(id))
     favoriteStreetArt({
       variables: {
         streetArtId: +id,
@@ -83,7 +68,7 @@ const ArtDetails = ({
   }
 
   const toggleVisitedHandler = () => {
-    setLoading(true)
+    dispatch(toggleVisited(id))
     visitStreetArt({
       variables: {
         streetArtId: +id,
