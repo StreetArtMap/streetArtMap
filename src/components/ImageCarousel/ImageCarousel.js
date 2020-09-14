@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { selectArt } from '../../actions/actions'
@@ -67,3 +68,13 @@ const ImageCarousel = ({
 }
 
 export default ImageCarousel
+
+ImageCarousel.propTypes = {
+  images: PropTypes.array,
+  height: PropTypes.number,
+  id: PropTypes.number,
+  imageLink: PropTypes.bool,
+  mapCarousel: PropTypes.func,
+  paintingMapImage: PropTypes.string,
+  paintingCardCarousel: PropTypes.string
+}

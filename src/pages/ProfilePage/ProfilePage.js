@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { selectArt } from '../../actions/actions'
@@ -13,6 +14,8 @@ import './ProfilePage.css'
 const ProfilePage = () => {
   const [showFavorites, setShowFavorites] = useState(false)
   const [displayModal, setDisplayModal] = useState(false)
+  const [tours, setTours] = useState([])
+  const [error, setError] = useState('')
   const dispatch = useDispatch()
   const addDefaultImageSrc = (e) => {
     e.target.src = DEFAULT_IMG_URL
@@ -35,6 +38,14 @@ const ProfilePage = () => {
     </section>
   ))
 
+  const getTours = async () => {
+    try {
+      return await axios.get('http://localhost:3000/tours')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const handleShowAll = () => {
     setShowFavorites(false)
   }
@@ -44,8 +55,27 @@ const ProfilePage = () => {
   }
 
   const handleShowTours = () => {
+    getTours()
+      .then(response => {
+        showTours(response.data.data.allTours)
+      })
+      .catch(error => {
+        setError(error.message)
+        console.log(error)
+      })
     setDisplayModal(true)
   }
+
+  const showTours = (tours) => {
+    const unpackedTours = tours.map(tour => {
+      return (
+        <Button key={tour.id} href={tour.link}>{tour.name}</Button>
+      )
+    })
+    setTours(unpackedTours)
+  }
+
+
   const favoritedArts = useSelector((state) => state.arts)
     .filter((art) => art.favorite)
     .map((art) => {
@@ -82,7 +112,7 @@ const ProfilePage = () => {
           <p className='user-image-count'>{arts.length} Posts</p>
           <section className='button-container'>
             <section className='tours-button' onClick={handleShowTours}>
-              <FaRoute className='art-icon' title='tours-icon' />
+              <FaRoute className='art-icon' title='tours-icon' onClick={() => getTours()}/>
             </section>
             <section className='all-button' onClick={handleShowAll}>
               <FaBookOpen className='art-icon' title='collection-icon' />
@@ -100,8 +130,20 @@ const ProfilePage = () => {
       )}
       <Modal show={displayModal}>
         <p className='modal-message'>Curated Waking Tours</p>
+        {tours}
         <Button styling='padding' onClick={() => setDisplayModal(false)}>
           back
+        </Button>
+      </Modal>
+      <Modal show={error}>
+        <p className='modal-message error-message'>{error}</p>
+        <Button
+          styling='padding'
+          onClick={() => {
+            setError('')
+          }}
+        >
+          close
         </Button>
       </Modal>
     </section>

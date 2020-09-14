@@ -2,7 +2,10 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import ReactDOM from 'react-dom'
 import { render, cleanup, screen } from '@testing-library/react'
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, InMemoryCache } from '@apollo/client'
+// import { ApolloClient } from '@apollo/client'
+import { ApolloProvider } from "@apollo/react-hooks"
+import { DEFAULT_IMG_URL, PROFILE_IMG_PLACEHOLDER } from '../../constants'
 import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
@@ -14,11 +17,12 @@ describe('ProfilePage', () => {
   let client
   let initialState
   let mockStore
+  let DEFAULT_IMG_URL
 
   beforeEach(() => {
     initialState = {
       user: {
-        name: 'user',
+        name: 'test username',
       },
       arts: [
         {
@@ -29,7 +33,7 @@ describe('ProfilePage', () => {
           city: 'city1',
           state: 'state1',
           zipcode: 'zip1',
-          imageUrls: ['url2', 'url1'],
+          images: ['url2', 'url1'],
           description: 'something about this art',
           artistName: 'artist name',
           artName: 'art name',
@@ -48,23 +52,46 @@ describe('ProfilePage', () => {
       uri: 'https://streetwalker-backend.herokuapp.com/graphql',
       cache: new InMemoryCache(),
     })
-
+    
     ProfilePageContainer = render(
-      <ApolloProvider client={client}>
-        <Provider store={store}>
-          <BrowserRouter>
-            {/* <ProfilePage /> */}
-          </BrowserRouter>
-        </Provider>
-      </ApolloProvider>
-    )
+        <ApolloProvider client={client}>
+          <Provider store={store}>
+            <BrowserRouter>
+              <ProfilePage />
+            </BrowserRouter>
+          </Provider>
+        </ApolloProvider>
+      )
   })
+    it('<ProfilePage/> component successfully renders', () => {
+      const { getByText, debug } = ProfilePageContainer
+      debug()
+      expect(getByText('test username')).toBeInTheDocument()
+    })
 
-  afterEach(cleanup)
+     // it('should render the profile page', () => {
+  //   const { getByText, getByTitle, getAllByRole } = ProfilePageContainer
 
-  it('fake test', () => {
-    expect(true).toBeTruthy()
-  })
+  //   const userName = getByText('UserName Here')
+  //   const savedImages = getByText('10 Images Saved')
+  //   const postsInformation = getByText('55 Posts')
+  //   const images = getAllByRole('img')
+  //   const collectionBtn = getByTitle('collection-icon')
+  //   const bookmarkBtn = getByTitle('bookmark-icon')
+  //   expect(userName).toBeInTheDocument()
+  //   expect(savedImages).toBeInTheDocument()
+  //   expect(postsInformation).toBeInTheDocument()
+  //   expect(images).toHaveLength(8)
+  //   expect(collectionBtn).toBeInTheDocument()
+  //   expect(bookmarkBtn).toBeInTheDocument()
+  // })
+})
+
+  // afterEach(cleanup)
+
+  // it('fake test', () => {
+  //   expect(true).toBeTruthy()
+  // })
 
   // it('<ProfilePage/> component successfully renders', () => {
   //   const { getByText } = ProfilePageContainer
@@ -96,4 +123,4 @@ describe('ProfilePage', () => {
   //   expect(collectionBtn).toBeInTheDocument()
   //   expect(bookmarkBtn).toBeInTheDocument()
   // })
-})
+// })

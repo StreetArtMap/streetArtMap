@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -18,17 +19,16 @@ import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 import './MapWithMarkers.css'
 
-const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
+const MapWithMarkers = ({ formMap, paintingMap, zoom, latitude, longitude }) => {
   const dispatch = useDispatch()
-
   const selectedId = useSelector((state) => state.session.selectedArt)
   const selectedArt = useSelector((state) =>
     state.arts.find((art) => art.id === selectedId)
   )
 
   const [viewport, setViewport] = useState({
-    latitude: lat || 39.744137,
-    longitude: lng || -104.95005,
+    latitude: latitude || 39.744137,
+    longitude: longitude || -104.95005,
     zoom: zoom || 10,
     width: '100%',
     height: '100%',
@@ -66,7 +66,7 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
   ))
 
   const myMarker = (
-    <Marker latitude={lat} longitude={lng}>
+    <Marker latitude={latitude} longitude={longitude}>
       <FaMapMarkerAlt className='my-location-icon' />
     </Marker>
   )
@@ -139,3 +139,16 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, lat, lng }) => {
 }
 
 export default MapWithMarkers
+
+MapWithMarkers.propTypes = {
+  formMap: PropTypes.bool,
+  paintingMap: PropTypes.bool,
+  zoom: PropTypes.number,
+  latitude: PropTypes.string,
+  longitude: PropTypes.string
+}
+
+Marker.propTypes = {
+  latitude: PropTypes.number,
+  longitude: PropTypes.number
+}

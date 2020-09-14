@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import Button from '../../UIComponents/Button/Button'
 import { CLOUDINARY_ENDPOINT } from '../../constants'
 import './ImageUpload.css'
@@ -63,6 +64,7 @@ const ImageUpload = ({
           type='file'
           className='file-input'
           id='file-input'
+          data-testid="image-input"
           onChange={(e) => {
             setImageSelected(e.target.files[0].name)
           }}
@@ -90,3 +92,11 @@ const ImageUpload = ({
 }
 
 export default ImageUpload
+
+ImageUpload.propTypes = {
+  setImages: PropTypes.func,
+  images: PropTypes.array,
+  setPostImage: PropTypes.func,
+  setError: PropTypes.func,
+  setIsUploading: PropTypes.func
+}

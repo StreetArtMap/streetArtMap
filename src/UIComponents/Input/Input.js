@@ -2,20 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Input.css'
 
-const Input = (props) => {
-  const {
-    id,
-    label,
-    type,
-    placeholder,
-    onChange,
-    element,
-    rows,
-    errorMessage,
-    isValid,
-    ...other
-  } = props
-
+const Input = ({
+  id,
+  label,
+  type,
+  placeholder,
+  onChange,
+  element,
+  rows,
+  errorMessage,
+  isValid,
+  ...other
+  }) => {
   const tag = !element ? (
     <input type={type} placeholder={placeholder} onChange={onChange} {...other} />
   ) : (
@@ -33,11 +31,17 @@ const Input = (props) => {
   )
 }
 
+export default Input
+
 Input.propTypes = {
   type: PropTypes.string,
   width: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
+  id: PropTypes.number,
+  label: PropTypes.string,
+  element: PropTypes.element,
+  rows: PropTypes.number,
+  errorMessage: PropTypes.string,
+  isValid: PropTypes.bool
 }
-
-export default Input

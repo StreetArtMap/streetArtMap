@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Modal.css'
 
 const Modal = ({ show, children }) => {
@@ -12,3 +13,7 @@ const Modal = ({ show, children }) => {
 }
 
 export default Modal
+
+Modal.propTypes = {
+  children: PropTypes.node
+}

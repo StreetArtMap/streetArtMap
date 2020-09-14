@@ -1,5 +1,5 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 import './LoadingSpinner.css'
 
 const LoadingSpinner = ({ asOverlay }) => {
@@ -11,3 +11,7 @@ const LoadingSpinner = ({ asOverlay }) => {
 }
 
 export default LoadingSpinner
+
+LoadingSpinner.propTypes = {
+  asOverlay: PropTypes.bool
+}

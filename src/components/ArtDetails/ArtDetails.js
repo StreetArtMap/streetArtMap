@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { useMutation, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
 import { toggleFavorite, toggleVisited } from '../../actions/actions'
@@ -131,3 +132,21 @@ const ArtDetails = ({
 }
 
 export default ArtDetails
+
+ArtDetails.propTypes = {
+  art: PropTypes.shape({
+    id: PropTypes.number,
+    address: PropTypes.string,
+    city: PropTypes.string,
+    state: PropTypes.string,
+    zipcode: PropTypes.string,
+    artName: PropTypes.string,
+    artistName: PropTypes.string,
+    instagramHandle: PropTypes.string,
+    description: PropTypes.string,
+    visited: PropTypes.bool,
+    favorite: PropTypes.bool,
+  }),
+  setLoading: PropTypes.func,
+  setError: PropTypes.func
+}

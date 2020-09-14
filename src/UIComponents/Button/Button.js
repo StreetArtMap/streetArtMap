@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import './Button.css'
 
 const Button = ({
@@ -43,9 +43,15 @@ const Button = ({
   )
 }
 
-Button.propTypes = {
-  type: PropTypes.string,
-  disabled: PropTypes.bool,
-}
-
 export default Button
+
+Button.propTypes = {
+  children: PropTypes.node,
+  href: PropTypes.string,
+  to: PropTypes.string,
+  inverse: PropTypes.bool,
+  styling: PropTypes.string,
+  disabled: PropTypes.bool,
+  type: PropTypes.string,
+  onClick: PropTypes.func
+}

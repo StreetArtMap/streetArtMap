@@ -6,7 +6,6 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import ExplorePage from './ExplorePage'
-import Nav from '../../components/Nav/Nav'
 
 describe('ExplorePage', () => {
   let ExplorePageContainer
@@ -32,6 +31,21 @@ describe('ExplorePage', () => {
           imageUrls: ['url2', 'url1'],
           description: 'something about this art',
           artistName: 'artist name',
+          instagramHandle: null,
+          favorite: true,
+          visited: false,
+        },
+        {
+          id: 2,
+          latitude: +'39.744137',
+          longitude: +'-104.95005',
+          address: 'address2',
+          city: 'city2',
+          state: 'state2',
+          zipcode: 'zip2',
+          imageUrls: ['url2', 'url1'],
+          description: 'test this art',
+          artistName: 'artist name2',
           instagramHandle: null,
           favorite: true,
           visited: false,
@@ -66,28 +80,21 @@ describe('ExplorePage', () => {
     expect(getByText('artist name')).toBeInTheDocument()
   })
 
-  // it('should render the nav', () => {
-  //   const { getByText, getByTitle } = render(
-  //     <BrowserRouter>
-  //       <Nav />
-  //     </BrowserRouter>
-  //   )
-
-  //   const explore = getByText('explore')
-  //   const map = getByText('map')
-  //   const create = getByText('create')
-  //   const profile = getByText('profile')
-  //   const searchIcon = getByTitle('search-icon')
-  //   const mapIcon = getByTitle('map-icon')
-  //   const cameraIcon = getByTitle('camera-icon')
-  //   const profileIcon = getByTitle('profile-icon')
-  //   expect(explore).toBeInTheDocument()
-  //   expect(map).toBeInTheDocument()
-  //   expect(create).toBeInTheDocument()
-  //   expect(profile).toBeInTheDocument()
-  //   expect(searchIcon).toBeInTheDocument()
-  //   expect(mapIcon).toBeInTheDocument()
-  //   expect(cameraIcon).toBeInTheDocument()
-  //   expect(profileIcon).toBeInTheDocument()
-  // })
+  it('should render the Explore Page', () => {
+    const { getByText, getAllByTestId } = ExplorePageContainer
+    const artistName1 = getByText('artist name')
+    const artistAddress1 = getByText('address1 city1 state1 zip1')
+    const artistDescription1 = getByText('something about this art')
+    const artistName2 = getByText('artist name2')
+    const artistAddress2 = getByText('address2 city2 state2 zip2')
+    const artistDescription2 = getByText('test this art')
+    const images = getAllByTestId('art-container')
+    expect(artistName1).toBeInTheDocument()
+    expect(artistAddress1).toBeInTheDocument()
+    expect(artistDescription1).toBeInTheDocument()
+    expect(artistName2).toBeInTheDocument()
+    expect(artistAddress2).toBeInTheDocument()
+    expect(artistDescription2).toBeInTheDocument()
+    expect(images).toHaveLength(2)
+  })
 })

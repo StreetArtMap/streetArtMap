@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { useMutation, gql } from '@apollo/client'
 import { useDispatch } from 'react-redux'
 import { addData } from '../../actions/actions'
@@ -374,3 +375,10 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
 }
 
 export default withRouter(CreateForm)
+
+CreateForm.propTypes = {
+  images: PropTypes.object,
+  setPostImage: PropTypes.func,
+  setImages: PropTypes.func,
+  setError: PropTypes.func
+}
