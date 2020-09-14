@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  selectArt,
-  toggleFavorite,
-  toggleVisited,
-} from '../../actions/actions'
+import { selectArt } from '../../actions/actions'
+import ArtDetails from '../ArtDetails/ArtDetails'
 import ReactMapGL, {
   Marker,
   Popup,
@@ -14,12 +11,16 @@ import ReactMapGL, {
   GeolocateControl,
 } from 'react-map-gl'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
-import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
-import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine } from 'react-icons/ri'
 import './MapWithMarkers.css'
 
-const MapWithMarkers = ({ formMap, paintingMap, zoom, latitude, longitude }) => {
+const MapWithMarkers = ({
+  formMap,
+  paintingMap,
+  zoom,
+  latitude,
+  longitude,
+}) => {
   const dispatch = useDispatch()
   const selectedId = useSelector((state) => state.session.selectedArt)
   const selectedArt = useSelector((state) =>
@@ -116,18 +117,7 @@ const MapWithMarkers = ({ formMap, paintingMap, zoom, latitude, longitude }) => 
             </section>
             <section className='map-art-details-container'>
               {!paintingMap && (
-                <section className='map-art-icons-wrapper'>
-                  {selectedArt.favorite ? (
-                    <FaHeart className='map-art-icon' />
-                  ) : (
-                    <FaRegHeart className='map-art-icon' />
-                  )}
-                  {selectedArt.visited ? (
-                    <RiCheckboxCircleLine className='map-art-icon' />
-                  ) : (
-                    <RiCheckboxBlankCircleLine className='map-art-icon' />
-                  )}
-                </section>
+                <ArtDetails art={selectedArt} mapArtDetails={true} />
               )}
               <p className='map-artist-name'>{selectedArt.artist_name}</p>
             </section>
@@ -145,10 +135,10 @@ MapWithMarkers.propTypes = {
   paintingMap: PropTypes.bool,
   zoom: PropTypes.number,
   latitude: PropTypes.string,
-  longitude: PropTypes.string
+  longitude: PropTypes.string,
 }
 
 Marker.propTypes = {
   latitude: PropTypes.number,
-  longitude: PropTypes.number
+  longitude: PropTypes.number,
 }

@@ -23,6 +23,7 @@ const ArtDetails = ({
     favorite,
   },
   setError,
+  mapArtDetails,
 }) => {
   const dispatch = useDispatch()
   const FAVORITE_ART = gql`
@@ -97,9 +98,11 @@ const ArtDetails = ({
           />
         )}
       </section>
-      {artName && <p className='artist-name'>{artName}</p>}
-      {artistName && <p className='artist-name'>{artistName}</p>}
-      {instagramHandle && (
+      {artName && !mapArtDetails && <p className='artist-name'>{artName}</p>}
+      {artistName && !mapArtDetails && (
+        <p className='artist-name'>{artistName}</p>
+      )}
+      {instagramHandle && !mapArtDetails && (
         <a
           href={`https://www.instagram.com/${instagramHandle}`}
           className='instagram-wrapper'
@@ -110,10 +113,12 @@ const ArtDetails = ({
           {instagramHandle}
         </a>
       )}
-      {address && (
+      {address && !mapArtDetails && (
         <p className='address'>{`${address} ${city} ${state} ${zipcode}`}</p>
       )}
-      {description && <p className='description'>{description}</p>}
+      {description && !mapArtDetails && (
+        <p className='description'>{description}</p>
+      )}
     </section>
   )
 }
