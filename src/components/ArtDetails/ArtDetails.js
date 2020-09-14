@@ -118,6 +118,8 @@ const ArtDetails = ({
         <a
           href={`https://www.instagram.com/${instagramHandle}`}
           className='instagram-wrapper'
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <AiFillInstagram className='art-icon' />
           {instagramHandle}
@@ -148,5 +150,5 @@ ArtDetails.propTypes = {
     favorite: PropTypes.bool,
   }),
   setLoading: PropTypes.func,
-  setError: PropTypes.func
+  setError: PropTypes.func,
 }
