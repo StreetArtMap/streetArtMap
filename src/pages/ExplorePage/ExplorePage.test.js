@@ -6,7 +6,6 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import ExplorePage from './ExplorePage'
-import Nav from '../../components/Nav/Nav'
 
 describe('ExplorePage', () => {
   let ExplorePageContainer

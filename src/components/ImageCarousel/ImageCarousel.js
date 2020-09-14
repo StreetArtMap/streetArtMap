@@ -73,7 +73,7 @@ ImageCarousel.propTypes = {
   images: PropTypes.array,
   height: PropTypes.number,
   id: PropTypes.number,
-  imageLink: PropTypes.string,
+  imageLink: PropTypes.bool,
   mapCarousel: PropTypes.func,
   paintingMapImage: PropTypes.string,
   paintingCardCarousel: PropTypes.string

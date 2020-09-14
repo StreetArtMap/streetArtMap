@@ -139,7 +139,7 @@ ArtDetails.propTypes = {
     address: PropTypes.string,
     city: PropTypes.string,
     state: PropTypes.string,
-    zipcode: PropTypes.number,
+    zipcode: PropTypes.string,
     artName: PropTypes.string,
     artistName: PropTypes.string,
     instagramHandle: PropTypes.string,

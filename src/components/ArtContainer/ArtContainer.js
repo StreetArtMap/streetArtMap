@@ -16,8 +16,8 @@ const ArtContainer = ({ art, imageLink, setLoading, setError }) => {
 export default ArtContainer
 
 ArtContainer.propTypes = {
-  art: PropTypes.array,
-  imageLink: PropTypes.string,
+  art: PropTypes.object,
+  imageLink: PropTypes.bool,
   setLoading: PropTypes.func,
   setError: PropTypes.func
 }
