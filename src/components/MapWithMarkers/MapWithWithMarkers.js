@@ -117,6 +117,7 @@ const MapWithMarkers = ({
             onClose={() => dispatch(selectArt(''))}
             isOpen={true}
             offsetTop={!paintingMap && 130}
+            tipSize={paintingMap ? 10 : 0}
           >
             <section
               className={`map-image-carousel-container ${
