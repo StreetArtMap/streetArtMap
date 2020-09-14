@@ -11,8 +11,7 @@ import ReactMapGL, {
   GeolocateControl,
 } from 'react-map-gl'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
-import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
-import { BiHeartCircle, BiCheckCircle } from 'react-icons/bi'
+import { FaMapMarkerAlt } from 'react-icons/fa'
 import { FaHeart, FaCheck } from 'react-icons/fa'
 import { RiMapPin3Fill } from 'react-icons/ri'
 import './MapWithMarkers.css'
@@ -31,9 +30,9 @@ const MapWithMarkers = ({
   )
 
   const [viewport, setViewport] = useState({
-    latitude: latitude || 39.744137,
-    longitude: longitude || -104.95005,
-    zoom: zoom || 10,
+    latitude: latitude || 39.755697,
+    longitude: longitude || -105.002651,
+    zoom: zoom || 12,
     width: '100%',
     height: '100%',
   })
@@ -43,7 +42,7 @@ const MapWithMarkers = ({
       setViewport({
         latitude: +selectedArt.latitude,
         longitude: +selectedArt.longitude,
-        zoom: 10,
+        zoom: 12,
         width: '100%',
         height: '100%',
       })
