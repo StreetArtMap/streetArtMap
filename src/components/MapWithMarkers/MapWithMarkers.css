@@ -34,6 +34,7 @@
 
 .my-location-icon {
   color: var(--urgent);
+  font-size: 2.5rem;
 }
 
 .art-location-icon {
