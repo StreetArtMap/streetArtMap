@@ -1,11 +1,8 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import ReactDOM from 'react-dom'
-import { render, cleanup, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-// import { ApolloClient } from '@apollo/client'
 import { ApolloProvider } from "@apollo/react-hooks"
-import { DEFAULT_IMG_URL, PROFILE_IMG_PLACEHOLDER } from '../../constants'
 import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
@@ -17,7 +14,6 @@ describe('ProfilePage', () => {
   let client
   let initialState
   let mockStore
-  let DEFAULT_IMG_URL
 
   beforeEach(() => {
     initialState = {
@@ -40,7 +36,7 @@ describe('ProfilePage', () => {
           instagramHandle: null,
           favorite: true,
           visited: false,
-        },
+        }
       ],
       session: { selectedArt: '' },
     }
@@ -63,64 +59,22 @@ describe('ProfilePage', () => {
         </ApolloProvider>
       )
   })
-    it('<ProfilePage/> component successfully renders', () => {
-      const { getByText, debug } = ProfilePageContainer
-      debug()
-      expect(getByText('test username')).toBeInTheDocument()
-    })
-
-     // it('should render the profile page', () => {
-  //   const { getByText, getByTitle, getAllByRole } = ProfilePageContainer
-
-  //   const userName = getByText('UserName Here')
-  //   const savedImages = getByText('10 Images Saved')
-  //   const postsInformation = getByText('55 Posts')
-  //   const images = getAllByRole('img')
-  //   const collectionBtn = getByTitle('collection-icon')
-  //   const bookmarkBtn = getByTitle('bookmark-icon')
-  //   expect(userName).toBeInTheDocument()
-  //   expect(savedImages).toBeInTheDocument()
-  //   expect(postsInformation).toBeInTheDocument()
-  //   expect(images).toHaveLength(8)
-  //   expect(collectionBtn).toBeInTheDocument()
-  //   expect(bookmarkBtn).toBeInTheDocument()
-  // })
+  it('<ProfilePage/> component successfully renders', () => {
+    const { getByText, getByTestId } = ProfilePageContainer
+    const userName = getByText('test username')
+    const postAmount = getByText('1 Posts')
+    const collectionBtn = getByTestId('collection-icon')
+    const bookmarkBtn = getByTestId('bookmark-icon')
+    const toursBtn = getByTestId('tours-icon')
+    const popUp = getByText('Curated Walking Tours')
+    const popUpBtn = getByText('back')
+    expect(userName).toBeInTheDocument()
+    expect(postAmount).toBeInTheDocument()
+    expect(collectionBtn).toBeInTheDocument()
+    expect(bookmarkBtn).toBeInTheDocument()
+    expect(toursBtn).toBeInTheDocument()
+    expect(popUp).toBeInTheDocument()
+    expect(popUpBtn).toBeInTheDocument()
+  })
 })
 
-  // afterEach(cleanup)
-
-  // it('fake test', () => {
-  //   expect(true).toBeTruthy()
-  // })
-
-  // it('<ProfilePage/> component successfully renders', () => {
-  //   const { getByText } = ProfilePageContainer
-  //   expect(getByText('user')).toBeInTheDocument()
-  // })
-
-  // it('should render without crashing', () => {
-  //   const div = document.createElement('div');
-  //   ReactDOM.render(
-  //     <BrowserRouter>
-  //       <ProfilePage />
-  //     </BrowserRouter>, div);
-  //   ReactDOM.unmountComponentAtNode(div);
-  // })
-
-  // it('should render the profile page', () => {
-  //   const { getByText, getByTitle, getAllByRole } = ProfilePageContainer
-
-  //   const userName = getByText('UserName Here')
-  //   const savedImages = getByText('10 Images Saved')
-  //   const postsInformation = getByText('55 Posts')
-  //   const images = getAllByRole('img')
-  //   const collectionBtn = getByTitle('collection-icon')
-  //   const bookmarkBtn = getByTitle('bookmark-icon')
-  //   expect(userName).toBeInTheDocument()
-  //   expect(savedImages).toBeInTheDocument()
-  //   expect(postsInformation).toBeInTheDocument()
-  //   expect(images).toHaveLength(8)
-  //   expect(collectionBtn).toBeInTheDocument()
-  //   expect(bookmarkBtn).toBeInTheDocument()
-  // })
-// })
