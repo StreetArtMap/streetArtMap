@@ -8,26 +8,12 @@
   position: relative;
 }
 
-.toggle-maps-btn {
-  position: absolute;
-  z-index: 9;
-  font-size: 4rem;
-  color: var(--medium-dark);
-  cursor: pointer;
-}
-
 .route {
   font-size: 1.4rem;
 }
 
 .popup {
   pointer-events: none;
-}
-
-.toggle-maps-btn {
-  position: absolute;
-  left: 5%;
-  top: 15%;
 }
 
 .navigation-control {
@@ -47,15 +33,15 @@
 }
 
 .my-location-icon {
-  font-size: 2.5rem;
   color: var(--urgent);
 }
 
 .art-location-icon {
   font-size: 2.5rem;
-  color: var(--accent-dark);
+  color: var(--dark);
   position: absolute;
   top: -30px;
+  z-index: 1;
 }
 
 .map-image-carousel-container {
@@ -98,4 +84,26 @@
   color: var(--extra-light);
   line-height: 0.5;
   padding: 10px;
+}
+
+.map-pin-wrapper {
+  position: relative;
+}
+
+.art-location-top-icon {
+  position: absolute;
+  font-size: 1.3rem;
+  left: 9.5px;
+  bottom: 0.5px;
+  color: var(--extra-light);
+  z-index: 2;
+}
+
+.art-location-top-check-icon {
+  position: absolute;
+  font-size: 0.8rem;
+  left: 14px;
+  bottom: 5px;
+  color: var(--extra-dark);
+  z-index: 3;
 }

@@ -12,6 +12,9 @@ import ReactMapGL, {
 } from 'react-map-gl'
 import ImageCarousel from '../ImageCarousel/ImageCarousel'
 import { FaMapMarkerAlt, FaMapPin } from 'react-icons/fa'
+import { BiHeartCircle, BiCheckCircle } from 'react-icons/bi'
+import { FaHeart, FaCheck } from 'react-icons/fa'
+import { RiMapPin3Fill } from 'react-icons/ri'
 import './MapWithMarkers.css'
 
 const MapWithMarkers = ({
@@ -54,15 +57,29 @@ const MapWithMarkers = ({
       offsetLeft={-20}
       offsetTop={-10}
     >
-      <FaMapPin
+      <section
+        className='map-pin-wrapper'
         id={art.id}
-        className='art-location-icon'
         onClick={(e) => {
           e.preventDefault()
           dispatch(selectArt(art.id))
           e.target.classList.add('active')
         }}
-      />
+      >
+        {art.favorite && !art.visited && (
+          <FaHeart className='art-location-top-icon' />
+        )}
+        {art.visited && !art.favorite && (
+          <FaCheck className='art-location-top-icon' />
+        )}
+        {art.favorite && art.visited && (
+          <FaHeart className='art-location-top-icon' />
+        )}
+        {art.visited && art.favorite && (
+          <FaCheck className='art-location-top-check-icon' />
+        )}
+        <RiMapPin3Fill className='art-location-icon' />
+      </section>
     </Marker>
   ))
 
