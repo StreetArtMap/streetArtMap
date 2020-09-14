@@ -15,6 +15,5 @@ const Modal = ({ show, children }) => {
 export default Modal
 
 Modal.propTypes = {
-  show: PropTypes.bool,
   children: PropTypes.node
 }

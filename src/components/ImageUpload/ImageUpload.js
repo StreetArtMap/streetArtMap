@@ -64,6 +64,7 @@ const ImageUpload = ({
           type='file'
           className='file-input'
           id='file-input'
+          data-testid="image-input"
           onChange={(e) => {
             setImageSelected(e.target.files[0].name)
           }}

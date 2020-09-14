@@ -50,7 +50,7 @@ Button.propTypes = {
   href: PropTypes.string,
   to: PropTypes.string,
   inverse: PropTypes.bool,
-  styling: PropTypes.object,
+  styling: PropTypes.string,
   disabled: PropTypes.bool,
   type: PropTypes.string,
   onClick: PropTypes.func
