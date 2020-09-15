@@ -22,8 +22,8 @@ const ArtDetails = ({
     visited,
     favorite,
   },
-  setLoading,
   setError,
+  mapArtDetails,
 }) => {
   const dispatch = useDispatch()
   const FAVORITE_ART = gql`
@@ -45,35 +45,21 @@ const ArtDetails = ({
     }
   `
   const [favoriteStreetArt] = useMutation(FAVORITE_ART, {
-    onCompleted(data) {
-      if (data && data.favoriteStreetArt) {
-        dispatch(toggleFavorite(data.favoriteStreetArt.id))
-        setLoading(false)
-      }
-    },
     onError(error) {
       console.log(error.message)
       setError('Something went wrong... ')
-      setLoading(false)
     },
   })
 
   const [visitStreetArt] = useMutation(VISITED_ART, {
-    onCompleted(data) {
-      if (data && data.visitStreetArt) {
-        dispatch(toggleVisited(data.visitStreetArt.id))
-        setLoading(false)
-      }
-    },
     onError(error) {
       console.log(error)
       setError('Something went wrong... ')
-      setLoading(false)
     },
   })
 
   const toggleFavoriteHandler = () => {
-    setLoading(true)
+    dispatch(toggleFavorite(id))
     favoriteStreetArt({
       variables: {
         streetArtId: +id,
@@ -83,7 +69,7 @@ const ArtDetails = ({
   }
 
   const toggleVisitedHandler = () => {
-    setLoading(true)
+    dispatch(toggleVisited(id))
     visitStreetArt({
       variables: {
         streetArtId: +id,
@@ -114,21 +100,27 @@ const ArtDetails = ({
           />
         )}
       </section>
-      {artName && <p className='artist-name'>{artName}</p>}
-      {artistName && <p className='artist-name'>{artistName}</p>}
-      {instagramHandle && (
+      {artName && !mapArtDetails && <p className='artist-name'>{artName}</p>}
+      {artistName && !mapArtDetails && (
+        <p className='artist-name'>{artistName}</p>
+      )}
+      {instagramHandle && !mapArtDetails && (
         <a
           href={`https://www.instagram.com/${instagramHandle}`}
           className='instagram-wrapper'
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <AiFillInstagram className='art-icon' data-testid="instagram-icon" />
           {instagramHandle}
         </a>
       )}
-      {address && (
+      {address && !mapArtDetails && (
         <p className='address'>{`${address} ${city} ${state} ${zipcode}`}</p>
       )}
-      {description && <p className='description'>{description}</p>}
+      {description && !mapArtDetails && (
+        <p className='description'>{description}</p>
+      )}
     </section>
   )
 }
@@ -150,5 +142,5 @@ ArtDetails.propTypes = {
     favorite: PropTypes.bool,
   }),
   setLoading: PropTypes.func,
-  setError: PropTypes.func
+  setError: PropTypes.func,
 }

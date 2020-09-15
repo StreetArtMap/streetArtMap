@@ -19,7 +19,12 @@ const Button = ({
 
   if (href) {
     return (
-      <a className={className} href={href}>
+      <a
+        className={className}
+        href={href}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         {children}
       </a>
     )
@@ -53,5 +58,5 @@ Button.propTypes = {
   styling: PropTypes.string,
   disabled: PropTypes.bool,
   type: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 }

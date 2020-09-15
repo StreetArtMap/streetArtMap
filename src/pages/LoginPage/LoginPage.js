@@ -45,7 +45,7 @@ const LoginPage = ({
   const { loading, error, data } = useQuery(ART_FETCH)
 
   const verifyUser = () => {
-    if (username === 'a' && password === 'a') {
+    if (username === 'edignot' && password === 'edignot') {
       setIsLoggedIn(true)
       dispatch(login(username))
       getArt()
@@ -110,12 +110,11 @@ const LoginPage = ({
   )
 }
 
-
 export default LoginPage
 
 LoginPage.propTypes = {
   isLoggedIn: PropTypes.bool,
   setIsLoggedIn: PropTypes.func,
   currentUser: PropTypes.object,
-  setCurrentUser: PropTypes.func
+  setCurrentUser: PropTypes.func,
 }

@@ -56,10 +56,10 @@ const ProfilePage = () => {
 
   const handleShowTours = () => {
     getTours()
-      .then(response => {
+      .then((response) => {
         showTours(response.data.data.allTours)
       })
-      .catch(error => {
+      .catch((error) => {
         setError(error.message)
         console.log(error)
       })
@@ -67,14 +67,15 @@ const ProfilePage = () => {
   }
 
   const showTours = (tours) => {
-    const unpackedTours = tours.map(tour => {
+    const unpackedTours = tours.map((tour) => {
       return (
-        <Button key={tour.id} href={tour.link}>{tour.name}</Button>
+        <Button key={tour.id} href={tour.link} styling='padding'>
+          {tour.name}
+        </Button>
       )
     })
     setTours(unpackedTours)
   }
-
 
   const favoritedArts = useSelector((state) => state.arts)
     .filter((art) => art.favorite)
@@ -112,7 +113,12 @@ const ProfilePage = () => {
           <p className='user-image-count'>{arts.length} Posts</p>
           <section className='button-container'>
             <section className='tours-button' onClick={handleShowTours}>
-              <FaRoute className='art-icon' title='tours-icon' data-testid="tours-icon" onClick={() => getTours()}/>
+              <FaRoute
+                className='art-icon'
+                title='tours-icon'
+                data-testid="tours-icon"
+                onClick={() => getTours()}
+              />
             </section>
             <section className='all-button' onClick={handleShowAll}>
               <FaBookOpen className='art-icon' title='collection-icon' data-testid="collection-icon" />

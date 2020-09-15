@@ -200,7 +200,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
 
   const mappedImages = images.map((image) => {
     return (
-      <section className='form-image-wrapper' key={uuidv4()} >
+      <section className='form-image-wrapper' key={uuidv4()}>
         <section onClick={removeImageHandler}>
           <TiDelete id={image} className='image-delete-btn' />
         </section>
@@ -310,8 +310,8 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
               <MapWithMarkers
                 formMap={true}
                 zoom={14}
-                lat={currentLocation.latitude}
-                lng={currentLocation.longitude}
+                latitude={currentLocation.latitude}
+                longitude={currentLocation.longitude}
               />
             </section>
           </>
@@ -390,5 +390,5 @@ CreateForm.propTypes = {
   images: PropTypes.array,
   setPostImage: PropTypes.func,
   setImages: PropTypes.func,
-  setError: PropTypes.func
+  setError: PropTypes.func,
 }
