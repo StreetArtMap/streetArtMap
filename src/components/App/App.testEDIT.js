@@ -14,8 +14,8 @@ jest.mock("react-redux", () => ({
   useSelector: jest.fn()
 }));
 
-describe.skip('<App />', () => {
-  let AppContainer, store, initialState, mockStore, client, art
+describe('<App />', () => {
+  let AppContainer, store, initialState, mockStore, client, art, user, login
 
   beforeEach(() => {
     initialState = {
@@ -42,6 +42,14 @@ describe.skip('<App />', () => {
       session: { selectedArt: '' },
     }
 
+    login = {
+      type: 'LOGIN',
+      user
+    }
+
+    user = {
+      name: "edignot"
+    }
     art =  {
       id: '2',
       latitude: +'39.744137',
