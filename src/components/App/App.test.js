@@ -3,38 +3,50 @@ import { render, cleanup, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { MemoryRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-// import { useSelector } from 'react-redux'
 import configureStore from 'redux-mock-store'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
-import { createMemoryHistory } from 'history'
-import rootReducer from '../../reducers/index'
 import App from './App'
-jest.mock("react-redux", () => ({
-  ...jest.requireActual("react-redux"),
-  useSelector: jest.fn()
-}));
 
 describe('<App />', () => {
-  let AppContainer, store, initialState, mockStore, client, art, user, login
+  let AppContainer
+  let store
+  let client
+  let initialState
+  let mockStore
 
   beforeEach(() => {
     initialState = {
       user: {
-        name: '',
+        name: 'edita',
       },
       arts: [
         {
           id: '1',
-          latitude: 39.744137,
-          longitude: -104.95005,
+          latitude: +'39.744137',
+          longitude: +'-104.95005',
           address: 'address1',
           city: 'city1',
           state: 'state1',
           zipcode: 'zip1',
-          image_urls: ['url2', 'url1'],
+          imageUrls: ['url2', 'url1'],
           description: 'something about this art',
-          artist_name: 'artist name',
-          instagram_handle: null,
+          artistName: 'artist name',
+          instagramHandle: null,
+          favorite: true,
+          visited: false,
+        },
+        {
+          id: '2',
+          latitude: +'39.744137',
+          longitude: +'-104.95005',
+          address: 'address2',
+          city: 'city2',
+          state: 'state2',
+          zipcode: 'zip2',
+          imageUrls: ['url2', 'url1'],
+          description: 'test this art',
+          artistName: 'artist name2',
+          instagramHandle: null,
           favorite: true,
           visited: false,
         },
@@ -42,48 +54,14 @@ describe('<App />', () => {
       session: { selectedArt: '' },
     }
 
-    login = {
-      type: 'LOGIN',
-      user
-    }
-
-    user = {
-      name: "edignot"
-    }
-    art =  {
-      id: '2',
-      latitude: +'39.744137',
-      longitude: +'-104.95005',
-      address: 'address2',
-      city: 'city2',
-      state: 'state2',
-      zipcode: 'zip2',
-      images: ['https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600116891/ldxpxerqishozdxuvpzp.jpg', 'https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600116891/ldxpxerqishozdxuvpzp.jpg'],
-      description: 'test this art',
-      artistName: 'artist name2',
-      instagramHandle: null,
-      favorite: true,
-      visited: false,
-    }
-
     mockStore = configureStore()
-    store = mockStore(rootReducer, initialState)
-
-    // useSelector.mockImplementation(callback => {
-    //   let newState = {
-    //     ...initialState,
-    //     session: {
-    //       selectedArt: ''
-    //     }
-    //   }
-    //   return callback(newState);
-    // });
+    store = mockStore(initialState)
 
     client = new ApolloClient({
       uri: 'https://streetwalker-backend.herokuapp.com/graphql',
       cache: new InMemoryCache(),
     })
-    
+
     AppContainer = render(
       <ApolloProvider client={client}>
         <Provider store={store}>
@@ -102,9 +80,9 @@ describe('<App />', () => {
     const title = getByText('Street | ART | Walk')
     const usernameInput = getByPlaceholderText('Username...')
     const passwordInput = getByPlaceholderText('Password...')
-    const loginBtn = getByText("LOG IN")
-    const signupBtn = getByText("SIGN UP")
-    const noAccountMessage = getByTestId("signup-message")
+    const loginBtn = getByText('LOG IN')
+    const signupBtn = getByText('SIGN UP')
+    const noAccountMessage = getByTestId('signup-message')
     expect(title).toBeInTheDocument()
     expect(usernameInput).toBeInTheDocument()
     expect(passwordInput).toBeInTheDocument()
@@ -118,7 +96,7 @@ describe('<App />', () => {
     const title = getByText('Street | ART | Walk')
     const usernameInput = getByPlaceholderText('Username...')
     const passwordInput = getByPlaceholderText('Password...')
-    const loginBtn = getByText("LOG IN")
+    const loginBtn = getByText('LOG IN')
 
     expect(title).toBeInTheDocument()
     expect(usernameInput).toBeInTheDocument()
@@ -132,14 +110,41 @@ describe('<App />', () => {
     expect(loginBtn).not.toBeInTheDocument()
   })
 
-  it('Should update path locations when the log in button is clicked', () => {
-    const testHistoryObject = createMemoryHistory()
-    const { getByText, debug } = AppContainer
-    debug()
-    expect(testHistoryObject.location.pathname).toEqual('/')
+  it('Should display error mesage and stay on login page if username and password are not correct', () => {
+    const { getByText, getByPlaceholderText, debug } = AppContainer
     const loginBtn = getByText('LOG IN')
-    fireEvent.click(loginBtn, 'right click')
-    expect(testHistoryObject.location.pathname).toEqual('/')
-    // fix this last expect with '/explore'
+    fireEvent.change(getByPlaceholderText('Username...'), {
+      target: { value: 'wrong username' },
+    })
+    fireEvent.change(getByPlaceholderText('Password...'), {
+      target: { value: 'wrong password' },
+    })
+    fireEvent.click(loginBtn)
+    debug()
+  })
+
+  it('Should redirect to explore page after successful login and show explore, header, nav data', () => {
+    const { getByText, getByPlaceholderText, getByTestId, debug } = AppContainer
+    const loginBtn = getByText('LOG IN')
+    fireEvent.change(getByPlaceholderText('Username...'), {
+      target: { value: 'edignot' },
+    })
+    fireEvent.change(getByPlaceholderText('Password...'), {
+      target: { value: 'edignot' },
+    })
+    fireEvent.click(loginBtn)
+    const header = getByText('Street | ART | Walk')
+    const exploreNav = getByText('explore')
+    const mapNav = getByText('map')
+    const createNav = getByText('explore')
+    const profileNav = getByText('profile')
+    const exploreContainer = getByTestId('explore-container')
+    expect(header).toBeInTheDocument()
+    expect(exploreNav).toBeInTheDocument()
+    expect(mapNav).toBeInTheDocument()
+    expect(createNav).toBeInTheDocument()
+    expect(profileNav).toBeInTheDocument()
+    expect(exploreContainer).toBeInTheDocument()
+    debug()
   })
 })
