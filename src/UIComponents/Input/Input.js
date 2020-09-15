@@ -48,8 +48,8 @@ Input.propTypes = {
   onChange: PropTypes.func,
   id: PropTypes.number,
   label: PropTypes.string,
-  element: PropTypes.element,
-  rows: PropTypes.number,
+  element: PropTypes.string,
+  rows: PropTypes.string,
   errorMessage: PropTypes.string,
   isValid: PropTypes.bool,
 }

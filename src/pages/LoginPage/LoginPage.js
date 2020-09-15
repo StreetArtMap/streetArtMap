@@ -83,6 +83,7 @@ const LoginPage = ({
             placeholder='Username...'
             label='username'
             id='username'
+            data-testid='username-input'
           ></Input>
           <Input
             onChange={(e) => setPassword(e.target.value)}
@@ -90,6 +91,7 @@ const LoginPage = ({
             placeholder='Password...'
             label='password'
             id='password'
+            data-testid='password-input'
           ></Input>
           {credentialsError && (
             <p className='credentials-error'>
@@ -99,12 +101,13 @@ const LoginPage = ({
           <Button
             onClick={() => verifyUser()}
             type='submit'
-            to={currentUser.name ? '/explore' : '/'}
+            to='/explore'
+            // to={currentUser.name ? '/explore' : '/'}
           >
             LOG IN
           </Button>
         </section>
-        <p>Don't have an account?</p>
+        <p data-testid='signup-message'>Don't have an account?</p>
         <Button>SIGN UP</Button>
       </section>
     </section>

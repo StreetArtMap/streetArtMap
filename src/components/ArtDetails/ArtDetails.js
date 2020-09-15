@@ -82,18 +82,20 @@ const ArtDetails = ({
     <section className='art-details-container'>
       <section className='art-icons-wrapper'>
         {favorite ? (
-          <FaHeart className='art-icon' onClick={toggleFavoriteHandler} />
+          <FaHeart className='art-icon' data-testid="favorite-icon"  onClick={toggleFavoriteHandler} />
         ) : (
-          <FaRegHeart className='art-icon' onClick={toggleFavoriteHandler} />
+          <FaRegHeart className='art-icon' data-testid="unfavorite-icon" onClick={toggleFavoriteHandler} />
         )}
         {visited ? (
           <RiCheckboxCircleLine
             className='art-icon'
+            data-testid="unvisited-icon"
             onClick={toggleVisitedHandler}
           />
         ) : (
           <RiCheckboxBlankCircleLine
             className='art-icon'
+            data-testid="visited-icon"
             onClick={toggleVisitedHandler}
           />
         )}
@@ -109,7 +111,7 @@ const ArtDetails = ({
           target='_blank'
           rel='noopener noreferrer'
         >
-          <AiFillInstagram className='art-icon' />
+          <AiFillInstagram className='art-icon' data-testid="instagram-icon" />
           {instagramHandle}
         </a>
       )}
@@ -127,7 +129,7 @@ export default ArtDetails
 
 ArtDetails.propTypes = {
   art: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     address: PropTypes.string,
     city: PropTypes.string,
     state: PropTypes.string,

@@ -116,14 +116,15 @@ const ProfilePage = () => {
               <FaRoute
                 className='art-icon'
                 title='tours-icon'
+                data-testid="tours-icon"
                 onClick={() => getTours()}
               />
             </section>
             <section className='all-button' onClick={handleShowAll}>
-              <FaBookOpen className='art-icon' title='collection-icon' />
+              <FaBookOpen className='art-icon' title='collection-icon' data-testid="collection-icon" />
             </section>
             <section className='saved-button' onClick={handleFavorites}>
-              <FaHeart className='art-icon' title='bookmark-icon' />
+              <FaHeart className='art-icon' title='bookmark-icon' data-testid="bookmark-icon" />
             </section>
           </section>
         </section>
@@ -134,7 +135,7 @@ const ProfilePage = () => {
         <section className='photo-container'>{arts}</section>
       )}
       <Modal show={displayModal}>
-        <p className='modal-message'>Curated Waking Tours</p>
+        <p className='modal-message'>Curated Walking Tours</p>
         {tours}
         <Button styling='padding' onClick={() => setDisplayModal(false)}>
           back

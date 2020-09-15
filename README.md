@@ -1,14 +1,14 @@
-# Street Art Walk    
+# Street | ART | Walk - Frontend Service 
 
 [![Build Status](https://travis-ci.org/StreetArtMap/streetArtMap.svg?branch=master)](https://travis-ci.org/StreetArtMap/streetArtMap)
 
 ## Introduction
 
-Street Art Walk is an application that allows a user to search street art locations and information using maps. Leveraging Progressive Web Apps technology, we have designed the application to allow for a user to upload images of street art they find and allow them to pin their location, and any pertinent details like the artist name, including an instagram handle. This projects attempts to address the lack of a resources to find street art in organized manner and will also allow to post their work, including a description and their name as a way of leaving links to find more of their work. 
+[Street | ART | Walk](https://streetartwalk.netlify.app/) is an application that allows a user to search street art locations and information using maps. Leveraging Progressive Web Apps technology, we have designed the application to allow for a user to upload images of street art they find and allow them to pin their location, and any pertinent details like the artist name, artist instagram handle, and a brief description. This project attempts to address the lack of a resources for exploring street art in an organized manner. This app allows the artist to post and promote their work, including a description of the artwork and their instagram link in order to facilitate user artist discovery. 
 
-This application was bootstrapped using Create-React-App with Redux and Hooks, while utilizing GraphQL and the Apollo Client to handle our APIs. We employed static asset caching by using Progressive Web Apps technologies. The Application was deployed using TravisCI and Netlify. 
+This application was bootstrapped using Create-React-App with Redux and Hooks. We utilized GraphQL and the Apollo Client to handle our APIs. We employed static asset caching by using Progressive Web Apps technologies. The application was deployed using TravisCI and Netlify. 
 
-[Production link](https://streetartwalk.netlify.app/)
+[Deployed link](https://streetartwalk.netlify.app/)
 
 ## Application Demo 
 
@@ -50,5 +50,5 @@ Temporary Credentials:
 More Details: [Street Art Walk Backend](https://github.com/StreetArtMap/street_art_backend)
 
 ## Collaborators
-- Edita Ignot
-- Carlos Flores 
+- [Edita Ignot](github.com/edignot)
+- [Carlos Flores](github.com/carflor) 
