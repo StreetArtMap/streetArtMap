@@ -3,13 +3,18 @@ import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from "@apollo/react-hooks"
 import configureStore from 'redux-mock-store'
-import Nav from './Nav'
+import PaintingCard from './PaintingCard'
+jest.mock("react-redux", () => ({
+  ...jest.requireActual("react-redux"),
+  useSelector: jest.fn()
+}));
 
-describe('Nav', () => {
-  let NavBox, store, initialState, mockStore, client, art
+describe('PaintingCard', () => {
+  let PaintingCardBox, store, initialState, mockStore, client, art, state
   beforeEach(() => {
     client = new ApolloClient({
       uri: 'https://streetwalker-backend.herokuapp.com/graphql',
@@ -51,7 +56,7 @@ describe('Nav', () => {
           favorite: true,
           visited: false,
         },
-      ],
+      ]
     }
     art =  {
       id: '2',
@@ -68,28 +73,49 @@ describe('Nav', () => {
       favorite: true,
       visited: false,
     }
+
+    useSelector.mockImplementation(callback => {
+      let newState = {
+        ...initialState,
+        session: {
+          selectedArt: '2'
+        }
+      }
+      return callback(newState);
+    });
+
     mockStore = configureStore()
     store = mockStore(initialState)
 
-    NavBox = render(
+    PaintingCardBox = render(
       <ApolloProvider client={client}>
         <Provider store={store}>
           <BrowserRouter>
-            <Nav art={art}/>
+            <PaintingCard art={art}/>
           </BrowserRouter>
         </Provider>
       </ApolloProvider>
       )
   })
-  it('<Nav /> component successfully renders', () => {
-    const { getByTitle } = NavBox
-    const searchIcon = getByTitle('search-icon')
-    const mapIcon = getByTitle('map-icon')
-    const cameraIcon = getByTitle('camera-icon')
-    const profileIcon = getByTitle('profile-icon')
-    expect(searchIcon).toBeInTheDocument()
-    expect(mapIcon).toBeInTheDocument()
-    expect(cameraIcon).toBeInTheDocument()
-    expect(profileIcon).toBeInTheDocument()
+  it('<PaintingCard /> component successfully renders', () => {
+    const { getAllByTestId, getByTestId, getByText } = PaintingCardBox
+    const images = getAllByTestId('image')
+    const previousButton = getByText('Previous')
+    const nextButton = getByText('Next')
+    const favoriteIcon = getByTestId('favorite-icon')
+    const visitedIcon = getByTestId('visited-icon')
+    const artistName = getByText('artist name2')
+    const artistAddress = getByText('address2 city2 state2 zip2')
+    const description = getByText('test this art')
+    const mapWithMarkers = getByTestId('map-with-markers')
+    expect(images).toHaveLength(5)
+    expect(previousButton).toBeInTheDocument()
+    expect(nextButton).toBeInTheDocument()
+    expect(favoriteIcon).toBeInTheDocument()
+    expect(visitedIcon).toBeInTheDocument()
+    expect(artistName).toBeInTheDocument()
+    expect(artistAddress).toBeInTheDocument()
+    expect(description).toBeInTheDocument()
+    expect(mapWithMarkers).toBeInTheDocument()
   })
 })
