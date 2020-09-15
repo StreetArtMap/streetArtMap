@@ -10,7 +10,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 6;
+  z-index: 10;
   background-color: var(--extra-light);
   opacity: 0.96;
   transform: translateY(0);
