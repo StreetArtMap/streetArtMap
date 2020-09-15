@@ -39,9 +39,10 @@ First you'll need these installed:
 - run npm install 
 - npm start (begins the server locally)
 
-Temporary Credentials: 
-- username: a
-- password: a
+Temporary Credentials for DEMO: 
+- username = username
+- password = password
+
 
 ### Backend 
 
