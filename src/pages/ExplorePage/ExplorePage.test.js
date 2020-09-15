@@ -75,11 +75,6 @@ describe('ExplorePage', () => {
 
   afterEach(cleanup)
 
-  it('<ExplorePage/> component successfully renders', () => {
-    const { getByText } = ExplorePageContainer
-    expect(getByText('artist name')).toBeInTheDocument()
-  })
-
   it('should render the Explore Page', () => {
     const { getByText, getAllByTestId } = ExplorePageContainer
     const artistName1 = getByText('artist name')

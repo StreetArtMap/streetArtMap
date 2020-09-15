@@ -39,6 +39,7 @@ const ImageCarousel = ({
               id={id}
               src={image}
               alt={image}
+              data-testid="image"
               className={`carousel-img main-carousel`}
               onError={addDefaultImageSrc}
               onClick={() => {
@@ -55,6 +56,7 @@ const ImageCarousel = ({
             id={id}
             src={image}
             alt={image}
+            data-testid="image"
             height={height}
             key={uuidv4()}
             className={`carousel-img ${mapCarousel && 'map-carousel'} ${

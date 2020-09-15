@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup, screen } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from "@apollo/react-hooks"
