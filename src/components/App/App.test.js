@@ -111,7 +111,7 @@ describe('<App />', () => {
   })
 
   it('Should display error mesage and stay on login page if username and password are not correct', () => {
-    const { getByText, getByPlaceholderText, debug } = AppContainer
+    const { getByText, getByPlaceholderText } = AppContainer
     const loginBtn = getByText('LOG IN')
     fireEvent.change(getByPlaceholderText('Username...'), {
       target: { value: 'wrong username' },
@@ -120,17 +120,17 @@ describe('<App />', () => {
       target: { value: 'wrong password' },
     })
     fireEvent.click(loginBtn)
-    debug()
+    expect(getByText(`Don't have an account?`)).toBeInTheDocument()
   })
 
   it('Should redirect to explore page after successful login and show explore, header, nav data', () => {
-    const { getByText, getByPlaceholderText, getByTestId, debug } = AppContainer
+    const { getByText, getByPlaceholderText, getByTestId } = AppContainer
     const loginBtn = getByText('LOG IN')
     fireEvent.change(getByPlaceholderText('Username...'), {
-      target: { value: 'edignot' },
+      target: { value: 'username' },
     })
     fireEvent.change(getByPlaceholderText('Password...'), {
-      target: { value: 'edignot' },
+      target: { value: 'password' },
     })
     fireEvent.click(loginBtn)
     const header = getByText('Street | ART | Walk')
@@ -145,6 +145,60 @@ describe('<App />', () => {
     expect(createNav).toBeInTheDocument()
     expect(profileNav).toBeInTheDocument()
     expect(exploreContainer).toBeInTheDocument()
-    debug()
   })
+
+  it('Should open map page', () => {
+    const { getByText, getByPlaceholderText, getByTestId } = AppContainer
+    const loginBtn = getByText('LOG IN')
+    fireEvent.change(getByPlaceholderText('Username...'), {
+      target: { value: 'username' },
+    })
+    fireEvent.change(getByPlaceholderText('Password...'), {
+      target: { value: 'password' },
+    })
+    fireEvent.click(loginBtn)
+    const exploreContainer = getByTestId('explore-container')
+    const mapNav = getByText('map')
+    fireEvent.click(mapNav)
+    const mapContainer = getByTestId('map-container')
+    expect(mapContainer).toBeInTheDocument()
+    expect(exploreContainer).not.toBeInTheDocument()
+  })
+
+  it('Should open create page', () => {
+    const { getByText, getByPlaceholderText, getByTestId } = AppContainer
+    const loginBtn = getByText('LOG IN')
+    fireEvent.change(getByPlaceholderText('Username...'), {
+      target: { value: 'username' },
+    })
+    fireEvent.change(getByPlaceholderText('Password...'), {
+      target: { value: 'password' },
+    })
+    fireEvent.click(loginBtn)
+    const exploreContainer = getByTestId('explore-container')
+    const createNav = getByText('create')
+    fireEvent.click(createNav)
+    const cameraContainer = getByTestId('camera-container')
+    expect(cameraContainer).toBeInTheDocument()
+    expect(exploreContainer).not.toBeInTheDocument()
+  })
+
+  // it('Should open create page', () => {
+  //   const { getByText, getByPlaceholderText, getByTestId, debug } = AppContainer
+  //   const loginBtn = getByText('LOG IN')
+  //   fireEvent.change(getByPlaceholderText('Username...'), {
+  //     target: { value: 'username' },
+  //   })
+  //   fireEvent.change(getByPlaceholderText('Password...'), {
+  //     target: { value: 'password' },
+  //   })
+  //   fireEvent.click(loginBtn)
+  //   const exploreContainer = getByTestId('explore-container')
+  //   const profileNav = getByText('profile')
+  //   fireEvent.click(profileNav)
+  //   const profileContainer = getByTestId('profile-container')
+  //   expect(profileContainer).toBeInTheDocument()
+  //   expect(exploreContainer).not.toBeInTheDocument()
+  //   debug()
+  // })
 })

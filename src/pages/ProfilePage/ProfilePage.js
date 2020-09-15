@@ -62,7 +62,7 @@ const ProfilePage = () => {
     })
 
   return (
-    <section className='profile-container'>
+    <section className='profile-container' data-testid='profile-container'>
       <section className='user-details-container'>
         <section className='user-image'>
           <img

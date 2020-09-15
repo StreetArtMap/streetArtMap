@@ -41,7 +41,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
   const { loading, error, data } = useQuery(ART_FETCH)
 
   const verifyUser = async () => {
-    if (username === 'edignot' && password === 'edignot') {
+    if (username === 'username' && password === 'password') {
       setIsLoggedIn(true)
       await getArt()
       dispatch(login(username))
