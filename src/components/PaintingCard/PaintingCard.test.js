@@ -8,13 +8,14 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from "@apollo/react-hooks"
 import configureStore from 'redux-mock-store'
 import PaintingCard from './PaintingCard'
+import rootReducer from '../../reducers/index'
 jest.mock("react-redux", () => ({
   ...jest.requireActual("react-redux"),
   useSelector: jest.fn()
 }));
 
 describe('PaintingCard', () => {
-  let PaintingCardBox, store, initialState, mockStore, client, art, state
+  let PaintingCardBox, store, initialState, mockStore, client, art
   beforeEach(() => {
     client = new ApolloClient({
       uri: 'https://streetwalker-backend.herokuapp.com/graphql',

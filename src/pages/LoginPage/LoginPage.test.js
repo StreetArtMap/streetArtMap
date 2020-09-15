@@ -7,62 +7,6 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import configureStore from 'redux-mock-store'
 import LoginPage from './LoginPage'
-// import ReactDOM from 'react-dom'
-// import { MockedProvider } from '@apollo/client/testing';
-// import { createStore } from 'redux'
-// import rootReducer from '../../reducers/index'
-// import { ART_FETCH, LoginPage } from './LoginPage'
-// const setIsLoggedIn = jest.fn()
-
-// const mocks = [
-//   {
-//     request: {
-//       query: ART_FETCH,
-//       },
-//     },{
-//     result: {
-//       data: {
-//         streetArts: [{
-//           id: 8,
-//           latitude: 39.660355,
-//           longitude: -105.598137,
-//           address: 'address2',
-//           city: 'city2',
-//           state: 'state2',
-//           zipcode: 'zip2',
-//           image_urls: [
-//             'https://images.unsplash.com/photo-1526304760382-3591d3840148?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-//             'https://images.unsplash.com/photo-1561059488-916d69792237?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80',
-//             'https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1415&q=80',
-//           ],
-//           description: 'something about this art',
-//           artist_name: 'artist name',
-//           instagram_handle: 'edignot',
-//           favorite: false,
-//           visited: true,
-//         },
-//         {
-//           id: 9,
-//           latitude: 39.72356,
-//           longitude: -104.894882,
-//           address: 'address3',
-//           city: 'city3',
-//           state: 'state3',
-//           zipcode: 'zip3',
-//           image_urls: [
-//             'https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1415&q=80',
-//             'https://images.unsplash.com/photo-1526304760382-3591d3840148?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-//           ],
-//           description: 'something about this art',
-//           artist_name: 'artist name',
-//           instagram_handle: 'edignot',
-//           favorite: true,
-//           visited: false,
-//         }],
-//       },
-//     },
-//   }
-// ];
 
 describe('<LoginPage/>', () => {
   let LoginPageContainer
@@ -96,15 +40,12 @@ describe('<LoginPage/>', () => {
     }
     mockStore = configureStore()
     store = mockStore(initialState)
-    // store = createStore(rootReducer, initialState)
-
     client = new ApolloClient({
       uri: 'https://streetwalker-backend.herokuapp.com/graphql',
       cache: new InMemoryCache(),
     })
 
     LoginPageContainer = render(
-      // <MockedProvider mocks={mocks} addTypename={false}>
       <ApolloProvider client={client}>
         <Provider store={store}>
           <BrowserRouter>
@@ -112,7 +53,6 @@ describe('<LoginPage/>', () => {
           </BrowserRouter>
         </Provider>
       </ApolloProvider>
-      // </MockedProvider>
     )
   })
   afterEach(cleanup)
