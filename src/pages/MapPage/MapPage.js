@@ -4,15 +4,17 @@ import './MapPage.css'
 import axios from 'axios'
 import Button from '../../UIComponents/Button/Button'
 import Modal from '../../UIComponents/Modal/Modal'
+import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 import { FaRoute } from 'react-icons/fa'
 
 const MapPage = () => {
   const [displayModal, setDisplayModal] = useState(false)
   const [tours, setTours] = useState([])
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const getTours = async () => {
     try {
-      return await axios.get('http://localhost:3000/tours')
+      return await axios.get('https://streetwalker-backend.herokuapp.com/tours')
     } catch (error) {
       console.log(error)
     }
@@ -20,13 +22,16 @@ const MapPage = () => {
 
   const handleShowTours = () => {
     getTours()
-      .then((response) => {
-        showTours(response.data.data.allTours)
-      })
-      .catch((error) => {
-        setError(error.message)
-        console.log(error)
-      })
+    .then((response) => {
+      showTours(response.data.data.allTours)
+      setIsLoading(false)
+    })
+    .catch((error) => {
+      setError(error.message)
+      setIsLoading(false)
+      console.log(error)
+    })
+    setIsLoading(true)
     setDisplayModal(true)
   }
 
@@ -73,6 +78,7 @@ const MapPage = () => {
           close
         </Button>
       </Modal>
+      {isLoading && <LoadingSpinner asOverlay />}
     </>
   )
 }

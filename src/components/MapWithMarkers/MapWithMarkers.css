@@ -80,7 +80,7 @@
 }
 
 .mapboxgl-popup-close-button {
-  z-index: 9;
+  z-index: 7;
   font-size: 4rem;
   color: var(--extra-light);
   line-height: 0.5;
