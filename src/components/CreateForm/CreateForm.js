@@ -209,6 +209,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           src={image || DEFAULT_IMG_URL}
           alt='new-shoot'
           className='form-image'
+          data-testid="image"
           key={image}
           onError={addDefaultImageSrc}
         />
@@ -228,14 +229,16 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
       {!images.length && (
         <p className='no-images-error'>Please add at least one photo</p>
       )}
-      <Button onClick={() => setPostImage(false)}>
+      <Button onClick={() => setPostImage(false)} data-testid="add-more-photos-button">
         ADD MORE PHOTOS <ImCamera className='btn-icon' />
       </Button>
-      <form onSubmit={postArtHandler} className='create-art-form'>
+      <form onSubmit={postArtHandler} className='create-art-form'
+      data-testid="image-form">
         <Input
           className='create-art-input'
           type='text'
           placeholder='art title'
+          data-testid="title-input"
           value={title}
           onInput={(e) => setTitle(e.target.value)}
         />
@@ -243,6 +246,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           className='create-art-input'
           type='text'
           placeholder='artist name'
+          data-testid="name-input"
           value={artistName}
           onInput={(e) => setArtistName(e.target.value)}
         />
@@ -250,6 +254,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           className='create-art-input'
           type='text'
           placeholder='artist instagram'
+          data-testid="instagram-input"
           value={artistInstagram}
           onInput={(e) => setArtistInstagram(e.target.value)}
         />
@@ -260,6 +265,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
               className='create-art-input'
               type='text'
               placeholder='address'
+              data-testid="address"
               value={address}
               onInput={(e) => setAddress(e.target.value)}
               isValid={isAddressValid}
@@ -269,6 +275,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
               className='create-art-input'
               type='text'
               placeholder='city'
+              data-testid="city"
               value={city}
               onInput={(e) => setCity(e.target.value)}
               isValid={isCityValid}
@@ -278,6 +285,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
               className='create-art-input'
               type='text'
               placeholder='state'
+              data-testid="state"
               value={state}
               onInput={(e) => setState(e.target.value)}
               isValid={isStateValid}
@@ -287,6 +295,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
               className='create-art-input'
               type='number'
               placeholder='zipcode'
+              data-testid="zipcode"
               value={zipcode}
               onInput={(e) => setZipcode(e.target.value)}
               isValid={isZipcodeValid}
@@ -297,7 +306,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
 
         {!addressInput && currentLocation && !isArtUploaded && (
           <>
-            <section className='current-location-map'>
+            <section className='current-location-map' data-testid="map-with-markers">
               <MapWithMarkers
                 formMap={true}
                 zoom={14}
@@ -315,7 +324,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
             <section className='form-btn-wrapper my-location-btn'>
               <Button onClick={getCurrentLocationHandler}>
                 my location
-                <FaMapMarkerAlt className='btn-icon' />
+                <FaMapMarkerAlt className='btn-icon' data-testid="my-location-button" />
               </Button>
             </section>
           </>
@@ -340,13 +349,14 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           type='text'
           element='textarea'
           placeholder='description'
+          data-testid="description"
           rows='5'
           value={description}
           onInput={(e) => setDescription(e.target.value)}
         />
         <section className='form-btn-wrapper post-art-btn'>
           <Button type='submit' styling={postDisabled && 'disabled'}>
-            POST ART <FaTelegramPlane />
+            POST ART <FaTelegramPlane data-testid="post-art-icon"/>
           </Button>
         </section>
       </form>
@@ -377,7 +387,7 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
 export default withRouter(CreateForm)
 
 CreateForm.propTypes = {
-  images: PropTypes.object,
+  images: PropTypes.array,
   setPostImage: PropTypes.func,
   setImages: PropTypes.func,
   setError: PropTypes.func,

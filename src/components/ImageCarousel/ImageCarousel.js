@@ -39,6 +39,7 @@ const ImageCarousel = ({
               id={id}
               src={image}
               alt={image}
+              data-testid="image"
               className={`carousel-img main-carousel`}
               onError={addDefaultImageSrc}
               onClick={() => {
@@ -55,6 +56,7 @@ const ImageCarousel = ({
             id={id}
             src={image}
             alt={image}
+            data-testid="image"
             height={height}
             key={uuidv4()}
             className={`carousel-img ${mapCarousel && 'map-carousel'} ${
@@ -72,9 +74,9 @@ export default ImageCarousel
 ImageCarousel.propTypes = {
   images: PropTypes.array,
   height: PropTypes.number,
-  id: PropTypes.number,
+  id: PropTypes.string,
   imageLink: PropTypes.bool,
-  mapCarousel: PropTypes.func,
-  paintingMapImage: PropTypes.string,
-  paintingCardCarousel: PropTypes.string
+  mapCarousel: PropTypes.bool,
+  paintingMapImage: PropTypes.bool,
+  paintingCardCarousel: PropTypes.bool
 }

@@ -89,7 +89,7 @@ const MapWithMarkers = ({
   )
 
   return (
-    <section className='markers-map-container'>
+    <section className='markers-map-container' data-testid="map-with-markers">
       <ReactMapGL
         {...viewport}
         mapStyle='mapbox://styles/edignot/ckemah34j0amm19oe5hjne20p'

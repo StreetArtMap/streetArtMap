@@ -5,14 +5,15 @@ import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
-import ExplorePage from './ExplorePage'
+import ImageUpload from './ImageUpload'
 
-describe('ExplorePage', () => {
-  let ExplorePageContainer
+describe('ImageUpload', () => {
+  let ImageUploadContainer
   let store
   let client
   let initialState
   let mockStore
+  let setIsLoggedIn
 
   beforeEach(() => {
     initialState = {
@@ -21,7 +22,7 @@ describe('ExplorePage', () => {
       },
       arts: [
         {
-          id: '1',
+          id: 1,
           latitude: +'39.744137',
           longitude: +'-104.95005',
           address: 'address1',
@@ -36,7 +37,7 @@ describe('ExplorePage', () => {
           visited: false,
         },
         {
-          id: '2',
+          id: 2,
           latitude: +'39.744137',
           longitude: +'-104.95005',
           address: 'address2',
@@ -56,17 +57,18 @@ describe('ExplorePage', () => {
 
     mockStore = configureStore()
     store = mockStore(initialState)
+    setIsLoggedIn = jest.fn()
 
     client = new ApolloClient({
       uri: 'https://streetwalker-backend.herokuapp.com/graphql',
       cache: new InMemoryCache(),
     })
 
-    ExplorePageContainer = render(
+    ImageUploadContainer = render(
       <ApolloProvider client={client}>
         <Provider store={store}>
           <BrowserRouter>
-            <ExplorePage />
+            <ImageUpload setIsLoggedIn={setIsLoggedIn} images={initialState.arts}/>
           </BrowserRouter>
         </Provider>
       </ApolloProvider>
@@ -75,21 +77,13 @@ describe('ExplorePage', () => {
 
   afterEach(cleanup)
 
-  it('should render the Explore Page', () => {
-    const { getByText, getAllByTestId } = ExplorePageContainer
-    const artistName1 = getByText('artist name')
-    const artistAddress1 = getByText('address1 city1 state1 zip1')
-    const artistDescription1 = getByText('something about this art')
-    const artistName2 = getByText('artist name2')
-    const artistAddress2 = getByText('address2 city2 state2 zip2')
-    const artistDescription2 = getByText('test this art')
-    const images = getAllByTestId('art-container')
-    expect(artistName1).toBeInTheDocument()
-    expect(artistAddress1).toBeInTheDocument()
-    expect(artistDescription1).toBeInTheDocument()
-    expect(artistName2).toBeInTheDocument()
-    expect(artistAddress2).toBeInTheDocument()
-    expect(artistDescription2).toBeInTheDocument()
-    expect(images).toHaveLength(2)
+  it('<ImageUpload/> component successfully renders', () => {
+    const { getByTestId, getByText } = ImageUploadContainer
+    const imageInput = getByTestId('image-input')
+    const selectFromDevice = getByText('Select from device')
+    const uploadFromWidget = getByText('Upload Via Widget')
+    expect(imageInput).toBeInTheDocument()
+    expect(selectFromDevice).toBeInTheDocument()
+    expect(uploadFromWidget).toBeInTheDocument()
   })
 })

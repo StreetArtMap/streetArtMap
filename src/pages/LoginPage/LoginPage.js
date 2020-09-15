@@ -81,11 +81,13 @@ const LoginPage = ({
             onChange={(e) => setUsername(e.target.value)}
             type='text'
             placeholder='Username...'
+            data-testid="username-input"
           ></Input>
           <Input
             onChange={(e) => setPassword(e.target.value)}
             type='password'
             placeholder='Password...'
+            data-testid="password-input"
           ></Input>
           {credentialsError && (
             <p className='credentials-error'>
@@ -95,12 +97,13 @@ const LoginPage = ({
           <Button
             onClick={() => verifyUser()}
             type='submit'
-            to={currentUser.name ? '/explore' : '/'}
+            to="/explore"
+            // to={currentUser.name ? '/explore' : '/'}
           >
             LOG IN
           </Button>
         </section>
-        <p>Don't have an account?</p>
+        <p data-testid="signup-message">Don't have an account?</p>
         <Button>SIGN UP</Button>
       </section>
     </section>
