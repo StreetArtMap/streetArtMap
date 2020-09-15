@@ -1,14 +1,15 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { ApolloProvider } from "@apollo/react-hooks"
+import { ApolloProvider } from '@apollo/react-hooks'
 import configureStore from 'redux-mock-store'
 import ArtDetails from './ArtDetails'
 
 describe('ArtDetailsPage', () => {
+  window.scrollTo = jest.fn()
   let ArtDetailsBox, store, initialState, mockStore, client, art
   beforeEach(() => {
     client = new ApolloClient({
@@ -36,24 +37,9 @@ describe('ArtDetailsPage', () => {
           favorite: true,
           visited: false,
         },
-        {
-          id: '2',
-          latitude: +'39.744137',
-          longitude: +'-104.95005',
-          address: 'address2',
-          city: 'city2',
-          state: 'state2',
-          zipcode: 'zip2',
-          images: ['url2', 'url1'],
-          description: 'test this art',
-          artistName: 'artist name2',
-          instagramHandle: null,
-          favorite: true,
-          visited: false,
-        },
       ],
     }
-    art =  {
+    art = {
       id: '2',
       latitude: +'39.744137',
       longitude: +'-104.95005',
@@ -61,7 +47,10 @@ describe('ArtDetailsPage', () => {
       city: 'city2',
       state: 'state2',
       zipcode: 'zip2',
-      images: ['https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600116891/ldxpxerqishozdxuvpzp.jpg', 'https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600116891/ldxpxerqishozdxuvpzp.jpg'],
+      images: [
+        'https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600116891/ldxpxerqishozdxuvpzp.jpg',
+        'https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600116891/ldxpxerqishozdxuvpzp.jpg',
+      ],
       description: 'test this art',
       artistName: 'artist name2',
       instagramHandle: null,
@@ -75,11 +64,11 @@ describe('ArtDetailsPage', () => {
       <ApolloProvider client={client}>
         <Provider store={store}>
           <BrowserRouter>
-            <ArtDetails art={art}/>
+            <ArtDetails art={art} />
           </BrowserRouter>
         </Provider>
       </ApolloProvider>
-      )
+    )
   })
   it('<ArtDetails /> component successfully renders', () => {
     const { getByTestId, getByText } = ArtDetailsBox
@@ -93,5 +82,12 @@ describe('ArtDetailsPage', () => {
     expect(artistName).toBeInTheDocument()
     expect(artistAddress).toBeInTheDocument()
     expect(artDescription).toBeInTheDocument()
+  })
+
+  it('<ArtDetails /> component successfully renders', () => {
+    const { getByTestId, getByText, debug } = ArtDetailsBox
+    const favoriteIcon = getByTestId('favorite-icon')
+    fireEvent.click(favoriteIcon)
+    debug()
   })
 })
