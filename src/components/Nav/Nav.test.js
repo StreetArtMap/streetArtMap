@@ -4,11 +4,12 @@ import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { ApolloProvider } from "@apollo/react-hooks"
+import { ApolloProvider } from '@apollo/react-hooks'
 import configureStore from 'redux-mock-store'
 import Nav from './Nav'
 
 describe('Nav', () => {
+  window.scrollTo = jest.fn()
   let NavBox, store, initialState, mockStore, client, art
   beforeEach(() => {
     client = new ApolloClient({
@@ -53,7 +54,7 @@ describe('Nav', () => {
         },
       ],
     }
-    art =  {
+    art = {
       id: '2',
       latitude: +'39.744137',
       longitude: +'-104.95005',
@@ -61,7 +62,10 @@ describe('Nav', () => {
       city: 'city2',
       state: 'state2',
       zipcode: 'zip2',
-      images: ['https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600116891/ldxpxerqishozdxuvpzp.jpg', 'https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600116891/ldxpxerqishozdxuvpzp.jpg'],
+      images: [
+        'https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600116891/ldxpxerqishozdxuvpzp.jpg',
+        'https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600116891/ldxpxerqishozdxuvpzp.jpg',
+      ],
       description: 'test this art',
       artistName: 'artist name2',
       instagramHandle: null,
@@ -75,11 +79,11 @@ describe('Nav', () => {
       <ApolloProvider client={client}>
         <Provider store={store}>
           <BrowserRouter>
-            <Nav art={art}/>
+            <Nav art={art} />
           </BrowserRouter>
         </Provider>
       </ApolloProvider>
-      )
+    )
   })
   it('<Nav /> component successfully renders', () => {
     const { getByTitle } = NavBox

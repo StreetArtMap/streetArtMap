@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom'
 import ProfilePage from './ProfilePage'
 
 describe('ProfilePage', () => {
+  window.scrollTo = jest.fn()
   let ProfilePageContainer
   let store
   let client
