@@ -2,13 +2,14 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { ApolloProvider } from "@apollo/react-hooks"
+import { ApolloProvider } from '@apollo/react-hooks'
 import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import ProfilePage from './ProfilePage'
 
 describe('ProfilePage', () => {
+  window.scrollTo = jest.fn()
   let ProfilePageContainer
   let store
   let client
@@ -36,7 +37,7 @@ describe('ProfilePage', () => {
           instagramHandle: null,
           favorite: true,
           visited: false,
-        }
+        },
       ],
       session: { selectedArt: '' },
     }
@@ -48,16 +49,16 @@ describe('ProfilePage', () => {
       uri: 'https://streetwalker-backend.herokuapp.com/graphql',
       cache: new InMemoryCache(),
     })
-    
+
     ProfilePageContainer = render(
-        <ApolloProvider client={client}>
-          <Provider store={store}>
-            <BrowserRouter>
-              <ProfilePage />
-            </BrowserRouter>
-          </Provider>
-        </ApolloProvider>
-      )
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <BrowserRouter>
+            <ProfilePage />
+          </BrowserRouter>
+        </Provider>
+      </ApolloProvider>
+    )
   })
   it('<ProfilePage/> component successfully renders', () => {
     const { getByText, getByTestId } = ProfilePageContainer
@@ -65,16 +66,9 @@ describe('ProfilePage', () => {
     const postAmount = getByText('1 Posts')
     const collectionBtn = getByTestId('collection-icon')
     const bookmarkBtn = getByTestId('bookmark-icon')
-    const toursBtn = getByTestId('tours-icon')
-    const popUp = getByText('Curated Walking Tours')
-    const popUpBtn = getByText('back')
     expect(userName).toBeInTheDocument()
     expect(postAmount).toBeInTheDocument()
     expect(collectionBtn).toBeInTheDocument()
     expect(bookmarkBtn).toBeInTheDocument()
-    expect(toursBtn).toBeInTheDocument()
-    expect(popUp).toBeInTheDocument()
-    expect(popUpBtn).toBeInTheDocument()
   })
 })
-

@@ -38,7 +38,9 @@ const ExplorePage = () => {
   return (
     <>
       {!selectedId && (
-        <section className='explore-container'>{mappedArts}</section>
+        <section className='explore-container' data-testid='explore-container'>
+          {mappedArts}
+        </section>
       )}
       {targetArt && (
         <section className='map-container'>

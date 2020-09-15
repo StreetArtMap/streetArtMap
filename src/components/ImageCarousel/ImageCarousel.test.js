@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import ImageCarousel from './ImageCarousel'
 
 describe('ImageCarousel', () => {
+  window.scrollTo = jest.fn()
   let ImageCarouselContainer
   let store
   let client
@@ -68,7 +69,10 @@ describe('ImageCarousel', () => {
       <ApolloProvider client={client}>
         <Provider store={store}>
           <BrowserRouter>
-            <ImageCarousel setIsLoggedIn={setIsLoggedIn} images={initialState.arts}/>
+            <ImageCarousel
+              setIsLoggedIn={setIsLoggedIn}
+              images={initialState.arts}
+            />
           </BrowserRouter>
         </Provider>
       </ApolloProvider>

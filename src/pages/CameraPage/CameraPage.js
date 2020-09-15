@@ -21,7 +21,7 @@ const CameraPage = () => {
   return (
     <>
       {!postImage && (
-        <section className='camera-container'>
+        <section className='camera-container' data-testid='camera-container'>
           {isSupported &&
             /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
               navigator.userAgent

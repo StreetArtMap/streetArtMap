@@ -5,14 +5,10 @@ import { useDispatch } from 'react-redux'
 import { addData, login } from '../../actions/actions'
 import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
+import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 import './LoginPage.css'
 
-const LoginPage = ({
-  setIsLoggedIn,
-  isLoggedIn,
-  currentUser,
-  setCurrentUser,
-}) => {
+const LoginPage = ({ setIsLoggedIn }) => {
   const dispatch = useDispatch()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -44,11 +40,11 @@ const LoginPage = ({
   `
   const { loading, error, data } = useQuery(ART_FETCH)
 
-  const verifyUser = () => {
-    if (username === 'edignot' && password === 'edignot') {
+  const verifyUser = async () => {
+    if (username === 'username' && password === 'password') {
       setIsLoggedIn(true)
+      await getArt()
       dispatch(login(username))
-      getArt()
     } else {
       setCredentialsError(true)
     }
@@ -75,19 +71,23 @@ const LoginPage = ({
   return (
     <section className='login-page'>
       <section className='login-container'>
-        <section className='login-title'>Street | ART | Walk</section>
+        <h1 className='login-title'>Street | ART | Walk</h1>
         <section className='user-validation'>
           <Input
             onChange={(e) => setUsername(e.target.value)}
             type='text'
             placeholder='Username...'
-            data-testid="username-input"
+            label='username'
+            id='username'
+            data-testid='username-input'
           ></Input>
           <Input
             onChange={(e) => setPassword(e.target.value)}
             type='password'
             placeholder='Password...'
-            data-testid="password-input"
+            label='password'
+            id='password'
+            data-testid='password-input'
           ></Input>
           {credentialsError && (
             <p className='credentials-error'>
@@ -97,15 +97,16 @@ const LoginPage = ({
           <Button
             onClick={() => verifyUser()}
             type='submit'
-            to="/explore"
+            to='/explore'
             // to={currentUser.name ? '/explore' : '/'}
           >
             LOG IN
           </Button>
         </section>
-        <p data-testid="signup-message">Don't have an account?</p>
+        <p data-testid='signup-message'>Don't have an account?</p>
         <Button>SIGN UP</Button>
       </section>
+      {!data && <LoadingSpinner asOverlay />}
     </section>
   )
 }

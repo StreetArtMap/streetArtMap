@@ -31,3 +31,8 @@ textarea {
   position: absolute;
   color: var(--error);
 }
+
+.form-label {
+  opacity: 0;
+  position: absolute;
+}

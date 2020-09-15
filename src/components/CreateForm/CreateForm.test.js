@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import CreateForm from './CreateForm'
 
 describe('CreateForm', () => {
+  window.scrollTo = jest.fn()
   let CreateFormContainer
   let store
   let client
@@ -68,7 +69,10 @@ describe('CreateForm', () => {
       <ApolloProvider client={client}>
         <Provider store={store}>
           <BrowserRouter>
-            <CreateForm setIsLoggedIn={setIsLoggedIn} images={initialState.arts}/>
+            <CreateForm
+              setIsLoggedIn={setIsLoggedIn}
+              images={initialState.arts}
+            />
           </BrowserRouter>
         </Provider>
       </ApolloProvider>
