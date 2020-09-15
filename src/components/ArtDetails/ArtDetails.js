@@ -96,18 +96,20 @@ const ArtDetails = ({
     <section className='art-details-container'>
       <section className='art-icons-wrapper'>
         {favorite ? (
-          <FaHeart className='art-icon' onClick={toggleFavoriteHandler} />
+          <FaHeart className='art-icon' data-testid="favorite-icon"  onClick={toggleFavoriteHandler} />
         ) : (
-          <FaRegHeart className='art-icon' onClick={toggleFavoriteHandler} />
+          <FaRegHeart className='art-icon' data-testid="unfavorite-icon" onClick={toggleFavoriteHandler} />
         )}
         {visited ? (
           <RiCheckboxCircleLine
             className='art-icon'
+            data-testid="unvisited-icon"
             onClick={toggleVisitedHandler}
           />
         ) : (
           <RiCheckboxBlankCircleLine
             className='art-icon'
+            data-testid="visited-icon"
             onClick={toggleVisitedHandler}
           />
         )}
@@ -119,7 +121,7 @@ const ArtDetails = ({
           href={`https://www.instagram.com/${instagramHandle}`}
           className='instagram-wrapper'
         >
-          <AiFillInstagram className='art-icon' />
+          <AiFillInstagram className='art-icon' data-testid="instagram-icon" />
           {instagramHandle}
         </a>
       )}
