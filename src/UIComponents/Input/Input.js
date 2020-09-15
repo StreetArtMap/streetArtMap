@@ -13,20 +13,28 @@ const Input = ({
   errorMessage,
   isValid,
   ...other
-  }) => {
+}) => {
   const tag = !element ? (
-    <input type={type} placeholder={placeholder} onChange={onChange} {...other} />
+    <input
+      type={type}
+      id={id}
+      placeholder={placeholder}
+      onChange={onChange}
+      {...other}
+    />
   ) : (
-    <textarea rows={rows || 3} placeholder={placeholder} {...other} />
+    <textarea rows={rows || 3} id={id} placeholder={placeholder} {...other} />
   )
 
   return (
     <section>
-      <label htmlFor={id}>{label}</label>
       <section className='input-error-wrapper'>
         {tag}
         {!isValid && <p className='input-error-message'>{errorMessage}</p>}
       </section>
+      <label htmlFor={id} className='form-label'>
+        {label}
+      </label>
     </section>
   )
 }
@@ -43,5 +51,5 @@ Input.propTypes = {
   element: PropTypes.element,
   rows: PropTypes.number,
   errorMessage: PropTypes.string,
-  isValid: PropTypes.bool
+  isValid: PropTypes.bool,
 }

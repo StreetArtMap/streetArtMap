@@ -75,17 +75,21 @@ const LoginPage = ({
   return (
     <section className='login-page'>
       <section className='login-container'>
-        <section className='login-title'>Street | ART | Walk</section>
+        <h1 className='login-title'>Street | ART | Walk</h1>
         <section className='user-validation'>
           <Input
             onChange={(e) => setUsername(e.target.value)}
             type='text'
             placeholder='Username...'
+            label='username'
+            id='username'
           ></Input>
           <Input
             onChange={(e) => setPassword(e.target.value)}
             type='password'
             placeholder='Password...'
+            label='password'
+            id='password'
           ></Input>
           {credentialsError && (
             <p className='credentials-error'>

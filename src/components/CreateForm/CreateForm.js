@@ -238,6 +238,8 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           placeholder='art title'
           value={title}
           onInput={(e) => setTitle(e.target.value)}
+          label='art title'
+          id='art title'
         />
         <Input
           className='create-art-input'
@@ -245,6 +247,8 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           placeholder='artist name'
           value={artistName}
           onInput={(e) => setArtistName(e.target.value)}
+          label='artist name'
+          id='artist name'
         />
         <Input
           className='create-art-input'
@@ -252,6 +256,8 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           placeholder='artist instagram'
           value={artistInstagram}
           onInput={(e) => setArtistInstagram(e.target.value)}
+          label='artist instagram'
+          id='artist instagram'
         />
 
         {addressInput && (
@@ -264,6 +270,8 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
               onInput={(e) => setAddress(e.target.value)}
               isValid={isAddressValid}
               errorMessage='Address is required or current location'
+              label='address'
+              id='address'
             />
             <Input
               className='create-art-input'
@@ -273,6 +281,8 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
               onInput={(e) => setCity(e.target.value)}
               isValid={isCityValid}
               errorMessage='City is required or current location'
+              label='city'
+              id='city'
             />
             <Input
               className='create-art-input'
@@ -282,6 +292,8 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
               onInput={(e) => setState(e.target.value)}
               isValid={isStateValid}
               errorMessage='State is required or current location'
+              label='state'
+              id='state'
             />
             <Input
               className='create-art-input'
@@ -291,6 +303,8 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
               onInput={(e) => setZipcode(e.target.value)}
               isValid={isZipcodeValid}
               errorMessage='Zipcode is required or current location'
+              label='zipcode'
+              id='zipcode'
             />
           </>
         )}
@@ -343,6 +357,8 @@ const CreateForm = ({ images, setPostImage, setImages, setError }) => {
           rows='5'
           value={description}
           onInput={(e) => setDescription(e.target.value)}
+          label='description'
+          id='description'
         />
         <section className='form-btn-wrapper post-art-btn'>
           <Button type='submit' styling={postDisabled && 'disabled'}>
