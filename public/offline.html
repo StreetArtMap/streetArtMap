@@ -12,13 +12,43 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/streetartwalkbig.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Street Art Walk</title>
+    <style type="text/css">
+      body {
+        height: auto;
+
+        background-color: #cecece;
+      }
+
+      .message-container {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 50vw;
+        height: 20vh;
+        background-color: #fdfdfd;
+        box-shadow: 10px 10px 10px rgba(58, 58, 58, 0.03);
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h2 {
+        font-size: 1rem;
+        text-align: center;
+        font-family: 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+          'Helvetica Neue', sans-serif;
+        position: absolute;
+      }
+    </style>
   </head>
 
   <body>
-    <div>
-      <h2>
-        <span>YOU ARE OFFLINE</span>
-      </h2>
-    </div>
+    <section class="message-container">
+      <h2>YOU ARE OFFLINE...</h2>
+    </section>
   </body>
 </html>
