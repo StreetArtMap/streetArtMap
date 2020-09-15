@@ -5,14 +5,10 @@ import { useDispatch } from 'react-redux'
 import { addData, login } from '../../actions/actions'
 import Button from '../../UIComponents/Button/Button'
 import Input from '../../UIComponents/Input/Input'
+import LoadingSpinner from '../../UIComponents/LoadingSpinner/LoadingSpinner'
 import './LoginPage.css'
 
-const LoginPage = ({
-  setIsLoggedIn,
-  isLoggedIn,
-  currentUser,
-  setCurrentUser,
-}) => {
+const LoginPage = ({ setIsLoggedIn }) => {
   const dispatch = useDispatch()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -44,11 +40,11 @@ const LoginPage = ({
   `
   const { loading, error, data } = useQuery(ART_FETCH)
 
-  const verifyUser = () => {
+  const verifyUser = async () => {
     if (username === 'edignot' && password === 'edignot') {
       setIsLoggedIn(true)
+      await getArt()
       dispatch(login(username))
-      getArt()
     } else {
       setCredentialsError(true)
     }
@@ -110,6 +106,7 @@ const LoginPage = ({
         <p data-testid='signup-message'>Don't have an account?</p>
         <Button>SIGN UP</Button>
       </section>
+      {!data && <LoadingSpinner asOverlay />}
     </section>
   )
 }
