@@ -1,21 +1,15 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { selectArt } from '../../actions/actions'
 import { DEFAULT_IMG_URL, PROFILE_IMG_PLACEHOLDER } from '../../constants'
-import Modal from '../../UIComponents/Modal/Modal'
-import Button from '../../UIComponents/Button/Button'
-import { FaBookOpen, FaHeart, FaRoute } from 'react-icons/fa'
+import { FaBookOpen, FaHeart } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid'
 import './ProfilePage.css'
 
 const ProfilePage = () => {
   const [showFavorites, setShowFavorites] = useState(false)
-  const [displayModal, setDisplayModal] = useState(false)
-  const [tours, setTours] = useState([])
-  const [error, setError] = useState('')
   const dispatch = useDispatch()
   const addDefaultImageSrc = (e) => {
     e.target.src = DEFAULT_IMG_URL
@@ -38,43 +32,12 @@ const ProfilePage = () => {
     </section>
   ))
 
-  const getTours = async () => {
-    try {
-      return await axios.get('http://localhost:3000/tours')
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   const handleShowAll = () => {
     setShowFavorites(false)
   }
 
   const handleFavorites = () => {
     setShowFavorites(true)
-  }
-
-  const handleShowTours = () => {
-    getTours()
-      .then((response) => {
-        showTours(response.data.data.allTours)
-      })
-      .catch((error) => {
-        setError(error.message)
-        console.log(error)
-      })
-    setDisplayModal(true)
-  }
-
-  const showTours = (tours) => {
-    const unpackedTours = tours.map((tour) => {
-      return (
-        <Button key={tour.id} href={tour.link} styling='padding'>
-          {tour.name}
-        </Button>
-      )
-    })
-    setTours(unpackedTours)
   }
 
   const favoritedArts = useSelector((state) => state.arts)
@@ -112,19 +75,19 @@ const ProfilePage = () => {
           <p className='username'>{username}</p>
           <p className='user-image-count'>{arts.length} Posts</p>
           <section className='button-container'>
-            <section className='tours-button' onClick={handleShowTours}>
-              <FaRoute
+            <section className='all-button' onClick={handleShowAll}>
+              <FaBookOpen
                 className='art-icon'
-                title='tours-icon'
-                data-testid="tours-icon"
-                onClick={() => getTours()}
+                title='collection-icon'
+                data-testid='collection-icon'
               />
             </section>
-            <section className='all-button' onClick={handleShowAll}>
-              <FaBookOpen className='art-icon' title='collection-icon' data-testid="collection-icon" />
-            </section>
             <section className='saved-button' onClick={handleFavorites}>
-              <FaHeart className='art-icon' title='bookmark-icon' data-testid="bookmark-icon" />
+              <FaHeart
+                className='art-icon'
+                title='bookmark-icon'
+                data-testid='bookmark-icon'
+              />
             </section>
           </section>
         </section>
@@ -134,24 +97,6 @@ const ProfilePage = () => {
       ) : (
         <section className='photo-container'>{arts}</section>
       )}
-      <Modal show={displayModal}>
-        <p className='modal-message'>Curated Walking Tours</p>
-        {tours}
-        <Button styling='padding' onClick={() => setDisplayModal(false)}>
-          back
-        </Button>
-      </Modal>
-      <Modal show={error}>
-        <p className='modal-message error-message'>{error}</p>
-        <Button
-          styling='padding'
-          onClick={() => {
-            setError('')
-          }}
-        >
-          close
-        </Button>
-      </Modal>
     </section>
   )
 }

@@ -29,4 +29,14 @@ describe('<MapPage/>', () => {
     const { getByTestId } = MapPageComponent
     expect(getByTestId('map-container')).toBeInTheDocument()
   })
+
+  test('Tours icon and modal successfully renders', () => {
+    const { getByText, getByTestId } = MapPageComponent
+    const toursBtn = getByTestId('tours-icon')
+    const popUp = getByText('Curated Walking Tours')
+    const popUpBtn = getByText('back')
+    expect(toursBtn).toBeInTheDocument()
+    expect(popUp).toBeInTheDocument()
+    expect(popUpBtn).toBeInTheDocument()
+  })
 })
