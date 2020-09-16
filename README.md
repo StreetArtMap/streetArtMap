@@ -50,12 +50,29 @@ Temporary Credentials for DEMO:
 - password = password
 
 
-### Backend 
+## Contributors <a name="team"></a>
+
+  ### Frontend Team
+
+   [Carlos Flores](https://github.com/carflor)
+
+   [Edita Ignot](https://github.com/edignot)
+
+  ### Backend Team
 
 - This application was built in collaboration with a Backend Team that built a PostgresQL server running on Rails. 
 
 More Details: [Street Art Walk Backend](https://github.com/StreetArtMap/street_art_backend)
 
-## Collaborators
-- [Edita Ignot](github.com/edignot)
-- [Carlos Flores](github.com/carflor) 
+   [Stella Bonnie](https://github.com/stellakunzang)
+
+   [Michael Gallup](https://github.com/Gallup93)
+
+   [Jesse Gietzen](https://github.com/elguapogordo)
+
+  ### Project Managers
+
+   [Megan McMahon](https://github.com/memcmahon)
+
+   [Robbie Jaeger](https://github.com/robbiejaeger)
+
