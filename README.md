@@ -11,6 +11,8 @@ This application was bootstrapped using Create-React-App with Redux and Hooks. W
 [Deployed link](https://streetartwalk.netlify.app/)
 
 ## Application Demo 
+[![Iphone demo](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600215259/Screen_Shot_2020-09-15_at_18.13.26_ibkaxf.png)](https://vimeo.com/458368989)
+
 
 ## Tech Stack
 
