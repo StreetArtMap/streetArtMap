@@ -12,9 +12,12 @@ This application was bootstrapped using Create-React-App with Redux and Hooks. W
 
 ## Application Demo: 
 ![Street Art Walk](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600219353/streetartwalk1_u8uzdd.jpg)
+
 ![Street Art Walk](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600219328/streetartwalk2_pajf7z.jpg)
+
 #### iPhone demo video:
 [![Iphone demo](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600216366/streetartwalkiphone_hiowh1.jpg)](https://vimeo.com/458368989)
+
 #### iPad demo video:
 [![Ipad demo](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600216366/streetartwalkipad_jpcjdu.jpg)](https://vimeo.com/458365408)
 
