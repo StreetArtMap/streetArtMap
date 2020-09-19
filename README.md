@@ -4,7 +4,7 @@
 
 ## Introduction
 
-[Street | ART | Walk](https://streetartwalk.netlify.app/) is an application that allows a user to search street art locations and information using maps. Leveraging Progressive Web Apps technology, we have designed the application to allow for a user to upload images of street art they find and allow them to pin their location, and any pertinent details like the artist name, artist instagram handle, and a brief description. This project attempts to address the lack of a resources for exploring street art in an organized manner. This app allows the artist to post and promote their work, including a description of the artwork and their instagram link in order to facilitate user artist discovery. 
+[Street | ART | Walk](https://streetartwalk.netlify.app/) is an application that allows a user to search street art locations and information using maps. Leveraging Progressive Web Apps technology, we have designed the application to allow for a user to upload images of street art they find and allow them to pin their location, and any pertinent details like the artist name, artist instagram handle, and a brief description. This project attempts to address the lack of resources for exploring street art in an organized manner. This app allows the artist to post and promote their work, including a description of the artwork and their instagram link in order to facilitate user artist discovery. 
 
 This application was bootstrapped using Create-React-App with Redux and Hooks. We utilized GraphQL and the Apollo Client to handle our APIs. We employed static asset caching by using Progressive Web Apps technologies. The application was deployed using TravisCI and Netlify. 
 
