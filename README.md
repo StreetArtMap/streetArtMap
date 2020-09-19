@@ -66,8 +66,6 @@ Temporary Credentials for DEMO:
 
   ### Backend Team
 
-- This application was built in collaboration with a Backend Team that built a PostgresQL server running on Rails. 
-
 More Details: [Street Art Walk Backend](https://github.com/StreetArtMap/street_art_backend)
 
    [Stella Bonnie](https://github.com/stellakunzang)
