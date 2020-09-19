@@ -11,11 +11,12 @@ This application was bootstrapped using Create-React-App with Redux and Hooks. W
 [Deployed link](https://streetartwalk.netlify.app/)
 
 ## Application Demo: 
-![Street Art Walk](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600546863/Screen_Shot_2020-09-19_at_14.20.04_nilfeq.jpg)
-
 ![Street Art Walk](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600219353/streetartwalk1_u8uzdd.jpg)
 
 ![Street Art Walk](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600219328/streetartwalk2_pajf7z.jpg)
+
+#### App presentation video:
+[![Video App Presentation](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600546863/Screen_Shot_2020-09-19_at_14.20.04_nilfeq.jpg)](https://vimeo.com/459573196)
 
 #### iPhone demo video:
 [![Iphone demo](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1600216366/streetartwalkiphone_hiowh1.jpg)](https://vimeo.com/458368989)
