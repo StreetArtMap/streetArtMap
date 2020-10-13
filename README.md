@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/StreetArtMap/streetArtMap.svg?branch=master)](https://travis-ci.org/StreetArtMap/streetArtMap)
 
 ## https://streetartwalk.netlify.app/ 
-Login: username: username, password: paassword
+Login: username: username, password: password
 
 ## Introduction
 
