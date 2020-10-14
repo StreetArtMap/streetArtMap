@@ -182,23 +182,4 @@ describe('<App />', () => {
     expect(cameraContainer).toBeInTheDocument()
     expect(exploreContainer).not.toBeInTheDocument()
   })
-
-  // it('Should open create page', () => {	
-  //   const { getByText, getByPlaceholderText, getByTestId, debug } = AppContainer	
-  //   const loginBtn = getByText('LOG IN')	
-  //   fireEvent.change(getByPlaceholderText('Username...'), {	
-  //     target: { value: 'username' },	
-  //   })	
-  //   fireEvent.change(getByPlaceholderText('Password...'), {	
-  //     target: { value: 'password' },	
-  //   })	
-  //   fireEvent.click(loginBtn)	
-  //   const exploreContainer = getByTestId('explore-container')	
-  //   const profileNav = getByText('profile')	
-  //   fireEvent.click(profileNav)	
-  //   const profileContainer = getByTestId('profile-container')	
-  //   expect(profileContainer).toBeInTheDocument()	
-  //   expect(exploreContainer).not.toBeInTheDocument()	
-  //   debug()	
-  // })	
 })
